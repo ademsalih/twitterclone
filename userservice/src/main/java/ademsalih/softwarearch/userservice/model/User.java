@@ -1,5 +1,7 @@
 package ademsalih.softwarearch.userservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,8 +32,9 @@ public class User {
     private String userRole;
 
     @ManyToMany(cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"following", "followers"})
     @JoinTable(
-            name = "FOLLOWING",
+            name = "Following",
             joinColumns = { @JoinColumn(name = "user_id") },
             inverseJoinColumns = { @JoinColumn(name = "following_user_id") }
     )
@@ -39,6 +42,7 @@ public class User {
 
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "following")
+    @JsonIgnoreProperties({"following", "followers"})
     private Set<User> followers = new HashSet<>();
 
     public User(String firstName, String lastName, String email, String phone, String userName,
