@@ -1,7 +1,9 @@
 package ademsalih.softwarearch.userservice.service;
 
+import ademsalih.softwarearch.userservice.model.Follow;
 import ademsalih.softwarearch.userservice.model.User;
 import ademsalih.softwarearch.userservice.model.UserRoles;
+import ademsalih.softwarearch.userservice.repository.FollowRepository;
 import ademsalih.softwarearch.userservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,10 +17,8 @@ public class UserServiceImplementation implements UserService {
     @Autowired
     UserRepository userRepository;
 
-    @Override
-    public Set<User> getUsers() {
-        return null;
-    }
+    @Autowired
+    FollowRepository followRepository;
 
     @Override
     public User getUserById(long id) {
@@ -44,16 +44,24 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public List<User> getFollowersForUser(long id) {
+    public List<Follow> getFollowersForUser(long id) {
         User user = userRepository.findById(id).get();
-        List<User> followers = user.getFollowers();
-        return followers;
+        return user.getFollowers();
     }
 
     @Override
-    public List<User> getFollowingsForUser(long id) {
+    public List<Follow> getFollowingsForUser(long id) {
         User user = userRepository.findById(id).get();
-        List<User> followings = user.getFollowing();
-        return followings;
+        return user.getFollowing();
+    }
+
+    @Override
+    public void deleteFollowing(long user_id, long following_id) {
+        List<Follow> follow = followRepository.findAll();
+        for (Follow f : follow) {
+            if (f.getUser().getUser_id() == user_id && f.getFollowing_user().getUser_id() == following_id) {
+                followRepository.delete(f);
+            }
+        }
     }
 }

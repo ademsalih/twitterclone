@@ -1,6 +1,7 @@
 package ademsalih.softwarearch.userservice.service;
 
 
+import ademsalih.softwarearch.userservice.model.Follow;
 import ademsalih.softwarearch.userservice.model.User;
 import ademsalih.softwarearch.userservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,6 @@ import java.util.Set;
 
 public interface UserService {
 
-    Set<User> getUsers();
-
     User getUserById(long id);
 
     User saveUser(User user);
@@ -20,8 +19,10 @@ public interface UserService {
 
     void deleteUser(long id);
 
-    List<User> getFollowersForUser(long id);
+    List<Follow> getFollowersForUser(long id);
 
-    List<User> getFollowingsForUser(long id);
+    List<Follow> getFollowingsForUser(long id);
+
+    void deleteFollowing(long user, long following);
 
 }

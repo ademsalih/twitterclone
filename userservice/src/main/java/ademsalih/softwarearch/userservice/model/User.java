@@ -1,16 +1,13 @@
 package ademsalih.softwarearch.userservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -31,7 +28,9 @@ public class User {
     private String profileImageName;
     private String userRole;
 
-    @ManyToMany(cascade = CascadeType.DETACH)
+    /* ----------------- Many to many without extra table ----------------- */
+
+    /*@ManyToMany(cascade = CascadeType.DETACH)
     @JsonIgnoreProperties({"following", "followers"})
     @JsonIgnore
     @JoinTable(
@@ -45,7 +44,20 @@ public class User {
     @ManyToMany(cascade = CascadeType.DETACH, mappedBy = "following")
     @JsonIgnoreProperties({"following", "followers"})
     @JsonIgnore
-    private List<User> followers = new ArrayList<>();
+    private List<User> followers = new ArrayList<>();*/
+
+
+    /* ---------------- Many to many with table Following ---------------- */
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Follow> following = new ArrayList<>();
+
+
+    @OneToMany(mappedBy = "following_user")
+    @JsonIgnore
+    private List<Follow> followers = new ArrayList<>();
+
 
     public User(String firstName, String lastName, String email, String phone, String userName,
                 String password, String accountCreated, String profileImageName, String userRole) {

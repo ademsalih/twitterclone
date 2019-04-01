@@ -1,6 +1,8 @@
 package ademsalih.softwarearch.userservice.controller;
 
+import ademsalih.softwarearch.userservice.model.Follow;
 import ademsalih.softwarearch.userservice.model.User;
+import ademsalih.softwarearch.userservice.service.FollowService;
 import ademsalih.softwarearch.userservice.service.UserService;
 import ademsalih.softwarearch.userservice.service.UserServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    FollowService followService;
 
     /** ----------------------- USER ------------------------ **/
 
@@ -51,22 +56,28 @@ public class UserController {
     /** ----------------------- FOLLOWERS ------------------------ **/
 
     // OK
-    @GetMapping("/users/{id}/followers")
-    public List<User> getFollowers(@PathVariable long id) {
+    @GetMapping("/followers/{id}")
+    public List<Follow> getFollowers(@PathVariable long id) {
         return userService.getFollowersForUser(id);
     }
 
     // OK
-    @GetMapping("/users/{id}/followings")
-    public List<User> getFollowings(@PathVariable long id) {
+    @GetMapping("/followings/{id}")
+    public List<Follow> getFollowings(@PathVariable long id) {
         return userService.getFollowingsForUser(id);
     }
-    
 
-    // TODO: DELETE /users/{user_id}/following/{following_id}
-    // TODO: DELETE /users/{user_id}/followers/{follower_id}
+    // OK
+    @PostMapping("/following")
+    public void addFollowing(@RequestBody Follow follow) {
+        followService.saveFollowing(follow);
+    }
 
-    // TODO: POST /users/{user_id}/following/{following_id}
-    // TODO: POST /users/{user_id}/followers/{following_id}
+    // OK
+    @DeleteMapping("/following/{user_id}/{following_id}")
+    public void deleteFollowing(@PathVariable("user_id") long userId, @PathVariable("following_id") long followingId) {
+        userService.deleteFollowing(userId, followingId);
+    }
+
 
 }
