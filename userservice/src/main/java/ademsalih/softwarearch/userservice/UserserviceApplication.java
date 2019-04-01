@@ -45,12 +45,9 @@ public class UserserviceApplication implements CommandLineRunner {
                 UserRoles.USER.name());
 
 
-        pinar.getFollowers().add(adem);
-        adem.getFollowers().add(pinar);
-
-
         adem.getFollowing().add(pinar);
-        pinar.getFollowing().add(adem);
+
+        pinar.getFollowers().add(adem);
 
         userRepository.save(pinar);
         userRepository.save(adem);

@@ -4,10 +4,10 @@ import ademsalih.softwarearch.userservice.model.User;
 import ademsalih.softwarearch.userservice.service.UserService;
 import ademsalih.softwarearch.userservice.service.UserServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Set;
 
 @RestController
 public class UserController {
@@ -15,25 +15,58 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    /** ----------------------- USER ------------------------ **/
+
+    // OK
+    @GetMapping("/users")
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
+    }
+
+    // OK
+    @PostMapping("/users")
+    public User registerNewUser(@RequestBody User user) {
+        return userService.saveUser(user);
+    }
+
+    // OK
     @GetMapping("/users/{id}")
     public User getUserDetails(@PathVariable long id) {
         return userService.getUserById(id);
     }
 
+    // OK
+    @PutMapping("/users/{id}")
+    public User updateUser(@RequestBody User user, @PathVariable long id) {
+        user.setUser_id(id);
+        return userService.saveUser(user);
+    }
 
-    // TODO: POST /users
-    // TODO: GET /users [ADMIN]
+    // OK
+    @DeleteMapping("/users/{id}")
+    public void deleteUser(@PathVariable long id) {
+        userService.deleteUser(id);
+    }
 
-    // TODO: PUT /users/{id}
-    // TODO: DELETE /users/{id}
+    /** ----------------------- FOLLOWERS ------------------------ **/
 
-    // TODO: GET /users/{id}/following
-    // TODO: GET /users/{id}/followers
+    // OK
+    @GetMapping("/users/{id}/followers")
+    public List<User> getFollowers(@PathVariable long id) {
+        return userService.getFollowersForUser(id);
+    }
 
-    // TODO: DELETE /users/{id}/following/{id}
-    // TODO: DELETE /users/{id}/followers/{id}
+    // OK
+    @GetMapping("/users/{id}/followings")
+    public List<User> getFollowings(@PathVariable long id) {
+        return userService.getFollowingsForUser(id);
+    }
+    
 
-    // TODO: POST /users/{id}/following/{id}
-    // TODO: POST /users/{id}/followers/{id}
+    // TODO: DELETE /users/{user_id}/following/{following_id}
+    // TODO: DELETE /users/{user_id}/followers/{follower_id}
+
+    // TODO: POST /users/{user_id}/following/{following_id}
+    // TODO: POST /users/{user_id}/followers/{following_id}
 
 }

@@ -31,19 +31,21 @@ public class User {
     private String profileImageName;
     private String userRole;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.DETACH)
     @JsonIgnoreProperties({"following", "followers"})
+    @JsonIgnore
     @JoinTable(
             name = "Following",
             joinColumns = { @JoinColumn(name = "user_id") },
             inverseJoinColumns = { @JoinColumn(name = "following_user_id") }
     )
-    private Set<User> following = new HashSet<>();
+    private List<User> following = new ArrayList<>();
 
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "following")
+    @ManyToMany(cascade = CascadeType.DETACH, mappedBy = "following")
     @JsonIgnoreProperties({"following", "followers"})
-    private Set<User> followers = new HashSet<>();
+    @JsonIgnore
+    private List<User> followers = new ArrayList<>();
 
     public User(String firstName, String lastName, String email, String phone, String userName,
                 String password, String accountCreated, String profileImageName, String userRole) {
@@ -57,4 +59,5 @@ public class User {
         this.profileImageName = profileImageName;
         this.userRole = userRole;
     }
+
 }
