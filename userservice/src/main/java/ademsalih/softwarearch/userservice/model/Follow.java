@@ -1,6 +1,5 @@
 package ademsalih.softwarearch.userservice.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,14 +19,13 @@ public class Follow {
 
     @ManyToOne
     @JoinColumn(name="user")
-    @JsonIgnore()
+    @JsonIgnoreProperties({"userRole", "profileImageName", "accountCreated", "password", "userName", "phone", "email", "lastName", "firstName"})
     private User user;
 
     @ManyToOne
     @JoinColumn(name="following_user")
-    @JsonIgnoreProperties({"userRole", "profileImageName", "accountCreated", "password", "phone", "email", "lastName", "firstName"})
+    @JsonIgnoreProperties({"userRole", "profileImageName", "accountCreated", "password", "userName", "phone", "email", "lastName", "firstName"})
     public User following_user;
-
 
     public Follow(User user, User following_user) {
         this.user = user;

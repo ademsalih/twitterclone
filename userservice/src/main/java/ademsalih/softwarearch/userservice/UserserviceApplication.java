@@ -67,9 +67,11 @@ public class UserserviceApplication implements CommandLineRunner {
 
         Follow follow = new Follow(adem, pinar);
         Follow follow2 = new Follow(adem, esra);
+        Follow follow3 = new Follow(pinar, esra);
 
         followRepository.save(follow);
         followRepository.save(follow2);
+        followRepository.save(follow3);
 
 
     }
