@@ -1,5 +1,6 @@
 package ademsalih.softwarearch.tweetservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Tweet {
+public class Tweet extends TweetAbstract {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +28,8 @@ public class Tweet {
     private String imageName;
 
     @OneToMany(mappedBy = "tweet")
-    private List<Retweet> reshares = new ArrayList<>();
+    @JsonIgnore
+    private List<Retweet> retweets = new ArrayList<>();
 
     public Tweet(String message, String dateTime, long user_id, String imageName) {
         this.message = message;

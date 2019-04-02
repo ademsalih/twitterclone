@@ -12,18 +12,18 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Retweet {
+public class Retweet extends TweetAbstract {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long resharedtweet_id;
+    private long retweet_id;
 
     private long user_id;
 
     private String dateTime;
 
     @ManyToOne
-    @JsonIgnore
+    @JsonIgnoreProperties("retweets")
     @JoinColumn(name = "tweet_id")
     private Tweet tweet;
 

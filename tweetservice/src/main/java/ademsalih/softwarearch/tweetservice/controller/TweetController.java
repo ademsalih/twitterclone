@@ -2,6 +2,8 @@ package ademsalih.softwarearch.tweetservice.controller;
 
 import ademsalih.softwarearch.tweetservice.model.Retweet;
 import ademsalih.softwarearch.tweetservice.model.Tweet;
+import ademsalih.softwarearch.tweetservice.model.TweetAbstract;
+import ademsalih.softwarearch.tweetservice.service.FeedService;
 import ademsalih.softwarearch.tweetservice.service.RetweetService;
 import ademsalih.softwarearch.tweetservice.service.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,14 @@ public class TweetController {
 
     @Autowired
     RetweetService retweetService;
+
+    @Autowired
+    FeedService feedService;
+
+    @GetMapping("/feed")
+    public List<TweetAbstract> getFeed() {
+        return feedService.getFeed();
+    }
 
     @GetMapping("/tweets")
     public List<Tweet> getAllTweets() {
