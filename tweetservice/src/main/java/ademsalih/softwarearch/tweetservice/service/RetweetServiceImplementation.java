@@ -30,4 +30,9 @@ public class RetweetServiceImplementation implements RetweetService {
         }
         return userRetweets;
     }
+
+    @Override
+    public Retweet getRetweet(long id) {
+        return retweetRepository.findById(id).get();
+    }
 }

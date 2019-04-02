@@ -30,4 +30,9 @@ public class TweetServiceImplementation implements TweetService {
 
         return userTweets;
     }
+
+    @Override
+    public Tweet getTweet(long id) {
+        return tweetRepository.findById(id).get();
+    }
 }

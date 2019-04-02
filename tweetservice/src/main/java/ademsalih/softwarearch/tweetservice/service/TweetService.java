@@ -9,4 +9,6 @@ public interface TweetService {
     List<Tweet> getAllTweets();
 
     List<Tweet> getTweetsForUser(long id);
+
+    Tweet getTweet(long id);
 }

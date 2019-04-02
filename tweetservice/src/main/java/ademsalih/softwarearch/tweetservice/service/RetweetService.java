@@ -9,4 +9,6 @@ public interface RetweetService {
     List<Retweet> getAllRetweets();
 
     List<Retweet> getRetweetsForUser(long id);
+
+    Retweet getRetweet(long id);
 }

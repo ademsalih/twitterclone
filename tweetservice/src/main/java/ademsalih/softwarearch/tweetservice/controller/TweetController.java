@@ -25,6 +25,11 @@ public class TweetController {
         return tweetService.getAllTweets();
     }
 
+    @GetMapping("/tweets/{id}")
+    public Tweet getTweet(@PathVariable long id) {
+        return tweetService.getTweet(id);
+    }
+
     @GetMapping("/tweets/user/{id}")
     public List<Tweet> getTweetsForUser(@PathVariable long id) {
         return tweetService.getTweetsForUser(id);
@@ -33,6 +38,11 @@ public class TweetController {
     @GetMapping("/retweets")
     public List<Retweet> getAllRetweets() {
         return retweetService.getAllRetweets();
+    }
+
+    @GetMapping("/retweets/{id}")
+    public Retweet getRetweet(@PathVariable long id) {
+        return retweetService.getRetweet(id);
     }
 
     @GetMapping("/retweets/user/{id}")
