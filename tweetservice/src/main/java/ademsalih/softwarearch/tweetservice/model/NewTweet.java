@@ -19,13 +19,13 @@ public class NewTweet extends Tweet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long tweet_id;
 
-    private String message;
+    private long user_id;
 
     private String dateTime;
 
-    private long user_id;
-
     private String imageName;
+
+    private String message;
 
     @OneToMany(mappedBy = "newTweet")
     @JsonIgnore

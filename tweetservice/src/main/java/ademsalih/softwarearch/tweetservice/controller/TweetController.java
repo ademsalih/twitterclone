@@ -63,6 +63,11 @@ public class TweetController {
         return retweetService.getRetweet(id);
     }
 
+    @DeleteMapping("/retweets/{id}")
+    public void deleteRetweet(@PathVariable long id) {
+        retweetService.deleteRetweet(id);
+    }
+
     @GetMapping("/retweets/user/{id}")
     public List<Retweet> getAllRetweets(@PathVariable long id) {
         return retweetService.getRetweetsForUser(id);

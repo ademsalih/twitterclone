@@ -11,4 +11,6 @@ public interface RetweetService {
     List<Retweet> getRetweetsForUser(long id);
 
     Retweet getRetweet(long id);
+
+    void deleteRetweet(long id);
 }
