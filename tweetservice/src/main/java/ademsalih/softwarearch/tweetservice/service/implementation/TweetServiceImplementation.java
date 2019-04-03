@@ -1,7 +1,8 @@
-package ademsalih.softwarearch.tweetservice.service;
+package ademsalih.softwarearch.tweetservice.service.implementation;
 
 import ademsalih.softwarearch.tweetservice.model.Tweet;
 import ademsalih.softwarearch.tweetservice.repository.TweetRepository;
+import ademsalih.softwarearch.tweetservice.service.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,5 +35,10 @@ public class TweetServiceImplementation implements TweetService {
     @Override
     public Tweet getTweet(long id) {
         return tweetRepository.findById(id).get();
+    }
+
+    @Override
+    public Tweet saveTweet(Tweet tweet) {
+        return tweetRepository.save(tweet);
     }
 }

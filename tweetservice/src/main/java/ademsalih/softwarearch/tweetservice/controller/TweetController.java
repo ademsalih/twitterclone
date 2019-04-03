@@ -4,12 +4,11 @@ import ademsalih.softwarearch.tweetservice.model.Retweet;
 import ademsalih.softwarearch.tweetservice.model.Tweet;
 import ademsalih.softwarearch.tweetservice.model.TweetAbstract;
 import ademsalih.softwarearch.tweetservice.service.FeedService;
+import ademsalih.softwarearch.tweetservice.service.implementation.FeedServiceImplementation;
 import ademsalih.softwarearch.tweetservice.service.RetweetService;
 import ademsalih.softwarearch.tweetservice.service.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,6 +32,11 @@ public class TweetController {
     @GetMapping("/tweets")
     public List<Tweet> getAllTweets() {
         return tweetService.getAllTweets();
+    }
+
+    @PostMapping("/tweets")
+    public Tweet saveTweet(@RequestBody Tweet tweet) {
+        return tweetService.saveTweet(tweet);
     }
 
     @GetMapping("/tweets/{id}")

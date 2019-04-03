@@ -1,8 +1,9 @@
-package ademsalih.softwarearch.tweetservice.service;
+package ademsalih.softwarearch.tweetservice.service.implementation;
 
 import ademsalih.softwarearch.tweetservice.model.Retweet;
 
 import ademsalih.softwarearch.tweetservice.repository.RetweetRepository;
+import ademsalih.softwarearch.tweetservice.service.RetweetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

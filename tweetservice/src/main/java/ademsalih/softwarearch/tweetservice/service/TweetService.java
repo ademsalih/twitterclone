@@ -11,4 +11,6 @@ public interface TweetService {
     List<Tweet> getTweetsForUser(long id);
 
     Tweet getTweet(long id);
+
+    Tweet saveTweet(Tweet tweet);
 }
