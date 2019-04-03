@@ -39,6 +39,11 @@ public class TweetController {
         return tweetService.saveTweet(tweet);
     }
 
+    @DeleteMapping("/tweets/{id}")
+    public void deleteTweet(@PathVariable long id) {
+        tweetService.deleteTweet(id);
+    }
+
     @GetMapping("/tweets/{id}")
     public Tweet getTweet(@PathVariable long id) {
         return tweetService.getTweet(id);

@@ -41,4 +41,9 @@ public class TweetServiceImplementation implements TweetService {
     public Tweet saveTweet(Tweet tweet) {
         return tweetRepository.save(tweet);
     }
+
+    @Override
+    public void deleteTweet(long id) {
+        tweetRepository.deleteById(id);
+    }
 }

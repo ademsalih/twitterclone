@@ -13,4 +13,6 @@ public interface TweetService {
     Tweet getTweet(long id);
 
     Tweet saveTweet(Tweet tweet);
+
+    void deleteTweet(long id);
 }
