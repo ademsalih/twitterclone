@@ -1,12 +1,12 @@
 package ademsalih.softwarearch.tweetservice.service;
 
-import ademsalih.softwarearch.tweetservice.model.TweetAbstract;
+import ademsalih.softwarearch.tweetservice.model.Tweet;
 
 import java.util.List;
 
 public interface FeedService {
 
-    List<TweetAbstract> getFeed();
+    List<Tweet> getFeed();
 
-    List<TweetAbstract> getFeedForUser(long id);
+    List<Tweet> getFeedForUser(long id);
 }

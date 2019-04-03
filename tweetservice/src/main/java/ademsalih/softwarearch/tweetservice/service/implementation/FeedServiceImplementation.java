@@ -1,10 +1,10 @@
 package ademsalih.softwarearch.tweetservice.service.implementation;
 
+import ademsalih.softwarearch.tweetservice.model.NewTweet;
 import ademsalih.softwarearch.tweetservice.model.Retweet;
 import ademsalih.softwarearch.tweetservice.model.Tweet;
-import ademsalih.softwarearch.tweetservice.model.TweetAbstract;
 import ademsalih.softwarearch.tweetservice.repository.RetweetRepository;
-import ademsalih.softwarearch.tweetservice.repository.TweetRepository;
+import ademsalih.softwarearch.tweetservice.repository.NewTweetRepository;
 import ademsalih.softwarearch.tweetservice.service.FeedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,27 +16,27 @@ import java.util.List;
 public class FeedServiceImplementation implements FeedService {
 
     @Autowired
-    TweetRepository tweetRepository;
+    NewTweetRepository newTweetRepository;
 
     @Autowired
     RetweetRepository retweetRepository;
 
-    public List<TweetAbstract> getFeed() {
+    public List<Tweet> getFeed() {
 
-        List<Tweet> tweets = tweetRepository.findAll();
+        List<NewTweet> newTweets = newTweetRepository.findAll();
         List<Retweet> retweets = retweetRepository.findAll();
 
-        List<TweetAbstract> feed = new ArrayList<>();
+        List<Tweet> feed = new ArrayList<>();
 
-        feed.addAll(tweets);
+        feed.addAll(newTweets);
         feed.addAll(retweets);
 
         return feed;
     }
 
-    public List<TweetAbstract> getFeedForUser(long id) {
+    public List<Tweet> getFeedForUser(long id) {
 
-        List<TweetAbstract> feed = new ArrayList<>();
+        List<Tweet> feed = new ArrayList<>();
         return null;
     }
 }

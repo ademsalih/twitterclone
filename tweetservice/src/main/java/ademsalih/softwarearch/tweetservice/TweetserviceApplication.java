@@ -1,9 +1,9 @@
 package ademsalih.softwarearch.tweetservice;
 
+import ademsalih.softwarearch.tweetservice.model.NewTweet;
 import ademsalih.softwarearch.tweetservice.model.Retweet;
-import ademsalih.softwarearch.tweetservice.model.Tweet;
 import ademsalih.softwarearch.tweetservice.repository.RetweetRepository;
-import ademsalih.softwarearch.tweetservice.repository.TweetRepository;
+import ademsalih.softwarearch.tweetservice.repository.NewTweetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,7 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TweetserviceApplication implements CommandLineRunner {
 
     @Autowired
-    TweetRepository tweetRepository;
+    NewTweetRepository newTweetRepository;
 
     @Autowired
     RetweetRepository retweetRepository;
@@ -24,18 +24,18 @@ public class TweetserviceApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        tweetRepository.deleteAllInBatch();
+        newTweetRepository.deleteAllInBatch();
         retweetRepository.deleteAllInBatch();
 
-        Tweet tweet1 = new Tweet("My first tweet!", "02.04.2019 13:52", 1,"image1.jpg");
-        Tweet tweet2 = new Tweet("My second tweet!", "02.04.2019 13:52", 1,"image2.jpg");
-        Tweet tweet3 = new Tweet("My third tweet!", "02.04.2019 13:52", 1,"image3.jpg");
+        NewTweet newTweet1 = new NewTweet("My first newTweet!", "02.04.2019 13:52", 1,"image1.jpg");
+        NewTweet newTweet2 = new NewTweet("My second newTweet!", "02.04.2019 13:52", 1,"image2.jpg");
+        NewTweet newTweet3 = new NewTweet("My third newTweet!", "02.04.2019 13:52", 1,"image3.jpg");
 
-        tweetRepository.save(tweet1);
-        tweetRepository.save(tweet2);
-        tweetRepository.save(tweet3);
+        newTweetRepository.save(newTweet1);
+        newTweetRepository.save(newTweet2);
+        newTweetRepository.save(newTweet3);
 
-        Retweet retweet = new Retweet(2, "02.04.2019 14:26", tweet1);
+        Retweet retweet = new Retweet(2, "02.04.2019 14:26", newTweet1);
         retweetRepository.save(retweet);
 
 

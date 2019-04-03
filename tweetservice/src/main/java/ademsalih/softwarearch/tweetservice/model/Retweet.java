@@ -1,6 +1,5 @@
 package ademsalih.softwarearch.tweetservice.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Retweet extends TweetAbstract {
+public class Retweet extends Tweet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,11 +24,11 @@ public class Retweet extends TweetAbstract {
     @ManyToOne
     @JsonIgnoreProperties("retweets")
     @JoinColumn(name = "tweet_id")
-    private Tweet tweet;
+    private NewTweet newTweet;
 
-    public Retweet(long user_id, String dateTime, Tweet tweet) {
+    public Retweet(long user_id, String dateTime, NewTweet newTweet) {
         this.user_id = user_id;
         this.dateTime = dateTime;
-        this.tweet = tweet;
+        this.newTweet = newTweet;
     }
 }

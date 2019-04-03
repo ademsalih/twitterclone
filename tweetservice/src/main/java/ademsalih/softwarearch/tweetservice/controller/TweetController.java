@@ -1,12 +1,11 @@
 package ademsalih.softwarearch.tweetservice.controller;
 
+import ademsalih.softwarearch.tweetservice.model.NewTweet;
 import ademsalih.softwarearch.tweetservice.model.Retweet;
 import ademsalih.softwarearch.tweetservice.model.Tweet;
-import ademsalih.softwarearch.tweetservice.model.TweetAbstract;
 import ademsalih.softwarearch.tweetservice.service.FeedService;
-import ademsalih.softwarearch.tweetservice.service.implementation.FeedServiceImplementation;
 import ademsalih.softwarearch.tweetservice.service.RetweetService;
-import ademsalih.softwarearch.tweetservice.service.TweetService;
+import ademsalih.softwarearch.tweetservice.service.NewTweetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +15,7 @@ import java.util.List;
 public class TweetController {
 
     @Autowired
-    TweetService tweetService;
+    NewTweetService newTweetService;
 
     @Autowired
     RetweetService retweetService;
@@ -25,33 +24,33 @@ public class TweetController {
     FeedService feedService;
 
     @GetMapping("/feed")
-    public List<TweetAbstract> getFeed() {
+    public List<Tweet> getFeed() {
         return feedService.getFeed();
     }
 
-    @GetMapping("/tweets")
-    public List<Tweet> getAllTweets() {
-        return tweetService.getAllTweets();
+    @GetMapping("/newtweets")
+    public List<NewTweet> getAllNewTweets() {
+        return newTweetService.getAllNewTweets();
     }
 
-    @PostMapping("/tweets")
-    public Tweet saveTweet(@RequestBody Tweet tweet) {
-        return tweetService.saveTweet(tweet);
+    @PostMapping("/newtweets")
+    public NewTweet saveNewTweet(@RequestBody NewTweet newTweet) {
+        return newTweetService.saveNewTweet(newTweet);
     }
 
-    @DeleteMapping("/tweets/{id}")
-    public void deleteTweet(@PathVariable long id) {
-        tweetService.deleteTweet(id);
+    @DeleteMapping("/newtweets/{id}")
+    public void deleteNewTweet(@PathVariable long id) {
+        newTweetService.deleteNewTweet(id);
     }
 
-    @GetMapping("/tweets/{id}")
-    public Tweet getTweet(@PathVariable long id) {
-        return tweetService.getTweet(id);
+    @GetMapping("/newtweets/{id}")
+    public NewTweet getNewTweet(@PathVariable long id) {
+        return newTweetService.getNewTweet(id);
     }
 
-    @GetMapping("/tweets/user/{id}")
-    public List<Tweet> getTweetsForUser(@PathVariable long id) {
-        return tweetService.getTweetsForUser(id);
+    @GetMapping("/newtweets/user/{id}")
+    public List<NewTweet> getNewTweetsForUser(@PathVariable long id) {
+        return newTweetService.getNewTweetsForUser(id);
     }
 
     @GetMapping("/retweets")
