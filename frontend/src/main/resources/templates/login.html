@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" style="height: 80%">
+
+    <title>Login</title>
+    <head th:replace="fragment/header :: head"></head>
+
+    <body style="height: 80%">
+
+        <div th:replace="fragment/menu :: div"></div>
+
+            <div class="container" style="height: 80%;position: relative">
+
+                <div style="position: absolute; width: 30%;margin: 0 auto; left: 0; right: 0; top:50%">
+                    <h4>Log in</h4>
+                    <form th:action="@{/login}" method="POST">
+
+                        <div class="form-group">
+                            <input type="email"  name="username" class="form-control" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="password" class="form-control" placeholder="Password">
+                        </div>
+
+                        <a class="btn btn-secondary" style="float: left" th:href="@{/signup}">Sign up</a>
+
+                        <button class="btn btn-primary" style="float: right" type="submit">Log in</button>
+                    </form>
+                </div>
+
+            </div>
+    </body>
+</html>

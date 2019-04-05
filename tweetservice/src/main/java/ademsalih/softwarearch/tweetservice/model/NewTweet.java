@@ -17,7 +17,7 @@ public class NewTweet extends Tweet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long tweet_id;
+    private long id;
 
     private long user_id;
 

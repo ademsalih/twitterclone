@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <title>Home</title>
+    <head th:replace="fragment/header :: head"></head>
+
+    <body>
+        <div th:replace="fragment/menu :: div"></div>
+        <div class="container">
+
+            <div class="col-sm-10 mx-auto">
+                <br>
+                <table width="100%">
+                    <tr>
+                        <td class="align-middle" style="text-align: left" width="50%">
+                            <h3>Feed</h3>
+                        </td>
+                        <td class="align-middle" style="text-align: right" width="50%">
+                            <!--<a th:if="${user.role == 'ADMIN'}" class="btn btn-success btn-sm" th:href="@{/add}">
+                                <i class="far fa-plus-square"></i> New ticket
+                            </a>-->
+                        </td>
+                    </tr>
+                </table>
+
+                <br>
+
+                <div th:if="${feedTweets.empty}" class="text-center">
+                    <br>
+                    <h5 style="opacity: 0.5">There are no tickets available.</h5>
+                </div>
+
+                <table th:if="${!feedTweets.empty}" class="table">
+                    <thead>
+                        <tr>
+                            <th class="align-middle" scope="col">FIRST NAME</th>
+                            <th class="align-middle" scope="col">LAST NAME</th>
+                            <th class="align-middle" scope="col">USERNAME</th>
+                            <th class="align-middle" scope="col">PROFILE IMAGE</th>
+                            <th class="align-middle" scope="col">DATETIME</th>
+                            <th class="align-middle" scope="col">TWEET IMAGE</th>
+                            <th class="align-middle" scope="col">MESSAGE</th>
+                            <th class="align-middle" scope="col">RETWEET</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="t : ${feedTweets}">
+                            <td class="align-middle" th:text="${t.firstName}"></td>
+                            <td class="align-middle" th:text="${t.lastName}"></td>
+                            <td class="align-middle" th:text="${t.userName}"></td>
+                            <td class="align-middle" th:text="${t.profileImageName}"></td>
+                            <td class="align-middle" th:text="${t.dateTime}"></td>
+                            <td class="align-middle" th:text="${t.imageName}"></td>
+                            <td class="align-middle" th:text="${t.message}"></td>
+
+                            <td class="align-middle">
+                                <p th:if="${t.newTweet != null}" th:text="${t.newTweet.dateTime}"></p>
+                                <p th:if="${t.newTweet != null}" th:text="${t.newTweet.imageName}"></p>
+                                <p th:if="${t.newTweet != null}" th:text="${t.newTweet.message}"></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </body>
+</html>

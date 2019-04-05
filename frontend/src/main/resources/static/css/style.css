@@ -1,0 +1,16 @@
+.navbarGradient {
+    background: #1C222F;
+    opacity: 1.0;
+}
+
+body {
+    margin-top: 5em;
+}
+
+.userLabel {
+    color: white;
+}
+
+table > thead > tr{
+    border-top: hidden;
+}

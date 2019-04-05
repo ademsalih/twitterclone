@@ -15,7 +15,7 @@ public class Retweet extends Tweet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long retweet_id;
+    private long id;
 
     private long user_id;
 
