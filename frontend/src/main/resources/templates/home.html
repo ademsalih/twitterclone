@@ -8,29 +8,94 @@
         <div th:replace="fragment/menu :: div"></div>
         <div class="container">
 
+
+
             <div class="col-sm-10 mx-auto">
-                <br>
-                <table width="100%">
-                    <tr>
-                        <td class="align-middle" style="text-align: left" width="50%">
-                            <h3>Feed</h3>
-                        </td>
-                        <td class="align-middle" style="text-align: right" width="50%">
-                            <!--<a th:if="${user.role == 'ADMIN'}" class="btn btn-success btn-sm" th:href="@{/add}">
-                                <i class="far fa-plus-square"></i> New ticket
-                            </a>-->
-                        </td>
-                    </tr>
-                </table>
 
                 <br>
 
-                <div th:if="${feedTweets.empty}" class="text-center">
-                    <br>
-                    <h5 style="opacity: 0.5">There are no tickets available.</h5>
-                </div>
+                <row>
 
-                <table th:if="${!feedTweets.empty}" class="table">
+                    <div class="col">
+                        <p>Adem Salih</p>
+
+                        <span><span th:text="${followerCount}"></span> Followers</span>
+
+                        <span>34 Tweets</span>
+
+                        <br>
+                    </div>
+
+                    <div class="col">
+
+                        <div th:each="t : ${feedTweets}">
+
+
+                            <div  th:if="${t.newTweet == null}" class="tweetbox">
+
+                                <div style="width: 10%; float: left; height: 100%">
+                                    <img class="pic" th:src="@{'/images/profile/' + 'avatar.png'}" alt="profile-image">
+                                </div>
+
+                                <span>
+                            <span th:text="${t.firstName}"></span>
+                            <span th:text="${t.lastName}"></span>
+                        </span>
+
+                                <span>@ <span th:text="${t.userName}"></span></span>
+
+                                <span style="float: right;" th:text="${t.dateTime}"></span>
+
+                                <p th:text="${t.message}" style="font-size: 0.9em"></p>
+
+                                <a style="font-size: 0.9em" href="#">Retweet</a>
+                                <a style="font-size: 0.9em" href="#">Like</a>
+                                <a style="font-size: 0.9em" href="#">Share</a>
+                            </div>
+
+
+                            <div th:if="${t.newTweet != null}">
+
+                                <p>
+                                    <span th:text="${t.firstName}"></span>
+                                    <span th:text="${t.lastName}"></span> retweeted
+                                </p>
+
+                                <div class="tweetbox">
+                                    <div style="width: 10%; float: left; height: 100%">
+                                        <img class="pic" th:src="@{'/images/profile/' + 'avatar.png'}" alt="profile-image">
+                                    </div>
+
+                                    <span>
+                            <span th:text="${t.newTweet.firstName}"></span>
+                            <span th:text="${t.newTweet.lastName}"></span>
+                        </span>
+
+                                    <span>@ <span th:text="${t.newTweet.userName}"></span></span>
+
+                                    <span style="float: right;" th:text="${t.newTweet.dateTime}"></span>
+
+                                    <p th:text="${t.newTweet.message}" style="font-size: 0.9em"></p>
+
+                                    <a style="font-size: 0.9em" href="#">Retweet</a>
+                                    <a style="font-size: 0.9em" href="#">Like</a>
+                                    <a style="font-size: 0.9em" href="#">Share</a>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                </row>
+
+
+
+<!--                <table th:if="${!feedTweets.empty}" class="table">
                     <thead>
                         <tr>
                             <th class="align-middle" scope="col">FIRST NAME</th>
@@ -54,13 +119,16 @@
                             <td class="align-middle" th:text="${t.message}"></td>
 
                             <td class="align-middle">
+                                <p th:if="${t.newTweet != null}" th:text="${t.newTweet.firstName}"></p>
+                                <p th:if="${t.newTweet != null}" th:text="${t.newTweet.lastName}"></p>
+                                <p th:if="${t.newTweet != null}" th:text="${t.newTweet.profileImageName}"></p>
                                 <p th:if="${t.newTweet != null}" th:text="${t.newTweet.dateTime}"></p>
                                 <p th:if="${t.newTweet != null}" th:text="${t.newTweet.imageName}"></p>
                                 <p th:if="${t.newTweet != null}" th:text="${t.newTweet.message}"></p>
                             </td>
                         </tr>
                     </tbody>
-                </table>
+                </table>-->
 
             </div>
         </div>

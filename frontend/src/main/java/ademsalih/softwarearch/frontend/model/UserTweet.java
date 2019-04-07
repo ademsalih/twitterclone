@@ -23,9 +23,19 @@ public class UserTweet {
 
     private String message;
 
-    private Tweet newTweet;
+    private UserTweet newTweet;
 
-    public UserTweet(String firstName, String lastName, String userName, String profileImageName, String dateTime, String imageName, String message, Tweet newTweet) {
+    public UserTweet(String firstName, String lastName, String userName, String profileImageName, String dateTime, String imageName, String message) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.profileImageName = profileImageName;
+        this.dateTime = dateTime;
+        this.imageName = imageName;
+        this.message = message;
+    }
+
+    public UserTweet(String firstName, String lastName, String userName, String profileImageName, String dateTime, String imageName, String message, UserTweet newTweet) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
