@@ -105,7 +105,13 @@
 
                                     <p th:text="${t.newTweet.message}" style="font-size: 0.9em"></p>
 
-                                    <a style="font-size: 0.9em" href="@{'/retweet' + t}">Retweet</a>
+                                    <form th:action="@{'/retweet/' + ${t.newTweet.id} }" method="post" modelAttribute="retweet">
+
+                                        <input type="hidden" th:value="${retweet.id}" name="id">
+
+                                        <button class="btn btn-primary btn-sm">Retweet</button>
+
+                                    </form>
                                     <a style="font-size: 0.9em" href="#">Like</a>
                                     <a style="font-size: 0.9em" href="#">Share</a>
                                 </div>

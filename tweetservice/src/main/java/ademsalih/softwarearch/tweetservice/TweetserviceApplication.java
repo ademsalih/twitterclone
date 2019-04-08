@@ -37,7 +37,7 @@ public class TweetserviceApplication implements CommandLineRunner {
         newTweetRepository.save(newTweet3);
         newTweetRepository.save(newTweet4);
 
-        Retweet retweet = new Retweet(2, "02.04.2019 14:26", newTweet1);
+        Retweet retweet = new Retweet(2, "02.04.2019 14:26", newTweet4);
         retweetRepository.save(retweet);
 
 
