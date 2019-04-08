@@ -1,9 +1,6 @@
 package ademsalih.softwarearch.frontend.controller;
 
-import ademsalih.softwarearch.frontend.model.Follow;
-import ademsalih.softwarearch.frontend.model.Tweet;
-import ademsalih.softwarearch.frontend.model.User;
-import ademsalih.softwarearch.frontend.model.UserTweet;
+import ademsalih.softwarearch.frontend.model.*;
 import ademsalih.softwarearch.frontend.service.FollowService;
 import ademsalih.softwarearch.frontend.service.TweetService;
 import ademsalih.softwarearch.frontend.service.UserService;
@@ -12,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
@@ -49,10 +47,26 @@ public class HomeController {
         return "redirect:/home";
     }
 
+    @PostMapping("/retweet/{id}")
+    public String retweet(@ModelAttribute("retweet") Retweet retweet, @PathVariable long id) {
+
+        retweet.setDateTime("08.04.2019 21:33");
+        retweet.setUser_id(user_id);
+
+        Tweet tweet = new Tweet();
+        tweet.setId(id);
+        retweet.setNewTweet(tweet);
+
+        tweetService.postRetweet(retweet);
+
+        return "redirect:/home";
+    }
+
     @GetMapping("/home")
     public String home(Model model) {
 
         model.addAttribute("tweet", new Tweet());
+        model.addAttribute("retweet", new Retweet());
 
         List<Follow> followers = followService.getFollowersForUserById(user_id);
         int followerCount = followers.size();
@@ -86,14 +100,14 @@ public class HomeController {
 
                 User user2 = userService.getUserById(t.getNewTweet().getUser_id());
 
-                UserTweet userTweet2 = new UserTweet(user2.getFirstName(), user2.getLastName(), user2.getUserName(), user2.getProfileImageName(), t.getNewTweet().getDateTime(), t.getNewTweet().getImageName(), t.getNewTweet().getMessage());
+                UserTweet userTweet2 = new UserTweet(t.getNewTweet().getId(),user2.getFirstName(), user2.getLastName(), user2.getUserName(), user2.getProfileImageName(), t.getNewTweet().getDateTime(), t.getNewTweet().getImageName(), t.getNewTweet().getMessage());
 
-                UserTweet userTweet = new UserTweet(user.getFirstName(),user.getLastName(), user.getUserName(), user.getProfileImageName(), t.getDateTime(), t.getImageName(), t.getMessage(), userTweet2);
+                UserTweet userTweet = new UserTweet(t.getId(),user.getFirstName(),user.getLastName(), user.getUserName(), user.getProfileImageName(), t.getDateTime(), t.getImageName(), t.getMessage(), userTweet2);
 
                 feedTweets.add(userTweet);
 
             } else {
-                UserTweet userTweet = new UserTweet(user.getFirstName(),user.getLastName(), user.getUserName(), user.getProfileImageName(), t.getDateTime(), t.getImageName(), t.getMessage());
+                UserTweet userTweet = new UserTweet(t.getId(),user.getFirstName(),user.getLastName(), user.getUserName(), user.getProfileImageName(), t.getDateTime(), t.getImageName(), t.getMessage());
 
                 feedTweets.add(userTweet);
             }

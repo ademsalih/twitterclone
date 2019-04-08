@@ -41,4 +41,9 @@ public class RetweetServiceImplementation implements RetweetService {
     public void deleteRetweet(long id) {
         retweetRepository.deleteById(id);
     }
+
+    @Override
+    public Retweet saveRetweet(Retweet retweet) {
+        return retweetRepository.save(retweet);
+    }
 }

@@ -58,6 +58,11 @@ public class TweetController {
         return retweetService.getAllRetweets();
     }
 
+    @PostMapping("/retweets")
+    public Retweet saveRetweet(@RequestBody Retweet retweet) {
+        return retweetService.saveRetweet(retweet);
+    }
+
     @GetMapping("/retweets/{id}")
     public Retweet getRetweet(@PathVariable long id) {
         return retweetService.getRetweet(id);

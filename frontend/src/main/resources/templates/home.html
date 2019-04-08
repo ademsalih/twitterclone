@@ -60,13 +60,23 @@
                                     <span th:text="${t.lastName}"></span>
                                 </span>
 
-                                <span>@ <span th:text="${t.userName}"></span></span>
+                                <span>@<span th:text="${t.userName}"></span></span>
 
                                 <span style="float: right;" th:text="${t.dateTime}"></span>
 
                                 <p th:text="${t.message}" style="font-size: 0.9em"></p>
 
-                                <a style="font-size: 0.9em" href="#">Retweet</a>
+
+
+
+                                <form th:action="@{'/retweet/' + ${t.id} }" method="post" modelAttribute="retweet">
+
+                                    <input type="hidden" th:value="${retweet.id}" name="id">
+
+                                    <button class="btn btn-primary btn-sm">Retweet</button>
+
+                                </form>
+
                                 <a style="font-size: 0.9em" href="#">Like</a>
                                 <a style="font-size: 0.9em" href="#">Share</a>
                             </div>
@@ -81,7 +91,7 @@
 
                                 <div class="tweetbox">
                                     <div style="width: 10%; float: left; height: 100%">
-                                        <img class="pic" th:src="@{'/images/profile/' + ${t.newTweet.profileImageName}" alt="profile-image">
+                                        <img class="pic" th:src="@{'/images/profile/' + ${t.newTweet.profileImageName}}" alt="profile-image">
                                     </div>
 
                                     <span>
@@ -95,7 +105,7 @@
 
                                     <p th:text="${t.newTweet.message}" style="font-size: 0.9em"></p>
 
-                                    <a style="font-size: 0.9em" href="#">Retweet</a>
+                                    <a style="font-size: 0.9em" href="@{'/retweet' + t}">Retweet</a>
                                     <a style="font-size: 0.9em" href="#">Like</a>
                                     <a style="font-size: 0.9em" href="#">Share</a>
                                 </div>

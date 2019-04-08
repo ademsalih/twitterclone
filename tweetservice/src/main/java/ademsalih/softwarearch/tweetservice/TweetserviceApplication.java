@@ -28,14 +28,12 @@ public class TweetserviceApplication implements CommandLineRunner {
         retweetRepository.deleteAllInBatch();
 
         NewTweet newTweet1 = new NewTweet("My first newTweet!", "02.04.2019 13:52", 1,"image1.jpg");
-        NewTweet newTweet2 = new NewTweet("My second newTweet! Lorem ipsum dolor sit amet.", "02.04.2019 13:52", 1,"image2.jpg");
         NewTweet newTweet3 = new NewTweet("Jeg elsker is!", "07.04.2019 22:06", 2,"image2.jpg");
 
         NewTweet newTweet4 = new NewTweet("Dette er min aller første tweet. Hva er en tweet egentlig? Nå logger jeg ut...", "08.04.2019 18:18", 3,"image2.jpg");
 
 
         newTweetRepository.save(newTweet1);
-        newTweetRepository.save(newTweet2);
         newTweetRepository.save(newTweet3);
         newTweetRepository.save(newTweet4);
 

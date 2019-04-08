@@ -9,6 +9,8 @@ import lombok.Setter;
 @Setter
 public class UserTweet {
 
+    private long id;
+
     private String firstName;
 
     private String lastName;
@@ -25,7 +27,8 @@ public class UserTweet {
 
     private UserTweet newTweet;
 
-    public UserTweet(String firstName, String lastName, String userName, String profileImageName, String dateTime, String imageName, String message) {
+    public UserTweet(long id, String firstName, String lastName, String userName, String profileImageName, String dateTime, String imageName, String message) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
@@ -35,7 +38,8 @@ public class UserTweet {
         this.message = message;
     }
 
-    public UserTweet(String firstName, String lastName, String userName, String profileImageName, String dateTime, String imageName, String message, UserTweet newTweet) {
+    public UserTweet(long id, String firstName, String lastName, String userName, String profileImageName, String dateTime, String imageName, String message, UserTweet newTweet) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
