@@ -15,8 +15,24 @@ public class TweetService {
     private RestTemplate restTemplate = new RestTemplate();
 
     public List<Tweet> getFeed(){
-        return  Arrays.stream(
+        return Arrays.stream(
                 restTemplate.getForObject(BASE_URL + "feed", Tweet[].class)
         ).collect(Collectors.toList());
+    }
+
+    public List<Tweet> getTweetsForUserById(long id) {
+        return Arrays.stream(
+                restTemplate.getForObject(BASE_URL + "newtweets/user/" + id, Tweet[].class)
+        ).collect(Collectors.toList());
+    }
+
+    public List<Tweet> getRetweetsForUserById(long id) {
+        return Arrays.stream(
+                restTemplate.getForObject(BASE_URL + "retweets/user/" + id, Tweet[].class)
+        ).collect(Collectors.toList());
+    }
+
+    public Tweet postTweet(Tweet tweet) {
+        return restTemplate.postForObject(BASE_URL + "newtweets", tweet, Tweet.class);
     }
 }

@@ -36,7 +36,7 @@ public class UserserviceApplication implements CommandLineRunner {
                 "adem123",
                 "test",
                 "26.03.2019",
-                "imageName.jpg",
+                "profile1.png",
                 UserRoles.USER.name());
 
         User pinar = new User(
@@ -47,7 +47,7 @@ public class UserserviceApplication implements CommandLineRunner {
                 "pinarsalihgs",
                 "test",
                 "26.03.2019",
-                "imageName2.jpg",
+                "profile2.png",
                 UserRoles.USER.name());
 
         User esra = new User(
@@ -58,7 +58,7 @@ public class UserserviceApplication implements CommandLineRunner {
                 "esra123",
                 "esraerkul",
                 "26.03.2019",
-                "esra.jpg",
+                "profile3.png",
                 UserRoles.USER.name());
 
         userRepository.save(adem);
@@ -67,10 +67,12 @@ public class UserserviceApplication implements CommandLineRunner {
 
         Follow follow = new Follow(pinar, adem);
         Follow follow2 = new Follow(esra, adem);
+        Follow follow3 = new Follow(adem, pinar);
 
 
         followRepository.save(follow);
         followRepository.save(follow2);
+        followRepository.save(follow3);
 
 
     }

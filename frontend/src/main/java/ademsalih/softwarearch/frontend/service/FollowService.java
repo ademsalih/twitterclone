@@ -19,4 +19,10 @@ public class FollowService {
                 restTemplate.getForObject(BASE_URL + "followers" + "/" + id, Follow[].class)
         ).collect(Collectors.toList());
     }
+
+    public List<Follow> getFollowingsForUserById(long id){
+        return  Arrays.stream(
+                restTemplate.getForObject(BASE_URL + "followings" + "/" + id, Follow[].class)
+        ).collect(Collectors.toList());
+    }
 }

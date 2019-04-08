@@ -9,9 +9,9 @@ import lombok.Setter;
 @Setter
 public class Tweet {
 
-    protected long id;
+    private long id;
 
-    protected long user_id;
+    private long user_id;
 
     protected String dateTime;
 

@@ -31,3 +31,9 @@ table > thead > tr{
     width: 3em;
     border-radius: 50%;
 }
+
+.pic-lg {
+    height: 5em;
+    width: 5em;
+    border-radius: 50%;
+}

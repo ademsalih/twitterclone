@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,19 +29,49 @@ public class HomeController {
     @Autowired
     FollowService followService;
 
-    @GetMapping("/login")
+    long user_id = 1;
+
+    @GetMapping({"/", "/login"})
     public String login() {
         return "login";
     }
 
-    @GetMapping("/feed")
-    public String feed(Model model) {
+    @PostMapping("/tweet")
+    public String tweet(@ModelAttribute("tweet") Tweet tweet) {
 
-        long user_id = 1;
+        tweet.setUser_id(user_id);
+        tweet.setNewTweet(null);
+        tweet.setDateTime("now");
+        tweet.setImageName("asdas.jpg");
+
+        tweetService.postTweet(tweet);
+
+        return "redirect:/home";
+    }
+
+    @GetMapping("/home")
+    public String home(Model model) {
+
+        model.addAttribute("tweet", new Tweet());
 
         List<Follow> followers = followService.getFollowersForUserById(user_id);
         int followerCount = followers.size();
         model.addAttribute("followerCount", followerCount);
+
+        List<Follow> following = followService.getFollowingsForUserById(user_id);
+        int followingCount = following.size();
+        model.addAttribute("followingCount", followingCount);
+
+
+        List<Tweet> userTweets = tweetService.getTweetsForUserById(user_id);
+        List<Tweet> userRetweets = tweetService.getRetweetsForUserById(user_id);
+
+
+        int totalTweets = userTweets.size() + userRetweets.size();
+
+        model.addAttribute("totalTweets", totalTweets);
+
+
 
         List<Tweet> tweetsList = tweetService.getFeed();
 
@@ -72,5 +104,10 @@ public class HomeController {
 
         model.addAttribute("feedTweets", feedTweets);
         return "home";
+    }
+
+    @GetMapping("/profile")
+    public String profile() {
+        return "profile";
     }
 }
