@@ -86,24 +86,24 @@ public class HomeController {
     @GetMapping("/home")
     public String home(Model model) {
 
+        // Models for tweeting and retweeting
         model.addAttribute("tweet", new Tweet());
         model.addAttribute("retweet", new Retweet());
 
+        // Get follower count the logged in user
         List<Follow> followers = followService.getFollowersForUserById(user_id);
         int followerCount = followers.size();
         model.addAttribute("followerCount", followerCount);
 
+        // Get following count the logged in user
         List<Follow> following = followService.getFollowingsForUserById(user_id);
         int followingCount = following.size();
         model.addAttribute("followingCount", followingCount);
 
-
+        // Get total tweet count the logged in user
         List<Tweet> userTweets = tweetService.getTweetsForUserById(user_id);
         List<Tweet> userRetweets = tweetService.getRetweetsForUserById(user_id);
-
-
         int totalTweets = userTweets.size() + userRetweets.size();
-
         model.addAttribute("totalTweets", totalTweets);
 
 

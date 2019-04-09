@@ -37,3 +37,9 @@ table > thead > tr{
     width: 5em;
     border-radius: 50%;
 }
+
+.tweet-image {
+    height: 8em;
+    width: 10em;
+    border-radius: 5%;
+}

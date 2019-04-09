@@ -31,8 +31,7 @@
 
                     <div class="col-sm-9">
 
-                        <!-- POST NEW TWEET -->
-
+                        <!--------- POST NEW TWEET --------->
                         <form th:action="@{/tweet}" method="post" modelAttribute="tweet" enctype="multipart/form-data">
 
                             <input type="hidden" th:value="${tweet.id}" name="id">
@@ -52,9 +51,12 @@
 
                         <br>
 
+
+                        <!--------- TWEET FEED --------->
                         <div th:each="t : ${feedTweets}">
 
 
+                            <!--------- NEW TWEET --------->
                             <div  th:if="${t.newTweet == null}" class="tweetbox">
 
                                 <div style="width: 10%; float: left; height: 100%">
@@ -72,7 +74,7 @@
 
                                 <p th:text="${t.message}" style="font-size: 0.9em"></p>
 
-
+                                <img th:if="${t.imageName != null}" class="tweet-image" th:src="@{'/images/tweet/' + ${t.imageName} }" alt="tweet-image">
 
 
                                 <form th:action="@{'/retweet/' + ${t.id} }" method="post" modelAttribute="retweet">
@@ -87,7 +89,7 @@
                                 <a style="font-size: 0.9em" href="#">Share</a>
                             </div>
 
-
+                            <!--------- RETWEET --------->
                             <div th:if="${t.newTweet != null}">
 
                                 <p>
@@ -110,6 +112,9 @@
                                     <span style="float: right;" th:text="${t.newTweet.dateTime}"></span>
 
                                     <p th:text="${t.newTweet.message}" style="font-size: 0.9em"></p>
+
+                                    <img th:if="${t.newTweet.imageName != null}" class="tweet-image" th:src="@{'/images/tweet/' + ${t.newTweet.imageName} }" alt="tweet-image">
+
 
                                     <form th:action="@{'/retweet/' + ${t.newTweet.id} }" method="post" modelAttribute="retweet">
 
