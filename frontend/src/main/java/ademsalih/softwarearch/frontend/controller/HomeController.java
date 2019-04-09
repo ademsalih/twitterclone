@@ -7,11 +7,13 @@ import ademsalih.softwarearch.frontend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,12 +37,31 @@ public class HomeController {
     }
 
     @PostMapping("/tweet")
-    public String tweet(@ModelAttribute("tweet") Tweet tweet) {
+    public String tweet(@ModelAttribute("tweet") Tweet tweet, @RequestParam(value = "file", required=false) MultipartFile file) {
 
         tweet.setUser_id(user_id);
         tweet.setNewTweet(null);
         tweet.setDateTime("now");
-        tweet.setImageName("asdas.jpg");
+
+
+        if (!file.isEmpty()) {
+            try {
+
+                String IMAGE_LOCATION = "/src/main/resources/static/images/tweet/";
+
+                String projectDir = System.getProperty("user.dir");
+                String absolutePath = projectDir + IMAGE_LOCATION;
+
+                Path path = Paths.get(absolutePath + file.getOriginalFilename());
+
+                Files.write(path,file.getBytes());
+
+                tweet.setImageName(file.getOriginalFilename());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         tweetService.postTweet(tweet);
 

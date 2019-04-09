@@ -33,7 +33,7 @@
 
                         <!-- POST NEW TWEET -->
 
-                        <form th:action="@{/tweet}" method="post" modelAttribute="tweet">
+                        <form th:action="@{/tweet}" method="post" modelAttribute="tweet" enctype="multipart/form-data">
 
                             <input type="hidden" th:value="${tweet.id}" name="id">
 
@@ -41,8 +41,14 @@
                                 <input type="text" class="form-control" th:value="${tweet.message}" placeholder="Tweet something here..." name="message">
                             </div>
 
+                            <div class="form-group">
+                                <input type="file" class="form-control" name="file"/>
+                            </div>
+
                             <button class="btn btn-primary">Tweet</button>
                         </form>
+
+
 
                         <br>
 
