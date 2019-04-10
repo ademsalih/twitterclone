@@ -85,7 +85,10 @@
 
                                 </form>
 
+                                <a style="font-size: 0.9em" th:href="@{'/deleteTweet/' + ${t.id} }">Delete</a>
+
                                 <a style="font-size: 0.9em" href="#">Like</a>
+
                                 <a style="font-size: 0.9em" href="#">Share</a>
                             </div>
 
@@ -116,13 +119,10 @@
                                     <img th:if="${t.newTweet.imageName != null}" class="tweet-image" th:src="@{'/images/tweet/' + ${t.newTweet.imageName} }" alt="tweet-image">
 
 
-                                    <form th:action="@{'/retweet/' + ${t.newTweet.id} }" method="post" modelAttribute="retweet">
 
-                                        <input type="hidden" th:value="${retweet.id}" name="id">
 
-                                        <button class="btn btn-primary btn-sm">Retweet</button>
+                                    <a style="font-size: 0.9em" th:href="@{'/deleteRetweet/' + ${t.newTweet.id} }">Undo retweet</a>
 
-                                    </form>
                                     <a style="font-size: 0.9em" href="#">Like</a>
                                     <a style="font-size: 0.9em" href="#">Share</a>
                                 </div>

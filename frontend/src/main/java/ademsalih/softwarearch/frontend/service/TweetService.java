@@ -40,4 +40,12 @@ public class TweetService {
     public Retweet postRetweet(Retweet retweet) {
         return restTemplate.postForObject(BASE_URL + "retweets", retweet, Retweet.class);
     }
+
+    public void deleteTweet(long id) {
+        restTemplate.delete(BASE_URL + "newtweets/" + id);
+    }
+
+    public void deleteRetweet(long id) {
+        restTemplate.delete(BASE_URL + "retweets/" + id);
+    }
 }

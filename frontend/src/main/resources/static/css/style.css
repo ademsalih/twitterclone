@@ -1,7 +1,4 @@
-.navbarGradient {
-    background: #1DA1F2;
-    opacity: 1.0;
-}
+
 
 body {
     margin-top: 5em;
@@ -42,4 +39,37 @@ table > thead > tr{
     height: 8em;
     width: 10em;
     border-radius: 5%;
+}
+
+
+
+
+
+.navbarGradient {
+    background: #ffffff;
+    opacity: 1.0;
+}
+
+
+.navbar {
+    min-height: 40px;
+}
+
+.navbar-brand {
+    padding: 0 15px;
+    height: 40px;
+    line-height: 40px;
+
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    text-align: center;
+    margin: auto;
+}
+
+.navbar-toggle {
+    /* (80px - button height 34px) / 2 = 23px */
+    margin-top: 23px;
+    padding: 9px 10px !important;
 }

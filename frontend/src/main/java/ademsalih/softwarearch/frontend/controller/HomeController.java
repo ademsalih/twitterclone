@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -36,8 +38,10 @@ public class HomeController {
         return "login";
     }
 
+    // ADD PRINCIPAL FOR USER ID
+
     @PostMapping("/tweet")
-    public String tweet(@ModelAttribute("tweet") Tweet tweet, @RequestParam(value = "file", required=false) MultipartFile file) {
+    public String tweet(@ModelAttribute("tweet") Tweet tweet, @RequestParam(value = "file", required=false) MultipartFile file, HttpServletRequest request) {
 
         tweet.setUser_id(user_id);
         tweet.setNewTweet(null);
@@ -46,7 +50,6 @@ public class HomeController {
 
         if (!file.isEmpty()) {
             try {
-
                 String IMAGE_LOCATION = "/src/main/resources/static/images/tweet/";
 
                 String projectDir = System.getProperty("user.dir");
@@ -83,12 +86,25 @@ public class HomeController {
         return "redirect:/home";
     }
 
+    @GetMapping("/deleteTweet/{id}")
+    public String deleteTweet(@PathVariable long id) {
+        tweetService.deleteTweet(id);
+        return "redirect:/home";
+    }
+
+    @GetMapping("/deleteRetweet/{id}")
+    public String deleteRetweet(@PathVariable long id) {
+        tweetService.deleteRetweet(id);
+        return "redirect:/home";
+    }
+
     @GetMapping("/home")
     public String home(Model model) {
 
         // Models for tweeting and retweeting
         model.addAttribute("tweet", new Tweet());
         model.addAttribute("retweet", new Retweet());
+        model.addAttribute("loggedInUser", user_id);
 
         // Get follower count the logged in user
         List<Follow> followers = followService.getFollowersForUserById(user_id);

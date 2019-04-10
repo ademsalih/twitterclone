@@ -1,33 +1,26 @@
 <div xmlns:th="http://www.w3.org/1999/xhtml">
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbarGradient">
-        <a class="navbar-brand" href="/home">
-            <img th:src="@{/images/ticket.png}" width="30" height="30" alt="">
-        </a>
 
-        <a class="navbar-brand" href="/home">Twitter</a>
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
+
+        <a class="navbar-brand" th:href="@{/home}">
+            <i style="color: #1DA1F2" class="fab fa-twitter"></i>
+        </a>
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
 
-                <li th:if="${user != null}" class="nav-item">
-                    <a class="nav-link" href="/home">Tickets</a>
-                </li>
-
-                <li th:if="${user != null && user.role == 'USER'}" class="nav-item">
-                    <a class="nav-link" href="/orders">My tickets</a>
-                </li>
-
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="#">Home</a></li>
             </ul>
 
-            <form th:if="${user != null}" class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
-                <i class="far fa-user mx-2" style="color: white"></i>
-                <label class="userLabel" th:text=" ${user.firstName}"></label>
-                <button class="btn btn-danger my-2 my-sm-0 mx-5" type="submit">Log out</button>
-            </form>
+            <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+                <li><a href="#">Tweet</a></li>
+            </ul>
 
         </div>
     </nav>
