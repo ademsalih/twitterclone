@@ -55,10 +55,6 @@
 
 
 
-
-
-
-
                     <div class="col-sm-8">
 
                         <!--------- POST NEW TWEET --------->
@@ -76,9 +72,6 @@
 
                             <button class="btn btn-primary">Tweet</button>
                         </form>
-
-
-
                         <br>
 
 
@@ -87,40 +80,70 @@
 
 
                             <!--------- NEW TWEET --------->
-                            <div  th:if="${t.newTweet == null}" class="tweetbox">
+                            <div class="tweetbox">
 
-                                <div style="width: 10%; float: left; height: 100%">
-                                    <img class="pic" th:src="@{'/images/profile/' + ${t.profileImageName} }" alt="profile-image">
+                                <div class="tweetbox-image-box">
+                                    <img class="tweet-profile-pic" th:src="@{'/images/profile/' + ${t.profileImageName} }" alt="">
                                 </div>
 
-                                <span>
-                                    <span th:text="${t.firstName}"></span>
-                                    <span th:text="${t.lastName}"></span>
-                                </span>
+                                <div class="tweetbox-content">
+                                    <div class="name-field">
+                                        <span class="name" th:text="${t.firstName} + ' ' + ${t.lastName}"></span>
+                                        <span class="grey-text" th:text="' @' + ${t.userName}"></span>
+                                        <span class="grey-text">⋅</span>
+                                        <span class="grey-text" th:text="${t.dateTime}"></span>
+                                        <br>
+                                        <span class="tweet-message" th:text="${t.message}"></span>
+                                    </div>
 
-                                <span>@<span th:text="${t.userName}"></span></span>
+                                    <img th:if="${t.imageName != null}" class="tweet-pic" th:src="@{'/images/tweet/' + ${t.imageName} }" alt="">
 
-                                <span style="float: right;" th:text="${t.dateTime}"></span>
+                                    <div class="interaction-field">
 
-                                <p th:text="${t.message}" style="font-size: 0.9em"></p>
+                                        <table>
+                                            <tbody>
+                                            <tr>
+                                                <td class="interaction-item">
+                                                    <img class="icon" th:src="@{'/images/assets/comment.png'}">
+                                                    <span class="interaction-text">42</span>
+                                                </td>
+                                                <td class="interaction-item">
+                                                    <img class="retweet-icon" th:src="@{'/images/assets/gray-retweet.svg'}">
+                                                    <span class="interaction-text">42</span>
+                                                </td>
+                                                <td class="interaction-item">
+                                                    <img class="icon" th:src="@{'/images/assets/heart.png'}">
+                                                    <span class="interaction-text">89</span>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
 
-                                <img th:if="${t.imageName != null}" class="tweet-image" th:src="@{'/images/tweet/' + ${t.imageName} }" alt="tweet-image">
+                                    </div>
+
+                                </div>
 
 
-                                <form th:action="@{'/retweet/' + ${t.id} }" method="post" modelAttribute="retweet">
-
-                                    <input type="hidden" th:value="${retweet.id}" name="id">
-
-                                    <button class="btn btn-primary btn-sm">Retweet</button>
-
-                                </form>
-
-                                <a style="font-size: 0.9em" th:href="@{'/deleteTweet/' + ${t.id} }">Delete</a>
-
-                                <a style="font-size: 0.9em" href="#">Like</a>
-
-                                <a style="font-size: 0.9em" href="#">Share</a>
                             </div>
+
+
+                            <!--<form th:action="@{'/retweet/' + ${t.id} }" method="post" modelAttribute="retweet">
+
+                                <input type="hidden" th:value="${retweet.id}" name="id">
+
+                                <button class="btn btn-primary btn-sm">Retweet</button>
+
+                            </form>
+
+                            <a style="font-size: 0.9em" th:href="@{'/deleteTweet/' + ${t.id} }">Delete</a>
+
+                            <a style="font-size: 0.9em" href="#">Like</a>
+
+                            <a style="font-size: 0.9em" href="#">Share</a>-->
+
+
+
+
 
                             <!--------- RETWEET --------->
                             <div th:if="${t.newTweet != null}">
@@ -167,41 +190,6 @@
                 </div>
 
 
-
-<!--                <table th:if="${!feedTweets.empty}" class="table">
-                    <thead>
-                        <tr>
-                            <th class="align-middle" scope="col">FIRST NAME</th>
-                            <th class="align-middle" scope="col">LAST NAME</th>
-                            <th class="align-middle" scope="col">USERNAME</th>
-                            <th class="align-middle" scope="col">PROFILE IMAGE</th>
-                            <th class="align-middle" scope="col">DATETIME</th>
-                            <th class="align-middle" scope="col">TWEET IMAGE</th>
-                            <th class="align-middle" scope="col">MESSAGE</th>
-                            <th class="align-middle" scope="col">RETWEET</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="t : ${feedTweets}">
-                            <td class="align-middle" th:text="${t.firstName}"></td>
-                            <td class="align-middle" th:text="${t.lastName}"></td>
-                            <td class="align-middle" th:text="${t.userName}"></td>
-                            <td class="align-middle" th:text="${t.profileImageName}"></td>
-                            <td class="align-middle" th:text="${t.dateTime}"></td>
-                            <td class="align-middle" th:text="${t.imageName}"></td>
-                            <td class="align-middle" th:text="${t.message}"></td>
-
-                            <td class="align-middle">
-                                <p th:if="${t.newTweet != null}" th:text="${t.newTweet.firstName}"></p>
-                                <p th:if="${t.newTweet != null}" th:text="${t.newTweet.lastName}"></p>
-                                <p th:if="${t.newTweet != null}" th:text="${t.newTweet.profileImageName}"></p>
-                                <p th:if="${t.newTweet != null}" th:text="${t.newTweet.dateTime}"></p>
-                                <p th:if="${t.newTweet != null}" th:text="${t.newTweet.imageName}"></p>
-                                <p th:if="${t.newTweet != null}" th:text="${t.newTweet.message}"></p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>-->
 
             </div>
         </div>

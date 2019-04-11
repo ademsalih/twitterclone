@@ -70,47 +70,107 @@ body {
 /************ TWEET BOX ************/
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .tweetbox {
-    background: white;
-    height: 100%;
-    min-height: 100%;
-    width: 100%;
-    border-style: solid;
-    border-width: 0.08em;
+    width: 36.8em;
+    position: relative;
+    background-color: white;
+    overflow: hidden;
+    border-top: 0.09em solid #E6ECF0;
 }
+
+.tweetbox-image-box {
+    width: 12%;
+    float: left;
+    clear: both;
+}
+
+.tweet-profile-pic {
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 0.7em;
+}
+
+.tweetbox-content {
+    width: 88%;
+    float: right;
+}
+
+.name-field {
+    padding-top: 0.45em;
+    padding-right: 1em;
+    line-height: 1.2em;
+    margin-bottom: 1em;
+}
+
+.name {
+    font-size: 0.85em;
+    font-weight: bold;
+}
+
+.grey-text {
+    font-size: 0.85em;
+    color: #657786;
+}
+
+.tweet-message {
+    font-size: 0.9em;
+}
+
+.tweet-pic {
+    width: 31.7em;
+    border-radius: 0.65em;
+    margin-bottom: 0.6em;
+}
+
+.interaction-field {
+    margin-bottom: 0.4em;
+}
+
+.interaction-item {
+    width: 5em;
+}
+
+.icon {
+    width: 1em;
+}
+
+.interaction-text {
+    font-size: 0.68em;
+    font-weight: bold;
+    color: #657786;
+    margin-left: 0.7em;
+}
+
+.retweet-icon {
+    width: 1.1em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .pic {
     height: 3em;
