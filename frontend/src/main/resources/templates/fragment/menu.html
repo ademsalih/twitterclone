@@ -1,27 +1,39 @@
 <div xmlns:th="http://www.w3.org/1999/xhtml">
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbarGradient">
 
+        <div class="container">
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-brand">
+                <a th:href="@{/home}">
+                    <i style="color: #1DA1F2; font-size: 1em" class="fab fa-twitter"></i>
+                </a>
+            </div>
 
 
-        <a class="navbar-brand" th:href="@{/home}">
-            <i style="color: #1DA1F2" class="fab fa-twitter"></i>
-        </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="#">Home</a></li>
+                </ul>
 
-            <ul class="nav navbar-nav navbar-left">
-                <li><a href="#">Home</a></li>
-            </ul>
+                <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
 
-            <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-                <li><a href="#">Tweet</a></li>
-            </ul>
+                    <img class="pic-sm" th:src="@{'/images/profile/' + 'profile1.png'}" alt="profile-image">
+
+                    <li><a href="#">Tweet</a></li>
+                </ul>
+
+            </div>
+
+
 
         </div>
+
+
     </nav>
 </div>

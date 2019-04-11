@@ -8,28 +8,58 @@
         <div th:replace="fragment/menu :: div"></div>
         <div class="container">
 
-            <div class="col-sm-10 mx-auto">
+            <div class="col-sm-12 mx-auto">
 
                 <div class="row">
 
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
 
-                        <img class="pic-lg" th:src="@{'/images/profile/' + 'profile1.png'}" alt="profile-image">
+                        <!------------ PROFILE BOX ------------->
+                        <div class="profile-box">
 
-                        <p>Adem Salih</p>
+                            <img th:src="@{'/images/profile/' + 'profile1.png'}" class="profile-box-pic">
 
-                        <span>
-                            <span th:text="${followerCount}"></span> Followers <br>
-                            <span th:text="${followingCount}"></span> Following <br>
-                            <span th:text="${totalTweets}"></span> Tweets
-                        </span>
+                            <div class="profile-box-top-box">
+
+                            </div>
+
+                            <div class="profile-box-bottom-box">
+
+                                <div class="name-box">
+                                    <span class="profile-name">Adem Salih</span><br>
+                                    <span class="handle-name">@ademsalih</span>
+                                </div>
 
 
+                                <table class="follow-stat-table">
+                                    <thead>
+                                    <tr>
+                                        <th class="follow-stat-header">Tweets</th>
+                                        <th class="follow-stat-header">Following</th>
+                                        <th class="follow-stat-header">Followers</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="follow-stat-number" th:text="${totalTweets}"></td>
+                                        <td class="follow-stat-number" th:text="${followingCount}"></td>
+                                        <td class="follow-stat-number" th:text="${followerCount}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 
-                        <br>
                     </div>
 
-                    <div class="col-sm-9">
+
+
+
+
+
+
+
+                    <div class="col-sm-8">
 
                         <!--------- POST NEW TWEET --------->
                         <form th:action="@{/tweet}" method="post" modelAttribute="tweet" enctype="multipart/form-data">
