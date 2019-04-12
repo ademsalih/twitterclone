@@ -18,10 +18,7 @@
                         <div class="profile-box">
 
                             <img th:src="@{'/images/profile/' + 'profile1.png'}" class="profile-box-pic">
-
-                            <div class="profile-box-top-box">
-
-                            </div>
+                            <div class="profile-box-top-box"></div>
 
                             <div class="profile-box-bottom-box">
 
@@ -29,7 +26,6 @@
                                     <span class="profile-name">Adem Salih</span><br>
                                     <span class="handle-name">@ademsalih</span>
                                 </div>
-
 
                                 <table class="follow-stat-table">
                                     <thead>
@@ -148,39 +144,73 @@
                             <!--------- RETWEET --------->
                             <div th:if="${t.newTweet != null}">
 
-                                <p>
-                                    <span th:text="${t.firstName}"></span>
-                                    <span th:text="${t.lastName}"></span> retweeted
-                                </p>
-
                                 <div class="tweetbox">
-                                    <div style="width: 10%; float: left; height: 100%">
-                                        <img class="pic" th:src="@{'/images/profile/' + ${t.newTweet.profileImageName}}" alt="profile-image">
+
+
+                                    <div class="retweet-box">
+                                        <img class="user-retweet-icon" th:src="@{'/images/assets/gray-retweet.svg'}">
+                                        <span class="retweeted-text" th:text="${t.firstName} + ' ' + ${t.lastName} + ' Retweeted' "></span>
                                     </div>
 
-                                    <span>
-                                        <span th:text="${t.newTweet.firstName}"></span>
-                                        <span th:text="${t.newTweet.lastName}"></span>
-                                    </span>
 
-                                    <span>@ <span th:text="${t.newTweet.userName}"></span></span>
+                                    <div class="tweetbox-image-box">
+                                        <img class="tweet-profile-pic" th:src="@{'/images/profile/' + ${t.newTweet.profileImageName} }" alt="">
+                                    </div>
 
-                                    <span style="float: right;" th:text="${t.newTweet.dateTime}"></span>
+                                    <div class="tweetbox-content">
+                                        <div class="name-field">
+                                            <span class="name" th:text="${t.newTweet.firstName} + ' ' + ${t.newTweet.lastName}"></span>
+                                            <span class="grey-text" th:text="' @' + ${t.newTweet.userName}"></span>
+                                            <span class="grey-text">⋅</span>
+                                            <span class="grey-text" th:text="${t.newTweet.dateTime}"></span>
+                                            <br>
+                                            <span class="tweet-message" th:text="${t.newTweet.message}"></span>
+                                        </div>
 
-                                    <p th:text="${t.newTweet.message}" style="font-size: 0.9em"></p>
+                                        <img th:if="${t.newTweet.imageName != null}" class="tweet-pic" th:src="@{'/images/tweet/' + ${t.newTweet.imageName} }" alt="">
 
-                                    <img th:if="${t.newTweet.imageName != null}" class="tweet-image" th:src="@{'/images/tweet/' + ${t.newTweet.imageName} }" alt="tweet-image">
+                                        <div class="interaction-field">
+
+                                            <table>
+                                                <tbody>
+                                                <tr>
+                                                    <td class="interaction-item">
+                                                        <img class="icon" th:src="@{'/images/assets/comment.png'}">
+                                                        <span class="interaction-text">42</span>
+                                                    </td>
+                                                    <td class="interaction-item">
+                                                        <img class="retweet-icon" th:src="@{'/images/assets/gray-retweet.svg'}">
+                                                        <span class="interaction-text">42</span>
+                                                    </td>
+                                                    <td class="interaction-item">
+                                                        <img class="icon" th:src="@{'/images/assets/heart.png'}">
+                                                        <span class="interaction-text">89</span>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+
+                                    </div>
 
 
-
-
-                                    <a style="font-size: 0.9em" th:href="@{'/deleteRetweet/' + ${t.newTweet.id} }">Undo retweet</a>
-
-                                    <a style="font-size: 0.9em" href="#">Like</a>
-                                    <a style="font-size: 0.9em" href="#">Share</a>
                                 </div>
 
+                                <!--
+                                <a style="font-size: 0.9em" th:href="@{'/deleteRetweet/' + ${t.newTweet.id} }">Undo retweet</a>
+
+                                <a style="font-size: 0.9em" href="#">Like</a>
+                                <a style="font-size: 0.9em" href="#">Share</a>
+                                -->
+
                             </div>
+
+
+
+
+
+
 
 
                         </div>
