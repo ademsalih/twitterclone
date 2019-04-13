@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Calendar;
 
 @Entity
 @Getter
@@ -19,14 +20,14 @@ public class Retweet extends Tweet {
 
     private long user_id;
 
-    private String dateTime;
+    private Calendar dateTime;
 
     @ManyToOne
     @JsonIgnoreProperties("retweets")
     @JoinColumn(name = "tweet_id")
     private NewTweet newTweet;
 
-    public Retweet(long user_id, String dateTime, NewTweet newTweet) {
+    public Retweet(long user_id, Calendar dateTime, NewTweet newTweet) {
         this.user_id = user_id;
         this.dateTime = dateTime;
         this.newTweet = newTweet;

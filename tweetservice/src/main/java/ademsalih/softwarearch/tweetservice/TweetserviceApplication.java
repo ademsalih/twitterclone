@@ -9,6 +9,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
+
 @SpringBootApplication
 public class TweetserviceApplication implements CommandLineRunner {
 
@@ -27,17 +30,14 @@ public class TweetserviceApplication implements CommandLineRunner {
         newTweetRepository.deleteAllInBatch();
         retweetRepository.deleteAllInBatch();
 
-        NewTweet newTweet1 = new NewTweet("My first newTweet!", "02.04.2019 13:52", 1,null);
-
-        NewTweet newTweet4 = new NewTweet("Dette er min aller første tweet. Hva er en tweet egentlig? Nå logger jeg ut.", "08.04.2019 18:18", 2,null);
 
 
-        newTweetRepository.save(newTweet1);
-        newTweetRepository.save(newTweet4);
 
-        Retweet retweet = new Retweet(3, "02.04.2019 14:26", newTweet4);
+        NewTweet newTweet = new NewTweet("This a tweet for testing date time purposes.", Calendar.getInstance(),1,null);
+        newTweetRepository.save(newTweet);
+
+        Retweet retweet = new Retweet(3, Calendar.getInstance(), newTweet);
         retweetRepository.save(retweet);
-
 
 
 

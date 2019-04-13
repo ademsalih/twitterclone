@@ -2,6 +2,7 @@ package ademsalih.softwarearch.frontend.controller;
 
 import ademsalih.softwarearch.frontend.model.*;
 import ademsalih.softwarearch.frontend.service.FollowService;
+import ademsalih.softwarearch.frontend.service.TimeFormatService;
 import ademsalih.softwarearch.frontend.service.TweetService;
 import ademsalih.softwarearch.frontend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class HomeController {
@@ -45,12 +45,12 @@ public class HomeController {
 
         tweet.setUser_id(user_id);
         tweet.setNewTweet(null);
-        tweet.setDateTime("now");
+        tweet.setDateTime(Calendar.getInstance());
 
 
         if (!file.isEmpty()) {
             try {
-                String IMAGE_LOCATION = "/src/main/resources/static/images/tweet/";
+                String IMAGE_LOCATION = "/src/main/resources/static/images/";
 
                 String projectDir = System.getProperty("user.dir");
                 String absolutePath = projectDir + IMAGE_LOCATION;
@@ -74,7 +74,7 @@ public class HomeController {
     @PostMapping("/retweet/{id}")
     public String retweet(@ModelAttribute("retweet") Retweet retweet, @PathVariable("id") long id) {
 
-        retweet.setDateTime("08.04.2019 21:33");
+        retweet.setDateTime(Calendar.getInstance());
         retweet.setUser_id(user_id);
 
         Tweet tweet = new Tweet();
@@ -126,6 +126,10 @@ public class HomeController {
 
         List<Tweet> tweetsList = tweetService.getFeed();
 
+        Collections.sort(tweetsList, Comparator.comparing(Tweet::getDateTime));
+
+        Collections.reverse(tweetsList);
+
         List<UserTweet> feedTweets = new ArrayList<>();
 
         for (Tweet tweet : tweetsList) {
@@ -142,7 +146,7 @@ public class HomeController {
                         retweeter.getLastName(),
                         retweeter.getUserName(),
                         retweeter.getProfileImageName(),
-                        tweet.getNewTweet().getDateTime(),
+                        new TimeFormatService().format(tweet.getNewTweet().getDateTime()),
                         tweet.getNewTweet().getImageName(),
                         tweet.getNewTweet().getMessage()
                 );
@@ -153,7 +157,7 @@ public class HomeController {
                         user.getLastName(),
                         user.getUserName(),
                         user.getProfileImageName(),
-                        tweet.getDateTime(),
+                        new TimeFormatService().format(tweet.getDateTime()),
                         tweet.getImageName(),
                         tweet.getMessage(),
                         retweet
@@ -168,15 +172,13 @@ public class HomeController {
                         user.getLastName(),
                         user.getUserName(),
                         user.getProfileImageName(),
-                        tweet.getDateTime(),
+                        new TimeFormatService().format(tweet.getDateTime()),
                         tweet.getImageName(),
                         tweet.getMessage()
                 );
 
                 feedTweets.add(userTweet);
             }
-
-
 
         }
 

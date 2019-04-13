@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 @Entity
@@ -21,7 +22,8 @@ public class NewTweet extends Tweet {
 
     private long user_id;
 
-    private String dateTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar dateTime;
 
     private String imageName;
 
@@ -31,7 +33,7 @@ public class NewTweet extends Tweet {
     @JsonIgnore
     private List<Retweet> retweets = new ArrayList<>();
 
-    public NewTweet(String message, String dateTime, long user_id, String imageName) {
+    public NewTweet(String message, Calendar dateTime, long user_id, String imageName) {
         this.message = message;
         this.dateTime = dateTime;
         this.user_id = user_id;
