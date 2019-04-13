@@ -50,7 +50,7 @@ public class HomeController {
 
         if (!file.isEmpty()) {
             try {
-                String IMAGE_LOCATION = "/src/main/resources/static/images/";
+                String IMAGE_LOCATION = "/src/main/upload/static/images/tweet/";
 
                 String projectDir = System.getProperty("user.dir");
                 String absolutePath = projectDir + IMAGE_LOCATION;

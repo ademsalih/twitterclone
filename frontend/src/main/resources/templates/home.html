@@ -71,7 +71,7 @@
                             <div class="tweetbox">
 
                                 <div class="tweetbox-image-box">
-                                    <img class="tweet-profile-pic" th:src="@{'/images/profile/' + ${t.profileImageName} }" alt="">
+                                    <img class="tweet-profile-pic" th:src="@{'/upload/static/images/profile/' + ${t.profileImageName} }" alt="">
                                 </div>
 
                                 <div class="tweetbox-content">
@@ -84,7 +84,7 @@
                                         <span class="tweet-message" th:text="${t.message}"></span>
                                     </div>
 
-                                    <img th:if="${t.imageName != null}" class="tweet-pic" th:src="@{'/images/tweet/' + ${t.imageName} }" alt="">
+                                    <img th:if="${t.imageName != null}" class="tweet-pic" th:src="@{'/upload/static/images/tweet/' + ${t.imageName} }" alt="">
 
                                     <div class="interaction-field">
 
@@ -160,7 +160,7 @@
 
 
                                 <div class="tweetbox-image-box">
-                                    <img class="tweet-profile-pic" th:src="@{'/images/profile/' + ${t.newTweet.profileImageName} }" alt="">
+                                    <img class="tweet-profile-pic" th:src="@{'/upload/static/images/profile/' + ${t.newTweet.profileImageName} }" alt="">
                                 </div>
 
                                 <div class="tweetbox-content">
@@ -173,7 +173,7 @@
                                         <span class="tweet-message" th:text="${t.newTweet.message}"></span>
                                     </div>
 
-                                    <img th:if="${t.newTweet.imageName != null}" class="tweet-pic" th:src="@{'/images/tweet/' + ${t.newTweet.imageName} }" alt="">
+                                    <img th:if="${t.newTweet.imageName != null}" class="tweet-pic" th:src="@{'/upload/static/images/tweet/' + ${t.newTweet.imageName} }" alt="">
 
                                     <div class="interaction-field">
 
