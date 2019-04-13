@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Retweet {
 
-    private long id;
+    private long rid;
 
     private long user_id;
 

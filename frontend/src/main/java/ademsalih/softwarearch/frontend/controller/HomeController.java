@@ -38,7 +38,7 @@ public class HomeController {
         return "login";
     }
 
-    // ADD PRINCIPAL FOR USER ID
+    // TODO: ADD PRINCIPAL FOR USER ID
 
     @PostMapping("/tweet")
     public String tweet(@ModelAttribute("tweet") Tweet tweet, @RequestParam(value = "file", required=false) MultipartFile file, HttpServletRequest request) {
@@ -72,7 +72,7 @@ public class HomeController {
     }
 
     @PostMapping("/retweet/{id}")
-    public String retweet(@ModelAttribute("retweet") Retweet retweet, @PathVariable long id) {
+    public String retweet(@ModelAttribute("retweet") Retweet retweet, @PathVariable("id") long id) {
 
         retweet.setDateTime("08.04.2019 21:33");
         retweet.setUser_id(user_id);
@@ -128,23 +128,50 @@ public class HomeController {
 
         List<UserTweet> feedTweets = new ArrayList<>();
 
-        for (Tweet t : tweetsList) {
+        for (Tweet tweet : tweetsList) {
 
-            User user = userService.getUserById(t.getUser_id());
+            User user = userService.getUserById(tweet.getUser_id());
 
+            if (tweet.getNewTweet() != null) {
 
-            if (t.getNewTweet() != null) {
+                User retweeter = userService.getUserById(tweet.getNewTweet().getUser_id());
 
-                User user2 = userService.getUserById(t.getNewTweet().getUser_id());
+                UserTweet retweet = new UserTweet(
+                        tweet.getNewTweet().getId(),
+                        retweeter.getFirstName(),
+                        retweeter.getLastName(),
+                        retweeter.getUserName(),
+                        retweeter.getProfileImageName(),
+                        tweet.getNewTweet().getDateTime(),
+                        tweet.getNewTweet().getImageName(),
+                        tweet.getNewTweet().getMessage()
+                );
 
-                UserTweet userTweet2 = new UserTweet(t.getNewTweet().getId(),user2.getFirstName(), user2.getLastName(), user2.getUserName(), user2.getProfileImageName(), t.getNewTweet().getDateTime(), t.getNewTweet().getImageName(), t.getNewTweet().getMessage());
+                UserTweet originalTweet = new UserTweet(
+                        tweet.getId(),
+                        user.getFirstName(),
+                        user.getLastName(),
+                        user.getUserName(),
+                        user.getProfileImageName(),
+                        tweet.getDateTime(),
+                        tweet.getImageName(),
+                        tweet.getMessage(),
+                        retweet
+                );
 
-                UserTweet userTweet = new UserTweet(t.getId(),user.getFirstName(),user.getLastName(), user.getUserName(), user.getProfileImageName(), t.getDateTime(), t.getImageName(), t.getMessage(), userTweet2);
-
-                feedTweets.add(userTweet);
+                feedTweets.add(originalTweet);
 
             } else {
-                UserTweet userTweet = new UserTweet(t.getId(),user.getFirstName(),user.getLastName(), user.getUserName(), user.getProfileImageName(), t.getDateTime(), t.getImageName(), t.getMessage());
+                UserTweet userTweet = new UserTweet(
+                        tweet.getId(),
+                        user.getFirstName(),
+                        user.getLastName(),
+                        user.getUserName(),
+                        user.getProfileImageName(),
+                        tweet.getDateTime(),
+                        tweet.getImageName(),
+                        tweet.getMessage()
+                );
 
                 feedTweets.add(userTweet);
             }

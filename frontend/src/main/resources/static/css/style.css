@@ -12,7 +12,7 @@ body {
 /************ PROFILE BOX ************/
 
 .profile-box {
-    height: 13em;
+    height: 13.4em;
     width: 18em;
     position: relative;
 }
@@ -30,20 +30,20 @@ body {
 .profile-box-top-box {
     background-color: #1DA1F2;
     width: 100%;
-    height: 47%
+    height: 46%
 }
 
 .profile-box-bottom-box {
     background-color: white;
     width: 100%;
-    height: 53%
+    height: 54%
 }
 
 .name-box {
     margin-left: 5.5em;
-    padding-top: 0.8em;
+    padding-top: 0.7em;
     line-height: 1.15em;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.7em;
 }
 
 .profile-name {
@@ -68,9 +68,97 @@ body {
 }
 
 .follow-stat-table {
-    width: 90%;
+    width: 88%;
     margin: 0 auto;
 }
+
+
+
+/************ POST TWEET BOX ************/
+
+.post-tweet-box {
+    width: 36.8em;
+    height: 3.8em;
+    position: relative;
+    background-color: #E8F5FD;
+    overflow: hidden;
+    padding-top: 0.6em;
+}
+
+.newtweet-box-image-box {
+    width: 11.5%;
+    float: left;
+    clear: both;
+}
+
+.newtweet-profile-pic {
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    margin-left: 1.8em;
+    margin-right: auto;
+    display: block;
+    margin-top: 0.2em;
+}
+
+.tweetbox-content {
+    width: 88.5%;
+    float: right;
+}
+
+.new-tweet-input {
+    border-radius: 0.5em;
+    border: 0;
+    width: 34em;
+    height: 2.8em;
+    font-size: 0.85em;
+    font-weight: 300;
+    padding-left: 0.5em;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #1DA1F2;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #1DA1F2;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: #1DA1F2;
+}
+
+.outer {
+    width: 31.8em;
+    border-radius: 0.5em;
+    border: 0.08em solid #C6E7FB;
+    background-color: white;
+    display: inline-block;
+    position: relative;
+}
+
+.upload-btn-wrapper {
+    position: relative;
+    float: right;
+    margin: auto;
+}
+
+.upload-btn-wrapper input[type=file] {
+    opacity: 0;
+    overflow: hidden;
+    width: 2.4em;
+    height: 2.4em;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.upload-image-icon {
+    width: 1em;
+    padding-bottom: 0.2em;
+}
+
 
 
 
@@ -149,6 +237,14 @@ body {
     font-weight: bold;
     color: #657786;
     margin-left: 0.7em;
+}
+
+.interaction-div {
+    display: inline-block;
+}
+
+.no-text-decoration {
+    text-decoration: none !important;
 }
 
 .retweet-icon {
