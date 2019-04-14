@@ -5,7 +5,7 @@ body {
 
 @media (min-width: 1200px) {
     .container {
-        max-width: 1205px;
+        max-width: 1204px;
 
     }
 }
@@ -229,6 +229,7 @@ body {
     margin-right: auto;
     display: block;
     margin-top: 0.7em;
+    margin-bottom: 1em;
 }
 
 .tweetbox-content {
@@ -246,6 +247,7 @@ body {
 .name {
     font-size: 0.85em;
     font-weight: bold;
+    color: black !important;
 }
 
 .grey-text {
@@ -261,6 +263,7 @@ body {
     width: 31.7em;
     border-radius: 0.65em;
     margin-bottom: 0.6em;
+    border: 0.08em solid #E6E6E6;
 }
 
 .interaction-field {

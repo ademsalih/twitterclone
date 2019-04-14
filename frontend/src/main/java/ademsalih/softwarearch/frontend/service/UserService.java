@@ -1,5 +1,6 @@
 package ademsalih.softwarearch.frontend.service;
 
+import ademsalih.softwarearch.frontend.model.FollowStatus;
 import ademsalih.softwarearch.frontend.model.Tweet;
 import ademsalih.softwarearch.frontend.model.User;
 import org.springframework.stereotype.Service;

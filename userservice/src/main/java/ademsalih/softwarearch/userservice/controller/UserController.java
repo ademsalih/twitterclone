@@ -1,6 +1,7 @@
 package ademsalih.softwarearch.userservice.controller;
 
 import ademsalih.softwarearch.userservice.model.Follow;
+import ademsalih.softwarearch.userservice.model.FollowStatus;
 import ademsalih.softwarearch.userservice.model.User;
 import ademsalih.softwarearch.userservice.service.FollowService;
 import ademsalih.softwarearch.userservice.service.UserService;
@@ -77,6 +78,11 @@ public class UserController {
     @DeleteMapping("/following/{user_id}/{following_id}")
     public void deleteFollowing(@PathVariable("user_id") long userId, @PathVariable("following_id") long followingId) {
         userService.deleteFollowing(userId, followingId);
+    }
+
+    @GetMapping("/following/{user_id}/{following_id}")
+    public FollowStatus isFollowing(@PathVariable("user_id") long userId, @PathVariable("following_id") long followingId) {
+        return userService.checkIfIsFollowing(userId, followingId);
     }
 
 

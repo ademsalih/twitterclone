@@ -2,6 +2,7 @@ package ademsalih.softwarearch.userservice.service;
 
 
 import ademsalih.softwarearch.userservice.model.Follow;
+import ademsalih.softwarearch.userservice.model.FollowStatus;
 import ademsalih.softwarearch.userservice.model.User;
 import ademsalih.softwarearch.userservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,7 @@ public interface UserService {
     List<Follow> getFollowingsForUser(long id);
 
     void deleteFollowing(long user, long following);
+
+    FollowStatus checkIfIsFollowing(long user, long following);
 
 }

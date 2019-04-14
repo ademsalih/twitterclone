@@ -25,7 +25,7 @@ public class Follow {
     @ManyToOne
     @JoinColumn(name="following_user")
     @JsonIgnoreProperties({"userRole", "profileImageName", "accountCreated", "password", "userName", "phone", "email", "lastName", "firstName"})
-    public User following_user;
+    private User following_user;
 
     public Follow(User user, User following_user) {
         this.user = user;

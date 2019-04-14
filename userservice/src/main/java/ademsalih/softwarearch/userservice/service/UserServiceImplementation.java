@@ -1,6 +1,7 @@
 package ademsalih.softwarearch.userservice.service;
 
 import ademsalih.softwarearch.userservice.model.Follow;
+import ademsalih.softwarearch.userservice.model.FollowStatus;
 import ademsalih.softwarearch.userservice.model.User;
 import ademsalih.softwarearch.userservice.model.UserRoles;
 import ademsalih.softwarearch.userservice.repository.FollowRepository;
@@ -62,5 +63,20 @@ public class UserServiceImplementation implements UserService {
                 followRepository.delete(f);
             }
         }
+    }
+
+    @Override
+    public FollowStatus checkIfIsFollowing(long user, long following) {
+
+        List<Follow> follows = followRepository.findAll();
+
+
+        for (Follow f : follows) {
+            if (f.getUser().getUser_id() == user && f.getFollowing_user().getUser_id() == following) {
+                return new FollowStatus(true);
+            }
+        }
+
+        return new FollowStatus(false);
     }
 }
