@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
-    <title>Home</title>
+    <title>Twitter</title>
     <head th:replace="fragment/header :: head"></head>
 
     <body>
         <div th:replace="fragment/menu :: div"></div>
         <div class="container">
 
-
             <div class="row justify-content-center">
 
                 <div class="col-3">
                     <!------------ PROFILE BOX ------------->
                     <div class="profile-box">
-                        <img th:src="@{'/images/profile/' + 'profile1.png'}" class="profile-box-pic">
+                        <img th:src="@{'/static/images/profile/' + 'profile1.png'}" class="profile-box-pic">
                         <div class="profile-box-top-box"></div>
 
                         <div class="profile-box-bottom-box">
@@ -47,7 +46,7 @@
                     <!--------- POST NEW TWEET --------->
                     <div class="post-tweet-box">
                         <div class="newtweet-box-image-box">
-                            <img class="newtweet-profile-pic" th:src="@{'/images/assets/profile-new.png'}">
+                            <img class="newtweet-profile-pic" th:src="@{'/assets/profile-new.png'}">
                         </div>
                         <div class="outer">
                             <form th:action="@{/tweet}" method="post" modelAttribute="tweet" enctype="multipart/form-data">
@@ -55,7 +54,7 @@
                                 <input maxlength="140" th:value="${tweet.message}" class="new-tweet-input" type="text" placeholder="What's happening?" name="message">
                                 <div class="upload-btn-wrapper">
                                     <button type="submit" class="btn">
-                                        <img class="upload-image-icon" th:src="@{'/images/assets/upload-icon.png'}">
+                                        <img class="upload-image-icon" th:src="@{'/assets/upload-icon.png'}">
                                     </button>
                                     <input accept="image/gif,image/jpeg,image/jpg,image/png" type="file" name="file" />
                                 </div>
@@ -71,7 +70,7 @@
                             <div class="tweetbox">
 
                                 <div class="tweetbox-image-box">
-                                    <img class="tweet-profile-pic" th:src="@{'/upload/static/images/profile/' + ${t.profileImageName} }" alt="">
+                                    <img class="tweet-profile-pic" th:src="@{'/static/images/profile/' + ${t.profileImageName} }" alt="">
                                 </div>
 
                                 <div class="tweetbox-content">
@@ -84,7 +83,7 @@
                                         <span class="tweet-message" th:text="${t.message}"></span>
                                     </div>
 
-                                    <img th:if="${t.imageName != null}" class="tweet-pic" th:src="@{'/upload/static/images/tweet/' + ${t.imageName} }" alt="">
+                                    <img th:if="${t.imageName != null}" class="tweet-pic" th:src="@{'/static/images/tweet/' + ${t.imageName} }" alt="">
 
                                     <div class="interaction-field">
 
@@ -92,11 +91,10 @@
                                             <tbody>
                                             <tr>
                                                 <td class="interaction-item">
-                                                    <img class="icon" th:src="@{'/images/assets/comment.png'}">
+                                                    <img class="icon" th:src="@{'/assets/comment.png'}">
                                                     <span class="interaction-text">42</span>
                                                 </td>
                                                 <td class="interaction-item">
-
 
                                                     <form th:action="@{'/retweet/' + ${t.tweet_id} }" method="post" modelAttribute="retweet">
 
@@ -104,7 +102,7 @@
 
                                                         <a class="no-text-decoration" href="#" onclick="this.parentNode.submit();">
                                                             <div class="interaction-div">
-                                                                <img class="retweet-icon" th:src="@{'/images/assets/gray-retweet.svg'}">
+                                                                <img class="retweet-icon" th:src="@{'/assets/gray-retweet.svg'}">
                                                                 <span class="interaction-text">0</span>
                                                             </div>
 
@@ -112,10 +110,9 @@
 
                                                     </form>
 
-
                                                 </td>
                                                 <td class="interaction-item">
-                                                    <img class="icon" th:src="@{'/images/assets/heart.png'}">
+                                                    <img class="icon" th:src="@{'/assets/heart.png'}">
                                                     <span class="interaction-text">89</span>
                                                 </td>
                                             </tr>
@@ -126,12 +123,8 @@
 
                                 </div>
 
-
                             </div>
                         </div>
-
-
-
 
                         <!--
 
@@ -143,24 +136,18 @@
 
                         -->
 
-
-
-
-
                         <!--------- RETWEET --------->
                         <div th:if="${t.newTweet != null}">
 
                             <div class="tweetbox">
 
-
                                 <div class="retweet-box">
-                                    <img class="user-retweet-icon" th:src="@{'/images/assets/gray-retweet.svg'}">
+                                    <img class="user-retweet-icon" th:src="@{'/assets/gray-retweet.svg'}">
                                     <span class="retweeted-text" th:text="${t.firstName} + ' ' + ${t.lastName} + ' Retweeted' "></span>
                                 </div>
 
-
                                 <div class="tweetbox-image-box">
-                                    <img class="tweet-profile-pic" th:src="@{'/upload/static/images/profile/' + ${t.newTweet.profileImageName} }" alt="">
+                                    <img class="tweet-profile-pic" th:src="@{'/static/images/profile/' + ${t.newTweet.profileImageName} }" alt="">
                                 </div>
 
                                 <div class="tweetbox-content">
@@ -173,7 +160,7 @@
                                         <span class="tweet-message" th:text="${t.newTweet.message}"></span>
                                     </div>
 
-                                    <img th:if="${t.newTweet.imageName != null}" class="tweet-pic" th:src="@{'/upload/static/images/tweet/' + ${t.newTweet.imageName} }" alt="">
+                                    <img th:if="${t.newTweet.imageName != null}" class="tweet-pic" th:src="@{'/static/images/tweet/' + ${t.newTweet.imageName} }" alt="">
 
                                     <div class="interaction-field">
 
@@ -181,7 +168,7 @@
                                             <tbody>
                                             <tr>
                                                 <td class="interaction-item">
-                                                    <img class="icon" th:src="@{'/images/assets/comment.png'}">
+                                                    <img class="icon" th:src="@{'/assets/comment.png'}">
                                                     <span class="interaction-text">42</span>
                                                 </td>
                                                 <td class="interaction-item">
@@ -193,7 +180,7 @@
 
                                                         <a class="no-text-decoration" href="#" onclick="this.parentNode.submit();">
                                                             <div class="interaction-div">
-                                                                <img class="retweet-icon" th:src="@{'/images/assets/gray-retweet.svg'}">
+                                                                <img class="retweet-icon" th:src="@{'/assets/gray-retweet.svg'}">
                                                                 <span class="interaction-text">0</span>
                                                             </div>
 
@@ -203,7 +190,7 @@
 
                                                 </td>
                                                 <td class="interaction-item">
-                                                    <img class="icon" th:src="@{'/images/assets/heart.png'}">
+                                                    <img class="icon" th:src="@{'/assets/heart.png'}">
                                                     <span class="interaction-text">89</span>
                                                 </td>
                                             </tr>
@@ -213,7 +200,6 @@
                                     </div>
 
                                 </div>
-
 
                             </div>
 
@@ -226,13 +212,6 @@
 
                         </div>
 
-
-
-
-
-
-
-
                     </div>
 
                 </div>
@@ -243,7 +222,6 @@
                 </div>
 
             </div>
-
 
         </div>
     </body>
