@@ -38,7 +38,7 @@ public class HomeController {
     }
 
     @PostMapping("/follow/{id}")
-    public String follow(@PathVariable long id) {
+    public String follow(@PathVariable long id, HttpServletRequest request) {
 
         Follow follow = new Follow();
 
@@ -47,15 +47,16 @@ public class HomeController {
 
         followService.registerFollow(follow);
 
-        return "redirect:/" + id;
+        String referer = request.getHeader("Referer");
+        return "redirect:" + referer;
     }
 
     @GetMapping("unfollow/{id}")
-    public String unfollow(@PathVariable long id) {
+    public String unfollow(@PathVariable long id, HttpServletRequest request) {
 
         followService.deleteFollow(user_id, id);
 
-        return "redirect:/" + id;
+        return "redirect:" + request.getHeader("Referer");
     }
 
     @GetMapping("/following/{user_id}/{following_id}")
@@ -108,14 +109,27 @@ public class HomeController {
 
         List<Follow> follows = followService.getFollowingsForUserById(id);
 
-        List<User> followingUsers = new ArrayList<>();
+        List<FollowPageUser> followingUsers = new ArrayList<>();
 
         for (Follow follow : follows) {
             long followingId = follow.getFollowing_user().getUser_id();
 
-            User followingUser = userService.getUserById(followingId);
+            User user = userService.getUserById(followingId);
 
-            followingUsers.add(followingUser);
+            FollowStatus fs = followService.getFollowingStatus(user_id, user.getUser_id());
+
+            FollowPageUser fpuser = new FollowPageUser(
+                    user.getUser_id(),
+                    user.getFirstName(),
+                    user.getLastName(),
+                    user.getUserName(),
+                    user.getProfileImageName(),
+                    "banner.jpg",
+                    "Bio",
+                    Boolean.valueOf(fs.isFollow())
+            );
+
+            followingUsers.add(fpuser);
         }
 
         model.addAttribute("followUsers", followingUsers);
@@ -161,18 +175,30 @@ public class HomeController {
 
 
 
-
-        List<User> followerUsers = new ArrayList<>();
+        List<FollowPageUser> followingUsers = new ArrayList<>();
 
         for (Follow follow : followers) {
-            long followerId = follow.getUser().getUser_id();
+            long followingId = follow.getUser().getUser_id();
 
-            User followingUser = userService.getUserById(followerId);
+            User user = userService.getUserById(followingId);
 
-            followerUsers.add(followingUser);
+            FollowStatus fs = followService.getFollowingStatus(user_id, user.getUser_id());
+
+            FollowPageUser fpuser = new FollowPageUser(
+                    user.getUser_id(),
+                    user.getFirstName(),
+                    user.getLastName(),
+                    user.getUserName(),
+                    user.getProfileImageName(),
+                    "banner.jpg",
+                    "Bio",
+                    Boolean.valueOf(fs.isFollow())
+            );
+
+            followingUsers.add(fpuser);
         }
 
-        model.addAttribute("followUsers", followerUsers);
+        model.addAttribute("followUsers", followingUsers);
 
         return "profilefollow";
     }

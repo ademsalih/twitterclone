@@ -29,7 +29,27 @@
                                     <div class="follow-box-banner"></div>
                                     <div class="follow-box-content">
                                         <div class="text-right follow-box-follow-btn-container">
-                                            <button class="follow-button-sm"><span>Follow</span></button>
+
+
+                                            <div th:if="${currentUser != u.user_id}" class="stat-banner-button-container">
+
+                                                <form th:action="@{'/follow/' + ${u.user_id} }" method="post" modelAttribute="follow">
+                                                    <input type="hidden" th:value="${follow.id}" name="id">
+
+                                                    <input type="hidden" name="redirect_page" value="${#httpServletRequest.requestURI}"/>
+                                                    <button th:if="${!u.followable}" class="follow-button-sm"><span>Follow</span></button>
+                                                </form>
+
+
+                                                <form th:action="@{'/unfollow/' + ${u.user_id} }" method="get">
+
+                                                    <input type="hidden" name="redirect_page" value="{#httpServletRequest.requestURI}"/>
+                                                    <button th:if="${u.followable}" class="follow-button-sm follow-button-sm-checked"><span>Following</span></button>
+                                                </form>
+                                            </div>
+
+
+
                                             <img class="fl-box-hamburger-menu-icon" th:src="@{'/assets/hamburger-dots-icon.svg'}">
                                         </div>
                                         <div class="name-box-2">
