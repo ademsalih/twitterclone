@@ -65,6 +65,8 @@ public class UserserviceApplication implements CommandLineRunner {
         userRepository.save(pinar);
         userRepository.save(esra);
 
+        followRepository.save(new Follow(esra, adem));
+
 
 
 

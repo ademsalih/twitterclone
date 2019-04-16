@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <title>Twitter</title>
+    <head th:replace="fragment/header :: head"></head>
+
+    <body>
+        <div th:replace="fragment/menu :: div"></div>
+
+        <div th:replace="fragment/profile-page-top :: div"></div>
+
+        <div class="container">
+
+            <div class="row justify-content-center">
+
+                <div th:replace="fragment/profile-page-info :: div"></div>
+
+                <!---- FOLLOWING/FOLLOWERS ---->
+                <div class="col-9" style="padding-left: 0; padding-right: 0">
+                    <div class="container">
+                        <div class="row" style=" padding-left: 0; padding-right: 0">
+
+
+
+                            <!---- This should repeat... ---->
+                            <div th:each="u : ${followUsers}" class="single-follow-box" >
+                                <div style="width: 18em;height: 17.48em; background-color: #657786">
+                                    <img th:src="@{'/static/images/profile/' + ${u.profileImageName} }" class="follow-box-pic">
+                                    <div class="follow-box-banner"></div>
+                                    <div class="follow-box-content">
+                                        <div class="text-right follow-box-follow-btn-container">
+                                            <button class="follow-button-sm"><span>Follow</span></button>
+                                            <img class="fl-box-hamburger-menu-icon" th:src="@{'/assets/hamburger-dots-icon.svg'}">
+                                        </div>
+                                        <div class="name-box-2">
+                                            <span th:text=" ${u.firstName} + ' ' + ${u.lastName}" class="profile-name-2"></span><br>
+                                            <span th:text=" '@' + ${u.userName}" class="handle-name-2"></span>
+                                        </div>
+                                        <div class="follow-box-bio-box">
+                                            <span class="follow-box-bio">Worldwide. Always On. Listen live for free on @AppleMusic or on demand with a subscription.</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </body>
+</html>

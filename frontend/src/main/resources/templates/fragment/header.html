@@ -5,4 +5,32 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <script>
+        window.onload = function() {
+
+            var button;
+            var buttonText;
+            var group = [[${group}]];
+
+            switch(group) {
+                case 1:
+                    button = document.getElementById('tweets');
+                    buttonText = document.getElementById('tweets-text');
+                    break;
+                case 2:
+                    button = document.getElementById('followings');
+                    buttonText = document.getElementById('followings-text');
+                    break;
+                case 3:
+                    button = document.getElementById('followers');
+                    buttonText = document.getElementById('followers-text');
+                    break;
+                default:
+            }
+
+            button.className += " stat-button-selected";
+            buttonText.className += " stat-number-text-selected";
+        };
+    </script>
 </head>

@@ -1,83 +1,72 @@
 <div xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="profile-banner"></div>
     <div class="follow-stat-banner">
-
         <div class="container use-full-height">
-
             <div class="row justify-content-center use-full-height">
+
                 <div class="col-2"></div>
+
                 <div class="col-8 use-full-height" style="display: flex; padding-left: 6.6em;">
 
                     <div class="text-center tweets-stat">
                         <div class="use-full-height">
-                            <button class="stat-button stat-button-selected">
-                                <span class="stat-header-text">Tweets</span><br>
-                                <span th:text="${tweetCount}" class="stat-number-text stat-number-text-selected"></span>
-                            </button>
+
+                            <form class="use-full-height" th:action="@{ '/' + ${profile.user_id} }" method="get">
+                                <button id="tweets" class="stat-button">
+                                    <span class="stat-header-text">Tweets</span><br>
+                                    <span id="tweets-text" th:text="${tweetCount}" class="stat-number-text"></span>
+                                </button>
+                            </form>
+
                         </div>
                     </div>
 
 
                     <div class="text-center tweets-stat">
                         <div class="use-full-height">
-                            <button class="stat-button">
-                                <span class="stat-header-text">Following</span><br>
-                                <span th:text="${followings}" class="stat-number-text"></span>
-                            </button>
+                            <form class="use-full-height" th:action="@{ '/' + ${profile.user_id} + '/following'}" method="get">
+                                <button id="followings" type="submit" class="stat-button">
+                                    <span class="stat-header-text">Following</span><br>
+                                    <span id="followings-text" th:text="${followings}" class="stat-number-text"></span>
+                                </button>
+                            </form>
                         </div>
                     </div>
 
                     <div class="text-center tweets-stat">
                         <div class="use-full-height">
-                            <button class="stat-button">
-                                <span class="stat-header-text">Followers</span><br>
-                                <span th:text="${followers}" class="stat-number-text"></span>
-                            </button>
+
+                            <form class="use-full-height" th:action="@{ '/' + ${profile.user_id} + '/followers'}" method="get">
+                                <button id="followers" type="submit" class="stat-button">
+                                    <span class="stat-header-text">Followers</span><br>
+                                    <span id="followers-text" th:text="${followers}" class="stat-number-text"></span>
+                                </button>
+                            </form>
+
                         </div>
                     </div>
 
                 </div>
+
                 <div class="col-2 use-full-height follow-button-area-container">
-
-
-
-
-
                     <div class="text-right follow-button-area">
-
-
-
-
-                        <div th:if="${currentUser != profile.user_id}" style="display: inline-block">
-
+                        <div th:if="${currentUser == profile.user_id}" class="stat-banner-button-container">
+                            <button class="edit-profile-button">Edit profile</button>
+                        </div>
+                        <div th:if="${currentUser != profile.user_id}" class="stat-banner-button-container">
                             <form th:action="@{'/follow/' + ${profile.user_id} }" method="post" modelAttribute="follow">
                                 <input type="hidden" th:value="${follow.id}" name="id">
-
-                                <button th:if="${!isFollowing}" id="followButton" class="follow-button">
-                                    <span>Follow</span>
-                                </button>
+                                <button th:if="${!isFollowing}" id="followButton" class="follow-button"><span>Follow</span></button>
                             </form>
-
-
                             <form th:action="@{'/unfollow/' + ${profile.user_id} }" method="get">
-
-                                <button th:if="${isFollowing}" class="follow-button follow-button-checked">
-                                    <span>Following</span>
-                                </button>
+                                <button th:if="${isFollowing}" class="follow-button follow-button-checked"><span>Following</span></button>
                             </form>
-
                         </div>
-
-
-
                         <img class="hamburger-menu-icon" th:src="@{'/assets/hamburger-dots-icon.svg'}">
                     </div>
-
                 </div>
+
             </div>
-
-
         </div>
-
     </div>
 </div>

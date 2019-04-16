@@ -205,6 +205,18 @@ body {
 
 /*-----------------------------*/
 
+.edit-profile-button {
+    border-radius: 5em;
+    background-color: transparent;
+    border: 0.08em solid #66757f;
+    height: 2.582em;
+    width: 7.83em;
+    color: #66757f;
+    font-size: 0.84em;
+    font-weight: 700;
+    margin-right: 1.2em;
+}
+
 .follow-button {
     border-radius: 5em;
     background-color: transparent;
@@ -246,6 +258,10 @@ body {
     padding-right: 0.4em;
 }
 
+.stat-banner-button-container {
+    display: inline-block;
+}
+
 /*-----------------------------*/
 
 
@@ -260,7 +276,7 @@ body {
 }
 
 .follow-box-banner {
-    background-image: url("follow-banner.png");
+    background-image: url("../assets/follow-banner.png");
     background-size: cover; /* or contain depending on what you want */
     background-position: center center;
     background-repeat: no-repeat;
@@ -275,19 +291,19 @@ body {
     height: 67.5%;
 }
 
-.name-box {
+.name-box-2 {
     margin-left: 0.95em;
     padding-top: 3.23em;
     line-height: 1.15em;
     margin-bottom: 0.5em;
 }
 
-.profile-name {
+.profile-name-2 {
     font-size: 1.13em;
     font-weight: bold;
 }
 
-.handle-name {
+.handle-name-2 {
     color: #657786;
     font-size: 0.84em;
     font-weight: 400;

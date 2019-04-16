@@ -71,6 +71,41 @@ public class HomeController {
     @GetMapping("/{id}/following")
     public String followings(@PathVariable long id, Model model) {
 
+
+        model.addAttribute("retweet", new Retweet());
+        model.addAttribute("follow", new Follow());
+
+        model.addAttribute("group", 2);
+
+        model.addAttribute("currentUser", user_id);
+
+        // get user information for that user
+        User profileUser = userService.getUserById(id);
+        model.addAttribute("profile", profileUser);
+
+        FollowStatus f = followService.getFollowingStatus(user_id, id);
+
+        model.addAttribute("isFollowing", f.isFollow());
+
+
+        // Get follower count the logged in user
+        List<Follow> followers = followService.getFollowersForUserById(id);
+        int followerCount = followers.size();
+        model.addAttribute("followers", followerCount);
+
+        // Get following count the logged in user
+        List<Follow> following = followService.getFollowingsForUserById(id);
+        int followingCount = following.size();
+        model.addAttribute("followings", followingCount);
+
+        // Get total tweet count the logged in user
+        List<Tweet> userTweets = tweetService.getTweetsForUserById(id);
+        List<Tweet> userRetweets = tweetService.getRetweetsForUserById(id);
+        int totalTweets = userTweets.size() + userRetweets.size();
+        model.addAttribute("tweetCount", totalTweets);
+
+
+
         List<Follow> follows = followService.getFollowingsForUserById(id);
 
         List<User> followingUsers = new ArrayList<>();
@@ -86,16 +121,60 @@ public class HomeController {
         model.addAttribute("followUsers", followingUsers);
 
 
-        return "profilefollowing";
+        return "profilefollow";
     }
 
     @GetMapping("/{id}/followers")
     public String followers(@PathVariable long id, Model model) {
 
-        List<Follow> followers = followService.getFollowersForUserById(id);
+        model.addAttribute("group", 3);
 
-        model.addAttribute("followers", followers);
-        return "profilefollowers";
+        model.addAttribute("retweet", new Retweet());
+        model.addAttribute("follow", new Follow());
+
+        model.addAttribute("currentUser", user_id);
+
+        // get user information for that user
+        User profileUser = userService.getUserById(id);
+        model.addAttribute("profile", profileUser);
+
+        FollowStatus f = followService.getFollowingStatus(user_id, id);
+
+        model.addAttribute("isFollowing", f.isFollow());
+
+
+        // Get follower count the logged in user
+        List<Follow> followers = followService.getFollowersForUserById(id);
+        int followerCount = followers.size();
+        model.addAttribute("followers", followerCount);
+
+        // Get following count the logged in user
+        List<Follow> following = followService.getFollowingsForUserById(id);
+        int followingCount = following.size();
+        model.addAttribute("followings", followingCount);
+
+        // Get total tweet count the logged in user
+        List<Tweet> userTweets = tweetService.getTweetsForUserById(id);
+        List<Tweet> userRetweets = tweetService.getRetweetsForUserById(id);
+        int totalTweets = userTweets.size() + userRetweets.size();
+        model.addAttribute("tweetCount", totalTweets);
+
+
+
+
+        List<User> followerUsers = new ArrayList<>();
+
+        for (Follow follow : followers) {
+            long followerId = follow.getUser().getUser_id();
+
+            User followingUser = userService.getUserById(followerId);
+
+            followerUsers.add(followingUser);
+        }
+
+        model.addAttribute("followUsers", followerUsers);
+
+        return "profilefollow";
     }
 
     @GetMapping("/{id}")
@@ -103,6 +182,8 @@ public class HomeController {
 
         model.addAttribute("retweet", new Retweet());
         model.addAttribute("follow", new Follow());
+
+        model.addAttribute("group", 1);
 
         // get user information for that user
         User profileUser = userService.getUserById(id);
