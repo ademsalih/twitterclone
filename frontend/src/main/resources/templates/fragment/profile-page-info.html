@@ -1,0 +1,36 @@
+<div class="col-3" xmlns:th="http://www.w3.org/1999/xhtml">
+    <img class="profile-pic-big" th:src="@{'/static/images/profile/'} + ${profile.profileImageName}">
+
+    <div class="profile-box-down">
+        <span th:text="${profile.firstName} + ' ' + ${profile.lastName}" class="profile-big-name"></span><br>
+        <span th:text=" '@' + ${profile.userName}" class="profile-handle-big"></span>
+        <br>
+        <div class="bio-container">
+            <span class="profile-bio">We’re here to provide tips, tricks and helpful information when you need it most. We’re available every day to answer your questions, from 5am-8pm Pacific.</span>
+        </div>
+
+        <table>
+            <tbody>
+            <tr class="table-row">
+                <td>
+                    <img class="icon" th:src="@{'/assets/place-icon.svg'}">
+                    <span class="more-info-text-link">Cupertino, CA</span>
+                </td>
+            </tr>
+            <tr class="table-row">
+                <td>
+                    <img th:src="@{'/assets/link-icon.svg'}" alt="" class="icon">
+                    <span class="more-info-text-link">support.apple.com</span>
+                </td>
+            </tr>
+            <tr class="table-row">
+                <td>
+                    <img th:src="@{'/assets/cal-icon.svg'}" alt="" class="icon">
+                    <span th:text=" 'Joined ' + ${profile.accountCreated}" class="more-info-text"></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

@@ -1,5 +1,5 @@
 body {
-    margin-top: 3.5em;
+    margin-top: 2.9em;
     background: #E6ECF0;
 }
 
@@ -20,9 +20,9 @@ body {
 
 .navbar {
     min-height: 46px;
-    -webkit-box-shadow: 0px 1px 1px 0px rgba(176,176,176,1);
-    -moz-box-shadow: 0px 1px 1px 0px rgba(176,176,176,1);
-    box-shadow: 0px 1px 1px 0px rgba(176,176,176,1);
+    -webkit-box-shadow: 0px 1px 1px 0px rgba(17, 17, 17, 0.32);
+    -moz-box-shadow: 0px 1px 1px 0px rgba(17, 17, 17, 0.32);
+    box-shadow: 0px 1px 1px 0px rgba(17, 17, 17, 0.32);
 }
 
 .navbar-brand {
@@ -49,6 +49,335 @@ body {
     width: 1.5em;
     border-radius: 50%;
 }
+
+
+
+/************ PROFILE PAGE TOP ************/
+.profile-banner {
+    width: 100%;
+    height: 22.4em;
+    background-image: url("../assets/banner.jpeg");
+    background-size: cover; /* or contain depending on what you want */
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.follow-stat-banner {
+    width: 100%;
+    height: 3.9em;
+    background-color: white;
+    margin-bottom: 0.6em;
+    -webkit-box-shadow: 0px 1px 1px 0px rgba(176,176,176,1);
+    -moz-box-shadow: 0px 1px 1px 0px rgba(176,176,176,1);
+    box-shadow: 0px 1px 1px 0px rgba(176,176,176,1);
+}
+
+.profile-pic-big {
+    width: 13.1em;
+    height: 13.1em;
+    border-radius: 50%;
+    position: absolute;
+    border: 0.33em solid white;
+    margin-top: -12.1em;
+    z-index: 4;
+}
+
+.profile-box-down {
+    height: 19em;
+    width: 18em;
+    position: absolute;
+    margin-top: 1.7em;
+    padding-left: 0.4em;
+    line-height: 1.4em;
+}
+
+.profile-big-name {
+    font-size: 1.3em;
+    font-weight: 700;
+}
+
+.profile-handle-big {
+    color: #657786;
+    font-size: 0.9em;
+    font-weight: 100;
+}
+
+.bio-container {
+    line-height: 1.25em;
+    margin-top: 1em;
+    padding-right: 1em;
+    margin-bottom: 0.6em;
+}
+
+.profile-bio {
+    font-size: 0.9em;
+    color: #191919;
+    font-weight: 400;
+}
+
+.icon {
+    width: 1em;
+    margin-right: 0.1em;
+}
+
+.table-row {
+    height: 1.8em
+}
+
+.more-info-text {
+    color: #657786;
+    font-size: 0.9em;
+    font-weight: 300;
+}
+
+.more-info-text-link {
+    color: #0070C9;
+    font-size: 0.9em;
+    font-weight: 300;
+}
+
+.follow-stat-banner-container {
+    width: 20em;
+    margin-left: 30em;
+}
+
+.tweets-stat {
+    width: 5.4em;
+    display: table;
+    height: 100%;
+    line-height: 1.24em;
+}
+
+.use-full-height {
+    height: 100%;
+}
+
+.stat-header-text {
+    font-size: 0.75em;
+    color: #667580;
+    font-weight: 600;
+}
+
+.stat-number-text {
+    font-size: 1.1em;
+    color: #667580;
+    font-weight: 600;
+}
+
+.stat-button {
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    background-color: transparent;
+    border: 0;
+    transition: box-shadow 0.18s linear;
+}
+
+.stat-button-selected {
+    box-shadow: inset 0 -0.15em 0 0 #0070C9;
+    cursor: auto;
+}
+
+.stat-number-text-selected {
+    color: #0070C9;
+}
+
+
+
+.stat-button:hover {
+    box-shadow: inset 0 -0.15em 0 0 #0070C9;
+}
+
+.stat-button:hover .stat-number-text {
+    color: #0070C9;
+}
+
+.follow-content {
+    width: 55.5em;
+    height: 10em;
+}
+
+.follow-content-box {
+    width: 3em;
+    height: 4em;
+    background-color: orange;
+}
+
+/*-----------------------------*/
+
+.follow-button {
+    border-radius: 5em;
+    background-color: transparent;
+    border: 0.08em solid #0070C9;
+    height: 2.582em;
+    width: 7.83em;
+    color: #0070C9;
+    font-size: 0.84em;
+    font-weight: 700;
+    margin-right: 1.2em;
+}
+
+.follow-button:hover {
+    background-color: #E5F0F9;
+}
+
+.follow-button-checked {
+    background-color: #328CD3;
+    color: white;
+}
+
+.follow-button-checked:hover {
+    background-color: #AC002A;
+    color: white;
+    border: 0.08em solid #AC002A;
+}
+
+.hamburger-menu-icon {
+    width: 0.35em;
+}
+
+.follow-button-area {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.follow-button-area-container {
+    display: table;
+    padding-right: 0.4em;
+}
+
+/*-----------------------------*/
+
+
+.follow-box-pic {
+    margin-top: 3.62em;
+    margin-left: 0.75em;
+    position: absolute;
+    width: 4.78em;
+    height: 4.78em;
+    border-radius: 50%;
+    border: 0.2em solid #ffffff;
+}
+
+.follow-box-banner {
+    background-image: url("follow-banner.png");
+    background-size: cover; /* or contain depending on what you want */
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    width: 100%;
+    height: 32.5%
+}
+
+.follow-box-content {
+    background-color: white;
+    width: 100%;
+    height: 67.5%;
+}
+
+.name-box {
+    margin-left: 0.95em;
+    padding-top: 3.23em;
+    line-height: 1.15em;
+    margin-bottom: 0.5em;
+}
+
+.profile-name {
+    font-size: 1.13em;
+    font-weight: bold;
+}
+
+.handle-name {
+    color: #657786;
+    font-size: 0.84em;
+    font-weight: 400;
+}
+
+.follow-box-bio-box {
+    padding-left: 0.95em;
+    padding-right: 1em;
+    line-height: 1.13em;
+    margin-top: 0.2em;
+}
+
+.follow-box-bio {
+    font-size: 0.8em;
+}
+
+
+
+.follow-box-follow-btn-container {
+    position: relative;
+    float: right;
+    display: table;
+    margin-right: 1.58em;
+    margin-top: 1em;
+}
+
+
+.follow-button-sm {
+    border-radius: 5em;
+    background-color: transparent;
+    border: 0.1em solid #0070C9;
+    height: 2.25em;
+    width: 7.5em;
+    color: #0070C9;
+    font-size: 0.74em;
+    font-weight: 700;
+    margin-right: 1.6em;
+}
+
+.follow-button-sm:hover {
+    background-color: #E5F0F9;
+}
+
+.follow-button-sm-checked {
+    background-color: #328CD3;
+    color: white;
+}
+
+.follow-button-sm-checked:hover {
+    background-color: #AC002A;
+    color: white;
+    border: 0.08em solid #AC002A;
+}
+
+.follow-button-sm-checked:hover span {
+    display: none;
+}
+
+.follow-button-sm-checked:hover:before {
+    content: "Unfollow"
+}
+
+
+
+
+.follow-button-checked:hover:before {
+    content: "Unfollow"
+}
+
+.follow-button-checked:hover span {
+    display: none;
+}
+
+.fl-box-hamburger-menu-icon {
+    padding-top: 0.1em;
+    width: 0.3em;
+}
+
+.single-follow-box {
+    padding-bottom: 0.8em;
+    padding-left: 0.35em;
+    padding-right: 0.35em;
+}
+
+
+
+
+
+
+
 
 
 

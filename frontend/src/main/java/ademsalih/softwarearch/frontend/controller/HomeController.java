@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -48,7 +47,7 @@ public class HomeController {
 
         followService.registerFollow(follow);
 
-        return "redirect:/profile/" + id;
+        return "redirect:/" + id;
     }
 
     @GetMapping("unfollow/{id}")
@@ -56,7 +55,7 @@ public class HomeController {
 
         followService.deleteFollow(user_id, id);
 
-        return "redirect:/profile/" + id;
+        return "redirect:/" + id;
     }
 
     @GetMapping("/following/{user_id}/{following_id}")
@@ -69,8 +68,37 @@ public class HomeController {
         return s;
     }
 
+    @GetMapping("/{id}/following")
+    public String followings(@PathVariable long id, Model model) {
 
-    @GetMapping("/profile/{id}")
+        List<Follow> follows = followService.getFollowingsForUserById(id);
+
+        List<User> followingUsers = new ArrayList<>();
+
+        for (Follow follow : follows) {
+            long followingId = follow.getFollowing_user().getUser_id();
+
+            User followingUser = userService.getUserById(followingId);
+
+            followingUsers.add(followingUser);
+        }
+
+        model.addAttribute("followUsers", followingUsers);
+
+
+        return "profilefollowing";
+    }
+
+    @GetMapping("/{id}/followers")
+    public String followers(@PathVariable long id, Model model) {
+
+        List<Follow> followers = followService.getFollowersForUserById(id);
+
+        model.addAttribute("followers", followers);
+        return "profilefollowers";
+    }
+
+    @GetMapping("/{id}")
     public String profile(@PathVariable long id, Model model) {
 
         model.addAttribute("retweet", new Retweet());
@@ -162,7 +190,7 @@ public class HomeController {
         model.addAttribute("feedTweets", feedTweets);
 
 
-        return "profile";
+        return "profiletweets";
     }
 
     // TODO: ADD PRINCIPAL FOR USER ID
@@ -369,8 +397,4 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/profile")
-    public String profile() {
-        return "profile";
-    }
 }

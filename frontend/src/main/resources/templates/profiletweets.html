@@ -3,90 +3,19 @@
 
     <title>Twitter</title>
     <head th:replace="fragment/header :: head"></head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-
-
-            var base_url = "http://localhost:9092/following/";
-
-            var currentUser = [[${currentUser}]];
-
-            var followingUser = [[${profile.user_id}]];
-
-            var url = base_url + currentUser + '/' + followingUser;
-
-            /*$.ajax({
-                url: url,
-                type: 'GET',
-                data: {},
-
-                success: function (result) {
-
-                    if (result.follow == "true") {
-                        // is following
-
-                        $('#followButton').html('1')
-
-                    } else {
-                        // not following
-                        $('#followButton').html('2')
-
-                    }
-                },
-                error: function (xhr) {
-                    alert(xhr.status);
-                }
-            });*/
-
-        });
-    </script>
 
     <body>
         <div th:replace="fragment/menu :: div"></div>
+
+        <div th:replace="fragment/profile-page-top :: div"></div>
+
         <div class="container">
 
             <div class="row justify-content-center">
 
-                <div class="col-3">
-                    <!------------ PROFILE BOX ------------->
+                <div th:replace="fragment/profile-page-info :: div"></div>
 
-                    <p th:text="${profile.firstName}"></p>
-                    <p th:text="${profile.lastName}"></p>
-                    <p th:text="${profile.userName}"></p>
-                    <p th:text="${profile.accountCreated}"></p>
-                    <img style="width: 2em; height: 2em" th:src="@{'/static/images/profile/'} + ${profile.profileImageName}">
-
-                    <p th:text=" 'Followers:' + ${followers}"></p>
-                    <p th:text=" 'Following: ' + ${followings}"></p>
-                    <p th:text=" 'Tweets:' + ${tweetCount}"></p>
-
-                    <div th:if="${currentUser != profile.user_id}">
-
-                        <form th:action="@{'/follow/' + ${profile.user_id} }" method="post" modelAttribute="follow">
-
-                            <input type="hidden" th:value="${follow.id}" name="id">
-
-                            <button th:if="${!isFollowing}" id="followButton" class="btn btn-success">Follow</button>
-
-                        </form>
-
-                        <form th:action="@{'/unfollow/' + ${profile.user_id} }" method="get">
-                            <button th:if="${isFollowing}" class="btn btn-danger">Unfollow</button>
-                        </form>
-
-
-
-
-                    </div>
-
-
-
-
-                </div>
-
-                <div class="col-6">
+                <div class="col-6" style="padding-left: 0.3em">
 
                     <div th:if="${feedTweets.empty}">
                         <p>No tweets yet...</p>
@@ -246,7 +175,7 @@
 
                 </div>
 
-                <div class="col-3">
+                <div class="col-3" style="padding-left: 0.3em">
                     <!--------- FOLLOW BOX --------->
                     <div class="follow-box"></div>
                 </div>
@@ -254,6 +183,6 @@
             </div>
 
         </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     </body>
 </html>
