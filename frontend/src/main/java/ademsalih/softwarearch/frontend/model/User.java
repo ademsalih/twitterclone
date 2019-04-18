@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -12,13 +15,19 @@ public class User {
     private long user_id;
     private String firstName;
     private String lastName;
+
+    @NotNull
     private String email;
     private String phone;
     private String userName;
+
+    @NotNull
     private String password;
     private String accountCreated;
     private String profileImageName;
     private String userRole;
+
+    @Size(max = 160)
     private String bio;
     private String bannerImageName;
     private String link;

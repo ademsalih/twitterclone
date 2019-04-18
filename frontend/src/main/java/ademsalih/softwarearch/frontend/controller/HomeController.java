@@ -30,11 +30,35 @@ public class HomeController {
     @Autowired
     FollowService followService;
 
-    long user_id = 1;
+    long user_id = 4;
+
+    @GetMapping("/admin")
+    public String admin() {
+        return "admin";
+    }
 
     @GetMapping("/login")
     public String login() {
         return "login";
+    }
+
+    @GetMapping("/signup")
+    public String signup(Model model) {
+        model.addAttribute("user", new User());
+        return "signup";
+    }
+
+    @PostMapping("/register")
+    public String register(@ModelAttribute("user") User user) {
+
+        user.setUserRole("USER");
+        user.setAccountCreated(Calendar.getInstance().getTime().toInstant().toString());
+        user.setProfileImageName("default-profile-image.jpg");
+        user.setBannerImageName("default-banner-image.jpg");
+
+        userService.registerUser(user);
+
+        return "redirect:/login";
     }
 
     @PostMapping("/follow/{id}")
@@ -82,6 +106,8 @@ public class HomeController {
 
         // get user information for that user
         User profileUser = userService.getUserById(id);
+        profileUser.setAccountCreated(new TimeFormatService().formatJoinDate(profileUser.getAccountCreated()));
+
         model.addAttribute("profile", profileUser);
 
         FollowStatus f = followService.getFollowingStatus(user_id, id);
@@ -150,6 +176,7 @@ public class HomeController {
 
         // get user information for that user
         User profileUser = userService.getUserById(id);
+        profileUser.setAccountCreated(new TimeFormatService().formatJoinDate(profileUser.getAccountCreated()));
         model.addAttribute("profile", profileUser);
 
         FollowStatus f = followService.getFollowingStatus(user_id, id);

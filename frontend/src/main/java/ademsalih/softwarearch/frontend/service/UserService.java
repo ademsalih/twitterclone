@@ -25,4 +25,8 @@ public class UserService {
     public User getUserById(long id){
         return restTemplate.getForObject(BASE_URL + "/" + id, User.class);
     }
+
+    public User registerUser(User user) {
+        return restTemplate.postForObject(BASE_URL, user, User.class);
+    }
 }
