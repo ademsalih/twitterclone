@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 @Entity
@@ -24,9 +25,14 @@ public class User {
     private String phone;
     private String userName;
     private String password;
-    private String accountCreated;
+    private Calendar accountCreated;
     private String profileImageName;
     private String userRole;
+    private String bio;
+    private String bannerImageName;
+    private String link;
+    private String city;
+    private String country;
 
     /* ----------------- Many to many without extra table ----------------- */
 
@@ -59,8 +65,7 @@ public class User {
     private List<Follow> followers = new ArrayList<>();
 
 
-    public User(String firstName, String lastName, String email, String phone, String userName,
-                String password, String accountCreated, String profileImageName, String userRole) {
+    public User(String firstName, String lastName, String email, String phone, String userName, String password, Calendar accountCreated, String profileImageName, String userRole, String bio, String bannerImageName, String link, String city, String country) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -70,6 +75,11 @@ public class User {
         this.accountCreated = accountCreated;
         this.profileImageName = profileImageName;
         this.userRole = userRole;
+        this.bio = bio;
+        this.bannerImageName = bannerImageName;
+        this.link = link;
+        this.city = city;
+        this.country = country;
     }
 
 }

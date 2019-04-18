@@ -19,12 +19,12 @@ public class Follow {
 
     @ManyToOne
     @JoinColumn(name="user")
-    @JsonIgnoreProperties({"userRole", "profileImageName", "accountCreated", "password", "userName", "phone", "email", "lastName", "firstName"})
+    @JsonIgnoreProperties({"userRole", "profileImageName", "accountCreated", "password", "userName", "phone", "email", "lastName", "firstName", "country", "city", "link", "bannerImageName", "bio"})
     private User user;
 
     @ManyToOne
     @JoinColumn(name="following_user")
-    @JsonIgnoreProperties({"userRole", "profileImageName", "accountCreated", "password", "userName", "phone", "email", "lastName", "firstName"})
+    @JsonIgnoreProperties({"userRole", "profileImageName", "accountCreated", "password", "userName", "phone", "email", "lastName", "firstName", "country", "city", "link", "bannerImageName", "bio"})
     private User following_user;
 
     public Follow(User user, User following_user) {

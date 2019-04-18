@@ -6,7 +6,7 @@
         <span th:text=" '@' + ${profile.userName}" class="profile-handle-big"></span>
         <br>
         <div class="bio-container">
-            <span class="profile-bio">We’re here to provide tips, tricks and helpful information when you need it most. We’re available every day to answer your questions, from 5am-8pm Pacific.</span>
+            <span th:text="${profile.bio}" class="profile-bio"></span>
         </div>
 
         <table>
@@ -14,13 +14,15 @@
             <tr class="table-row">
                 <td>
                     <img class="icon" th:src="@{'/assets/place-icon.svg'}">
-                    <span class="more-info-text-link">Cupertino, CA</span>
+                    <span th:text="${profile.city} + ', ' + ${profile.country} " class="more-info-text-link"></span>
                 </td>
             </tr>
             <tr class="table-row">
                 <td>
                     <img th:src="@{'/assets/link-icon.svg'}" alt="" class="icon">
-                    <span class="more-info-text-link">support.apple.com</span>
+                    <a th:href="${profile.link}">
+                        <span th:text="${#strings.substring(profile.link, 11)}  " class="more-info-text-link"></span>
+                    </a>
                 </td>
             </tr>
             <tr class="table-row">

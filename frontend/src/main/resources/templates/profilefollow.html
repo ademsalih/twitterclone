@@ -24,7 +24,12 @@
                             <div th:each="u : ${followUsers}" class="single-follow-box" >
                                 <div style="width: 18em;height: 17.48em; background-color: #657786">
                                     <img th:src="@{'/static/images/profile/' + ${u.profileImageName} }" class="follow-box-pic">
-                                    <div class="follow-box-banner"></div>
+
+                                    <div class="follow-box-banner">
+                                        <img class="follow-box-banner-img" th:src="@{'/static/images/banner/' + ${u.bannerImageName} }" alt="">
+
+                                    </div>
+
                                     <div class="follow-box-content">
                                         <div class="text-right follow-box-follow-btn-container">
 
@@ -57,7 +62,7 @@
 
                                         </div>
                                         <div class="follow-box-bio-box">
-                                            <span class="follow-box-bio">Worldwide. Always On. Listen live for free on @AppleMusic or on demand with a subscription.</span>
+                                            <span th:text="${u.bio}" class="follow-box-bio"></span>
                                         </div>
                                     </div>
                                 </div>

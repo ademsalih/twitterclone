@@ -22,7 +22,6 @@ public class NewTweet extends Tweet {
 
     private long user_id;
 
-    @Temporal(TemporalType.TIMESTAMP)
     private Calendar dateTime;
 
     private String imageName;

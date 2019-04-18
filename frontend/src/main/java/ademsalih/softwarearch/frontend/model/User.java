@@ -19,6 +19,11 @@ public class User {
     private String accountCreated;
     private String profileImageName;
     private String userRole;
+    private String bio;
+    private String bannerImageName;
+    private String link;
+    private String city;
+    private String country;
 
     public User(String firstName, String lastName, String email, String phone, String userName,
                 String password, String accountCreated, String profileImageName, String userRole) {

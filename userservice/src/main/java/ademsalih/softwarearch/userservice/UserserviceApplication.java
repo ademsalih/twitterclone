@@ -10,6 +10,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Calendar;
+
 @SpringBootApplication
 public class UserserviceApplication implements CommandLineRunner {
 
@@ -35,9 +37,15 @@ public class UserserviceApplication implements CommandLineRunner {
                 "93689146",
                 "adem123",
                 "test",
-                "26.03.2019",
+                Calendar.getInstance(),
                 "profile1.png",
-                UserRoles.USER.name());
+                UserRoles.USER.name(),
+                "My name is Adem and I'm 21 years old. Follow 4 follow. Retweeting anything and everything.",
+                "adem-banner.jpg",
+                "http://www.google.com",
+                "Berlin",
+                "Germany"
+        );
 
         User pinar = new User(
                 "Pinar",
@@ -46,9 +54,15 @@ public class UserserviceApplication implements CommandLineRunner {
                 "93689144",
                 "pinarsalihgs",
                 "test",
-                "26.03.2019",
+                Calendar.getInstance(),
                 "profile2.png",
-                UserRoles.USER.name());
+                UserRoles.USER.name(),
+                "My name is Pinar and I'm 22 years old.",
+                "pinar-banner.jpg",
+                "http://www.google.com",
+                "Oslo",
+                "Norway"
+        );
 
         User esra = new User(
                 "Esra",
@@ -57,9 +71,15 @@ public class UserserviceApplication implements CommandLineRunner {
                 "93897123",
                 "esra123",
                 "esraerkul",
-                "26.03.2019",
+                Calendar.getInstance(),
                 "profile3.png",
-                UserRoles.USER.name());
+                UserRoles.USER.name(),
+                "My name is Esra and I'm 17 years old. I love munching on pancakes.",
+                "esra-banner.jpg",
+                "http://www.google.com",
+                "London",
+                "UK"
+        );
 
         userRepository.save(adem);
         userRepository.save(pinar);

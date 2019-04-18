@@ -124,8 +124,8 @@ public class HomeController {
                     user.getLastName(),
                     user.getUserName(),
                     user.getProfileImageName(),
-                    "banner.jpg",
-                    "Bio",
+                    user.getBannerImageName(),
+                    user.getBio(),
                     Boolean.valueOf(fs.isFollow())
             );
 
@@ -190,8 +190,8 @@ public class HomeController {
                     user.getLastName(),
                     user.getUserName(),
                     user.getProfileImageName(),
-                    "banner.jpg",
-                    "Bio",
+                    user.getBannerImageName(),
+                    user.getBio(),
                     Boolean.valueOf(fs.isFollow())
             );
 
