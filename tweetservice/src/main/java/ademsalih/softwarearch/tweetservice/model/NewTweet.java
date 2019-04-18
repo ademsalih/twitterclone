@@ -29,7 +29,7 @@ public class NewTweet extends Tweet {
 
     private String message;
 
-    @OneToMany(mappedBy = "newTweet")
+    @OneToMany(mappedBy = "newTweet", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Retweet> retweets = new ArrayList<>();
 

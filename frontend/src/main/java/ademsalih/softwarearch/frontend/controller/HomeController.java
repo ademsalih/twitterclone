@@ -349,15 +349,17 @@ public class HomeController {
     }
 
     @GetMapping("/deleteTweet/{id}")
-    public String deleteTweet(@PathVariable long id) {
+    public String deleteTweet(@PathVariable long id, HttpServletRequest request) {
         tweetService.deleteTweet(id);
-        return "redirect:/home";
+        String referer = request.getHeader("Referer");
+        return "redirect:" + referer;
     }
 
     @GetMapping("/deleteRetweet/{id}")
-    public String deleteRetweet(@PathVariable long id) {
+    public String deleteRetweet(@PathVariable long id, HttpServletRequest request) {
         tweetService.deleteRetweet(id);
-        return "redirect:/home";
+        String referer = request.getHeader("Referer");
+        return "redirect:" + referer;
     }
 
     @GetMapping("/")
@@ -416,10 +418,14 @@ public class HomeController {
     @GetMapping("/home")
     public String home(Model model) {
 
+        User loggedInUser = userService.getUserById(user_id);
+        model.addAttribute("profile", loggedInUser);
+
+        model.addAttribute("currentUser", user_id);
+
         // Models for tweeting and retweeting
         model.addAttribute("tweet", new Tweet());
         model.addAttribute("retweet", new Retweet());
-        model.addAttribute("loggedInUser", user_id);
 
         // Get follower count the logged in user
         List<Follow> followers = followService.getFollowersForUserById(user_id);
@@ -437,9 +443,7 @@ public class HomeController {
         int totalTweets = userTweets.size() + userRetweets.size();
         model.addAttribute("totalTweets", totalTweets);
 
-        User loggedInUser = userService.getUserById(user_id);
 
-        model.addAttribute("profile", loggedInUser);
 
 
         List<Tweet> tweetsList = new ArrayList<>();

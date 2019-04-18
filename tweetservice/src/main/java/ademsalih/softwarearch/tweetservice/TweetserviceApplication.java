@@ -30,14 +30,18 @@ public class TweetserviceApplication implements CommandLineRunner {
         newTweetRepository.deleteAllInBatch();
         retweetRepository.deleteAllInBatch();
 
-
-
-
         NewTweet newTweet = new NewTweet("This a tweet for testing date time purposes.", Calendar.getInstance(),1,null);
-        newTweetRepository.save(newTweet);
-
+        NewTweet newTweet2 = new NewTweet("This a tweet for testing deletion.", Calendar.getInstance(),3,null);
+        NewTweet newTweet3 = new NewTweet("This a tweet for testing deletion. Like the other ones", Calendar.getInstance(),2,null);
         Retweet retweet = new Retweet(3, Calendar.getInstance(), newTweet);
+
+        newTweetRepository.save(newTweet);
+        newTweetRepository.save(newTweet2);
+        newTweetRepository.save(newTweet3);
         retweetRepository.save(retweet);
+
+
+
 
 
 

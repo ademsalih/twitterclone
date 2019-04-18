@@ -22,7 +22,7 @@ public class Retweet extends Tweet {
 
     private Calendar dateTime;
 
-    @ManyToOne
+    @ManyToOne()
     @JsonIgnoreProperties("retweets")
     @JoinColumn(name = "tweet_id")
     private NewTweet newTweet;

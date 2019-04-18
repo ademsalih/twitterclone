@@ -11,26 +11,71 @@
 
             var button;
             var buttonText;
-            var group = [[${group}]];
+            var group = "[[${group}]]";
 
             switch(group) {
-                case 1:
+                case "1":
                     button = document.getElementById('tweets');
                     buttonText = document.getElementById('tweets-text');
                     break;
-                case 2:
+                case "2":
                     button = document.getElementById('followings');
                     buttonText = document.getElementById('followings-text');
                     break;
-                case 3:
+                case "3":
                     button = document.getElementById('followers');
                     buttonText = document.getElementById('followers-text');
                     break;
                 default:
             }
 
-            button.className += " stat-button-selected";
-            buttonText.className += " stat-number-text-selected";
+            if (button != null && buttonText != null) {
+                button.className += " stat-button-selected";
+                buttonText.className += " stat-number-text-selected";
+            }
+
+
+            // ------------------------------------------------------------------------//
+
+            document.body.addEventListener('click', function (event) {
+
+                var buttons = document.getElementsByClassName("caret-button");
+
+                for (var i = 0; i < buttons.length; i++) {
+
+                    var button = buttons[i];
+
+                    if (!button.contains(event.target)) {
+
+                        var popup = button.nextElementSibling;
+
+                        popup.style.visibility = "hidden";
+                    }
+
+                }
+            });
         };
+
+        function popUp(event) {
+
+
+            var button = event.currentTarget;
+
+            var popup = event.currentTarget.nextElementSibling;
+
+            if (button.contains(event.target)) {
+
+                if (getComputedStyle(popup).visibility === "hidden") {
+                    popup.style.visibility = "visible";
+
+                } else {
+                    popup.style.visibility = "hidden";
+                }
+
+            } else {
+
+                popup.style.visibility = "hidden";
+            }
+        }
     </script>
 </head>

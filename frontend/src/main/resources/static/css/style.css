@@ -1,6 +1,11 @@
+html {
+    height: 100%;
+}
+
 body {
     margin-top: 2.9em;
     background: #E6ECF0;
+    height: 100%;
 }
 
 @media (min-width: 1200px) {
@@ -9,6 +14,11 @@ body {
 
     }
 }
+
+button:focus {
+    outline: none !important;
+}
+
 
 
 /************ NAVBAR ************/
@@ -113,6 +123,11 @@ body {
     font-size: 0.9em;
     color: #191919;
     font-weight: 400;
+}
+
+
+.handle-at-username {
+    display: inline-flex;
 }
 
 .icon {
@@ -301,10 +316,11 @@ body {
 .profile-name-2 {
     font-size: 1.13em;
     font-weight: bold;
+    color: black;
 }
 
 .handle-name-2 {
-    color: #657786;
+    color: #657786 !important;
     font-size: 0.84em;
     font-weight: 400;
 }
@@ -437,10 +453,11 @@ body {
 .profile-name {
     font-size: 1.05em;
     font-weight: bold;
+    color: black !important;
 }
 
 .handle-name {
-    color: #657786;
+    color: #657786 !important;
     font-size: 0.84em;
 }
 
@@ -556,7 +573,7 @@ body {
     width: 36.8em;
     position: relative;
     background-color: white;
-    overflow: hidden;
+    display: table-caption;
     border-top: 0.09em solid #E6ECF0;
 }
 
@@ -574,7 +591,17 @@ body {
     margin-right: auto;
     display: block;
     margin-top: 0.7em;
-    margin-bottom: 1em;
+}
+
+.tweet-profile-pic-retweet {
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 0.3em;
+
 }
 
 .tweetbox-content {
@@ -584,6 +611,13 @@ body {
 
 .name-field {
     padding-top: 0.45em;
+    padding-right: 1em;
+    line-height: 1.2em;
+    margin-bottom: 1em;
+}
+
+.name-field-retweet {
+    padding-top: 0.1em;
     padding-right: 1em;
     line-height: 1.2em;
     margin-bottom: 1em;
@@ -644,7 +678,7 @@ body {
 
 .retweet-box {
     margin-left: 2.9em;
-    margin-top: 0.4em;
+    margin-top: 0.1em;
 }
 
 .user-retweet-icon {
@@ -652,10 +686,127 @@ body {
 }
 
 .retweeted-text {
-    font-size: 0.8em;
+    font-size: 0.75em;
     color: #657786;
     margin-left: 0.45em;
+    font-weight: 300;
 }
+
+
+
+
+/************ TWEET BOX OPTIONS ************/
+
+.tweet-options-menu {
+    position: relative;
+    float: right;
+    display: inline-block;
+    margin-right: 0.18em;
+    margin-top: 0.6em;
+}
+
+.tweet-options-menu-retweet {
+    position: relative;
+    float: right;
+    display: inline-block;
+    margin-right: 0.18em;
+    margin-top: 0.15em;
+}
+
+.caret-button {
+    background-color: transparent;
+    border: 0;
+    width: 2.12em;
+    height: 1.3em;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 0.34em;
+    z-index: 0;
+    display: table;
+}
+
+.caret-img {
+    display: block;
+    width: 0.72em;
+    opacity: 1;
+    margin: auto;
+    padding: 0;
+    z-index: 0;
+}
+
+.caret-popup {
+    visibility: hidden;
+    margin-top: 0.45em;
+    width: 12.45em;
+    background-color: #ffffff;
+    border-radius: 0.25em;
+    padding-top: 0.64em;
+    padding-bottom: 0.64em;
+    padding-right: 0;
+    position: absolute;
+    z-index: 1;
+
+    -webkit-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.23);
+    -moz-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.23);
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.23);
+}
+
+.caret-menu-button {
+    width: 100%;
+    background: none;
+    border: none;
+    display: table;
+    height: 1.86em;
+}
+
+.caret-menu-button:hover {
+    background-color: #1DA1F2;
+}
+
+.caret-menu-button:hover span {
+    color:white;
+}
+
+.caret-menu-button-text {
+    font-size: 0.85em;
+    color: #5f707f;
+    padding-left: 1em;
+    vertical-align: middle;
+    display: table-cell;
+    font-weight: 300;
+}
+
+.arrow-up {
+    width: 0;
+    height: 0;
+    border-left: 0.6em solid transparent;
+    border-right: 0.6em solid transparent;
+    border-bottom: 0.6em solid #ffffff;
+    position: absolute;
+}
+
+.arrow-up-shadow {
+    width: 0;
+    height: 0;
+    border-left: 0.6em solid transparent;
+    border-right: 0.6em solid transparent;
+    border-bottom: 0.6em solid rgb(220, 220, 220);
+    position: absolute;
+    margin-top: -0.05em;
+}
+
+.arrows {
+    position: absolute;
+    margin-top: -1.2em;
+    margin-left: 0.8em;
+}
+
+.menu-separator {
+    margin-top: 0.38em;
+    margin-bottom: 0.38em;
+    width: 12.25em;
+}
+
 
 
 
