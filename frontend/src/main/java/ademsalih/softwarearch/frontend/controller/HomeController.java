@@ -213,6 +213,8 @@ public class HomeController {
 
         // get user information for that user
         User profileUser = userService.getUserById(id);
+
+        profileUser.setAccountCreated(new TimeFormatService().formatJoinDate(profileUser.getAccountCreated()));
         model.addAttribute("profile", profileUser);
 
 
@@ -267,7 +269,7 @@ public class HomeController {
                     user.getLastName(),
                     user.getUserName(),
                     user.getProfileImageName(),
-                    new TimeFormatService().format(tweet.getDateTime()),
+                    new TimeFormatService().formatTimeAgo(tweet.getDateTime()),
                     tweet.getImageName(),
                     tweet.getMessage()
             );
@@ -283,7 +285,7 @@ public class HomeController {
                         retweeter.getLastName(),
                         retweeter.getUserName(),
                         retweeter.getProfileImageName(),
-                        new TimeFormatService().format(tweet.getNewTweet().getDateTime()),
+                        new TimeFormatService().formatTimeAgo(tweet.getNewTweet().getDateTime()),
                         tweet.getNewTweet().getImageName(),
                         tweet.getNewTweet().getMessage()
                 );
@@ -383,7 +385,7 @@ public class HomeController {
                     user.getLastName(),
                     user.getUserName(),
                     user.getProfileImageName(),
-                    new TimeFormatService().format(tweet.getDateTime()),
+                    new TimeFormatService().formatTimeAgo(tweet.getDateTime()),
                     tweet.getImageName(),
                     tweet.getMessage()
             );
@@ -399,7 +401,7 @@ public class HomeController {
                         retweeter.getLastName(),
                         retweeter.getUserName(),
                         retweeter.getProfileImageName(),
-                        new TimeFormatService().format(tweet.getNewTweet().getDateTime()),
+                        new TimeFormatService().formatTimeAgo(tweet.getNewTweet().getDateTime()),
                         tweet.getNewTweet().getImageName(),
                         tweet.getNewTweet().getMessage()
                 );
@@ -477,7 +479,7 @@ public class HomeController {
                     user.getLastName(),
                     user.getUserName(),
                     user.getProfileImageName(),
-                    new TimeFormatService().format(tweet.getDateTime()),
+                    new TimeFormatService().formatTimeAgo(tweet.getDateTime()),
                     tweet.getImageName(),
                     tweet.getMessage()
             );
@@ -493,7 +495,7 @@ public class HomeController {
                         retweeter.getLastName(),
                         retweeter.getUserName(),
                         retweeter.getProfileImageName(),
-                        new TimeFormatService().format(tweet.getNewTweet().getDateTime()),
+                        new TimeFormatService().formatTimeAgo(tweet.getNewTweet().getDateTime()),
                         tweet.getNewTweet().getImageName(),
                         tweet.getNewTweet().getMessage()
                 );
