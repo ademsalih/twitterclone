@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -19,41 +21,36 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long user_id;
-    private String firstName;
-    private String lastName;
+
+    @NotNull
+    private String name;
+
+    @NotNull
     private String email;
+
+    @Size(min=5, max = 10)
     private String phone;
+
+    @NotNull
     private String userName;
+
+    @NotNull
+    @Size(min=5)
     private String password;
+
     private Calendar accountCreated;
+
     private String profileImageName;
+
     private String userRole;
+
     private String bio;
+
     private String bannerImageName;
+
     private String link;
-    private String city;
-    private String country;
 
-    /* ----------------- Many to many without extra table ----------------- */
-
-    /*@ManyToMany(cascade = CascadeType.DETACH)
-    @JsonIgnoreProperties({"following", "followers"})
-    @JsonIgnore
-    @JoinTable(
-            name = "Following",
-            joinColumns = { @JoinColumn(name = "user_id") },
-            inverseJoinColumns = { @JoinColumn(name = "following_user_id") }
-    )
-    private List<User> following = new ArrayList<>();
-
-
-    @ManyToMany(cascade = CascadeType.DETACH, mappedBy = "following")
-    @JsonIgnoreProperties({"following", "followers"})
-    @JsonIgnore
-    private List<User> followers = new ArrayList<>();*/
-
-
-    /* ---------------- Many to many with table Following ---------------- */
+    private String location;
 
     @OneToMany(mappedBy = "user")
     @JsonIgnore
@@ -65,9 +62,8 @@ public class User {
     private List<Follow> followers = new ArrayList<>();
 
 
-    public User(String firstName, String lastName, String email, String phone, String userName, String password, Calendar accountCreated, String profileImageName, String userRole, String bio, String bannerImageName, String link, String city, String country) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String name, String email, String phone, String userName, String password, Calendar accountCreated, String profileImageName, String userRole, String bio, String bannerImageName, String link, String location) {
+        this.name = name;
         this.email = email;
         this.phone = phone;
         this.userName = userName;
@@ -78,8 +74,7 @@ public class User {
         this.bio = bio;
         this.bannerImageName = bannerImageName;
         this.link = link;
-        this.city = city;
-        this.country = country;
+        this.location = location;
     }
 
 }

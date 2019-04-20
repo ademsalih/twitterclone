@@ -13,9 +13,7 @@ public class UserTweet {
 
     private long tweet_id;
 
-    private String firstName;
-
-    private String lastName;
+    private String name;
 
     private String userName;
 
@@ -29,11 +27,10 @@ public class UserTweet {
 
     private UserTweet newTweet;
 
-    public UserTweet(long user_id, long tweet_id, String firstName, String lastName, String userName, String profileImageName, String dateTime, String imageName, String message) {
+    public UserTweet(long user_id, long tweet_id, String name, String userName, String profileImageName, String dateTime, String imageName, String message) {
         this.user_id = user_id;
         this.tweet_id = tweet_id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.name = name;
         this.userName = userName;
         this.profileImageName = profileImageName;
         this.dateTime = dateTime;
@@ -41,11 +38,10 @@ public class UserTweet {
         this.message = message;
     }
 
-    public UserTweet(long user_id, long tweet_id, String firstName, String lastName, String userName, String profileImageName, String dateTime, String imageName, String message, UserTweet newTweet) {
+    public UserTweet(long user_id, long tweet_id, String name, String userName, String profileImageName, String dateTime, String imageName, String message, UserTweet newTweet) {
         this.user_id = user_id;
         this.tweet_id = tweet_id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.name = name;
         this.userName = userName;
         this.profileImageName = profileImageName;
         this.dateTime = dateTime;

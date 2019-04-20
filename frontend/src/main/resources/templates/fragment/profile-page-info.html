@@ -2,7 +2,7 @@
     <img class="profile-pic-big" th:src="@{'/static/images/profile/'} + ${profile.profileImageName}">
 
     <div class="profile-box-down">
-        <span th:text="${profile.firstName} + ' ' + ${profile.lastName}" class="profile-big-name"></span><br>
+        <span th:text="${profile.name}" class="profile-big-name"></span><br>
         <span th:text=" '@' + ${profile.userName}" class="profile-handle-big"></span>
         <br>
         <div class="bio-container">
@@ -11,23 +11,23 @@
 
         <table>
             <tbody>
-            <tr class="table-row">
+            <tr th:if="${profile.location != null}" class="table-row">
                 <td>
-                    <img class="icon" th:src="@{'/assets/place-icon.svg'}">
-                    <span th:text="${profile.city} + ', ' + ${profile.country} " class="more-info-text-link"></span>
+                    <img class="icon" th:src="@{'/assets/place-icon-2.svg'}">
+                    <span th:text="${profile.location}" class="more-info-text-link"></span>
                 </td>
             </tr>
-            <tr class="table-row">
+            <tr th:if="${profile.link != null}" class="table-row">
                 <td>
-                    <img th:src="@{'/assets/link-icon.svg'}" alt="" class="icon">
-                    <a th:href="${profile.link}">
+                    <img th:src="@{'/assets/link-icon-2.svg'}" alt="" class="icon">
+                    <a th:href="${profile.link}" target="_blank">
                         <span th:text="${#strings.substring(profile.link, 11)}  " class="more-info-text-link"></span>
                     </a>
                 </td>
             </tr>
             <tr class="table-row">
                 <td>
-                    <img th:src="@{'/assets/cal-icon.svg'}" alt="" class="icon">
+                    <img th:src="@{'/assets/cal-icon-2.svg'}" alt="" class="icon">
                     <span th:text=" 'Joined ' + ${profile.accountCreated}" class="more-info-text"></span>
                 </td>
             </tr>

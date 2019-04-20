@@ -4,63 +4,82 @@
     <title>Login</title>
     <head th:replace="fragment/header :: head"></head>
 
-    <body>
+    <body style="background-color: white">
 
         <div th:replace="fragment/menu :: div"></div>
 
         <div class="container">
 
-            <h4>Join Twitter today</h4>
+            <div class="row justify-content-center">
+                <div class="col-5 form-container">
+                    <span class="join-twitter-header">Join Twitter today.</span>
 
-            <form th:action="@{/register}" method="post" modelAttribute="user">
+                    <form class="custom-form" th:action="@{/register}" method="post" th:object="${user}">
+
+                        <input th:field="*{name}" name="name" class="custom-form-input" type="text" placeholder="Full name">
+                        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+                        <br>
+
+                        <input th:field="*{email}" name="email" class="custom-form-input form-spacing" type="text" placeholder="Email">
+                        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
+                        <br>
+
+                        <input th:field="*{userName}" name="userName" class="custom-form-input form-spacing" type="text" placeholder="Username">
+                        <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Username Error</div>
+                        <br>
+
+                        <input type="password" th:field="*{password}" name="password" class="custom-form-input form-spacing" placeholder="Password">
+                        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
+                        <br>
+
+                        <button class="sign-up-button" type="submit">
+                            <span class="sign-up-button-text">Sign up</span>
+                        </button>
+                    </form>
+
+                    <div class="disclaimer-text-container">
+                        <span class="disclaimer-small-text">
+                            By signing up, you agree to the <a href="#" class="linkify">Terms of Service</a> and <a href="#" class="linkify">Privacy Policy</a>,
+                            including <a href="#" class="linkify">Cookie Use</a>. Others will be able to find you by searching for
+                            your email address or phone number when provided.
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--<form th:action="@{/register}" method="post" th:object="${user}">
+
 
                 <div class="form-group">
-                    <input type="text" name="firstName" class="form-control" placeholder="First Name">
+                    <input type="text" th:field="*{bio}"  name="bio" class="form-control" placeholder="Bio">
+                    <div th:if="${#fields.hasErrors('bio')}" th:errors="*{bio}">Bio Error</div>
                 </div>
 
                 <div class="form-group">
-                    <input type="text" name="lastName" class="form-control" placeholder="Last Name">
+                    <input type="text" th:field="*{link}" name="link" class="form-control" placeholder="Link">
+                    <div th:if="${#fields.hasErrors('link')}" th:errors="*{link}">Link Error</div>
                 </div>
 
                 <div class="form-group">
-                    <input type="email" name="email" class="form-control" placeholder="Email">
-                </div>
-
-                <div class="form-group">
-                    <input type="text" name="phone" class="form-control" placeholder="Phone">
-                </div>
-
-                <div class="form-group">
-                    <input type="password" name="password" class="form-control" placeholder="Password">
-                </div>
-
-                <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Verify password">
-                </div>
-
-                <div class="form-group">
-                    <input type="text" name="userName" class="form-control" placeholder="Username">
-                </div>
-
-                <div class="form-group">
-                    <input type="text"  name="bio" class="form-control" placeholder="Bio">
-                </div>
-
-                <div class="form-group">
-                    <input type="text"  name="link" class="form-control" placeholder="Link">
-                </div>
-
-                <div class="form-group">
-                    <input type="text"  name="city" class="form-control" placeholder="City">
-                </div>
-
-                <div class="form-group">
-                    <input type="text"  name="country" class="form-control" placeholder="Country">
+                    <select class="form-control" id="exampleFormControlSelect1" name="location">
+                        <option th:each="location : ${locations}" th:text="${location}" th:value="${location}"></option>
+                    </select>
                 </div>
 
                 <button class="btn btn-success">Sign up</button>
-            </form>
+            </form>-->
 
         </div>
+
+        <script>
+            window.onload = function() {
+                var bird = document.getElementById("bird");
+                bird.className = bird.className.replace(" bird", " bird-signup");
+
+                var nav = document.getElementById("nav");
+                nav.className = nav.className.replace(" navbarGradient navbar-shadow", " navbarGradient-signup navbar-shadow-line");
+            };
+        </script>
     </body>
 </html>

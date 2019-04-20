@@ -1,5 +1,5 @@
 <div xmlns:th="http://www.w3.org/1999/xhtml">
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbarGradient">
+    <nav id="nav" class="navbar navbar-expand-lg navbar-dark fixed-top navbarGradient navbar-shadow">
 
         <div class="container">
 
@@ -10,7 +10,7 @@
 
             <div class="navbar-brand">
                 <a th:href="@{/home}">
-                    <i style="color: #1DA1F2; font-size: 1em" class="fab fa-twitter"></i>
+                    <i id="bird" class="fab fa-twitter bird"></i>
                 </a>
             </div>
 
@@ -18,14 +18,18 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
                 <ul class="nav navbar-nav navbar-left">
-                    <li><a href="#">Home</a></li>
+                    <li>
+                        <a href="#">
+                            <img class="navbar-home-icon" th:src="@{'/assets/home-icon.svg'}"><span>Home</span>
+                        </a>
+                    </li>
                 </ul>
 
                 <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
 
                     <img class="pic-sm" th:src="@{'/static/images/profile/' + 'profile1.png'}" alt="profile-image">
 
-                    <li><a href="#">Tweet</a></li>
+                    <li><a href="#"></a></li>
                 </ul>
 
             </div>

@@ -27,7 +27,7 @@
                                     <div class="name-field">
 
                                         <a th:href="@{'/profile/' + ${t.user_id} }">
-                                            <span class="name" th:text="${t.firstName} + ' ' + ${t.lastName}"></span>
+                                            <span class="name" th:text="${t.name}"></span>
                                             <span class="grey-text" th:text="' @' + ${t.userName}"></span>
                                         </a>
 
@@ -68,7 +68,7 @@
                                 <div class="retweet-box">
                                     <a th:href="@{'/profile/' + ${t.user_id} }">
                                         <img class="user-retweet-icon" th:src="@{'/assets/gray-retweet.svg'}">
-                                        <span class="retweeted-text" th:text="${t.firstName} + ' ' + ${t.lastName} + ' Retweeted' "></span>
+                                        <span class="retweeted-text" th:text="${t.name} + ' Retweeted' "></span>
                                     </a>
                                 </div>
 
@@ -79,7 +79,7 @@
                                 <div class="tweetbox-content">
                                     <div class="name-field">
                                         <a th:href="@{'/profile/' + ${t.newTweet.user_id} }">
-                                            <span class="name" th:text="${t.newTweet.firstName} + ' ' + ${t.newTweet.lastName}"></span>
+                                            <span class="name" th:text="${t.newTweet.name}"></span>
                                             <span class="grey-text" th:text="' @' + ${t.newTweet.userName}"></span>
                                         </a>
                                         <span class="grey-text">⋅</span>

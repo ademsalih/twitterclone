@@ -8,18 +8,27 @@ import ademsalih.softwarearch.frontend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 @Controller
-public class HomeController {
+public class HomeController implements WebMvcConfigurer {
 
     @Autowired
     TweetService tweetService;
@@ -30,7 +39,7 @@ public class HomeController {
     @Autowired
     FollowService followService;
 
-    long user_id = 4;
+    long user_id = 1;
 
     @GetMapping("/admin")
     public String admin() {
@@ -42,23 +51,77 @@ public class HomeController {
         return "login";
     }
 
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/login").setViewName("login");
+    }
+
     @GetMapping("/signup")
-    public String signup(Model model) {
-        model.addAttribute("user", new User());
+    public String signup(User user, Model model) {
+
+        List<String> locations = new ArrayList<>();
+
+        /*BufferedReader bufferedReader;
+
+        try {
+
+            String IMAGE_LOCATION = "/src/main/resources/static/lists/worldcities.csv";
+
+            String projectDir = System.getProperty("user.dir");
+            String totalPath = projectDir + IMAGE_LOCATION;
+
+            bufferedReader = new BufferedReader(new FileReader(totalPath));
+
+            String line = bufferedReader.readLine();
+            line = bufferedReader.readLine();
+
+            while (line != null) {
+                line = bufferedReader.readLine();
+
+                String[] chunks = line.split(",");
+
+                String city = chunks[0];
+
+                city = city.substring(1,city.length()-1);
+
+                String country = chunks[4];
+                country = country.substring(1, country.length()-1);
+
+                String location = city + ", " + country;
+
+                locations.add(location);
+
+            }
+        } catch (IOException ioe) {
+
+        }*/
+
+
+        locations.add("Oslo, Norway");
+        locations.add("Istanbul, Turkey");
+        locations.add("London, UK");
+
+        model.addAttribute("locations", locations);
+
+
         return "signup";
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute("user") User user) {
+    public String register(@Valid User user, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "signup";
+        }
 
         user.setUserRole("USER");
-        user.setAccountCreated(Calendar.getInstance().getTime().toInstant().toString());
-        user.setProfileImageName("default-profile-image.jpg");
         user.setBannerImageName("default-banner-image.jpg");
+        user.setProfileImageName("default-profile-image.jpg");
+        user.setAccountCreated(Calendar.getInstance().getTime().toInstant().toString());
 
         userService.registerUser(user);
 
-        return "redirect:/login";
+        return "redirect:/home";
     }
 
     @PostMapping("/follow/{id}")
@@ -146,8 +209,7 @@ public class HomeController {
 
             FollowPageUser fpuser = new FollowPageUser(
                     user.getUser_id(),
-                    user.getFirstName(),
-                    user.getLastName(),
+                    user.getName(),
                     user.getUserName(),
                     user.getProfileImageName(),
                     user.getBannerImageName(),
@@ -213,8 +275,7 @@ public class HomeController {
 
             FollowPageUser fpuser = new FollowPageUser(
                     user.getUser_id(),
-                    user.getFirstName(),
-                    user.getLastName(),
+                    user.getName(),
                     user.getUserName(),
                     user.getProfileImageName(),
                     user.getBannerImageName(),
@@ -292,8 +353,7 @@ public class HomeController {
             UserTweet userTweet = new UserTweet(
                     user.getUser_id(),
                     tweet.getId(),
-                    user.getFirstName(),
-                    user.getLastName(),
+                    user.getName(),
                     user.getUserName(),
                     user.getProfileImageName(),
                     new TimeFormatService().formatTimeAgo(tweet.getDateTime()),
@@ -308,8 +368,7 @@ public class HomeController {
                 UserTweet retweet = new UserTweet(
                         retweeter.getUser_id(),
                         tweet.getNewTweet().getId(),
-                        retweeter.getFirstName(),
-                        retweeter.getLastName(),
+                        retweeter.getName(),
                         retweeter.getUserName(),
                         retweeter.getProfileImageName(),
                         new TimeFormatService().formatTimeAgo(tweet.getNewTweet().getDateTime()),
@@ -363,7 +422,7 @@ public class HomeController {
     }
 
     @PostMapping("/retweet/{id}")
-    public String retweet(@ModelAttribute("retweet") Retweet retweet, @PathVariable("id") long id) {
+    public String retweet(@ModelAttribute("retweet") Retweet retweet, @PathVariable("id") long id, HttpServletRequest request) {
 
         retweet.setDateTime(Calendar.getInstance());
         retweet.setUser_id(user_id);
@@ -374,7 +433,9 @@ public class HomeController {
 
         tweetService.postRetweet(retweet);
 
-        return "redirect:/home";
+        String referer = request.getHeader("Referer");
+
+        return "redirect:" + referer;
     }
 
     @GetMapping("/deleteTweet/{id}")
@@ -408,8 +469,7 @@ public class HomeController {
             UserTweet userTweet = new UserTweet(
                     user.getUser_id(),
                     tweet.getId(),
-                    user.getFirstName(),
-                    user.getLastName(),
+                    user.getName(),
                     user.getUserName(),
                     user.getProfileImageName(),
                     new TimeFormatService().formatTimeAgo(tweet.getDateTime()),
@@ -424,8 +484,7 @@ public class HomeController {
                 UserTweet retweet = new UserTweet(
                         retweeter.getUser_id(),
                         tweet.getNewTweet().getId(),
-                        retweeter.getFirstName(),
-                        retweeter.getLastName(),
+                        retweeter.getName(),
                         retweeter.getUserName(),
                         retweeter.getProfileImageName(),
                         new TimeFormatService().formatTimeAgo(tweet.getNewTweet().getDateTime()),
@@ -502,8 +561,7 @@ public class HomeController {
             UserTweet userTweet = new UserTweet(
                     user.getUser_id(),
                     tweet.getId(),
-                    user.getFirstName(),
-                    user.getLastName(),
+                    user.getName(),
                     user.getUserName(),
                     user.getProfileImageName(),
                     new TimeFormatService().formatTimeAgo(tweet.getDateTime()),
@@ -518,8 +576,7 @@ public class HomeController {
                 UserTweet retweet = new UserTweet(
                         retweeter.getUser_id(),
                         tweet.getNewTweet().getId(),
-                        retweeter.getFirstName(),
-                        retweeter.getLastName(),
+                        retweeter.getName(),
                         retweeter.getUserName(),
                         retweeter.getProfileImageName(),
                         new TimeFormatService().formatTimeAgo(tweet.getNewTweet().getDateTime()),

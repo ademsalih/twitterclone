@@ -31,42 +31,37 @@ public class UserserviceApplication implements CommandLineRunner {
         followRepository.deleteAllInBatch();
 
         User adem = new User(
-                "Adem",
-                "Salih",
+                "Adem Salih",
                 "adem@gmail.com",
                 "93689146",
                 "adem123",
-                "test",
+                "testing",
                 Calendar.getInstance(),
                 "profile1.png",
                 UserRoles.USER.name(),
                 "My name is Adem and I'm 21 years old. Follow 4 follow. Retweeting anything and everything.",
                 "adem-banner.jpg",
                 "http://www.google.com",
-                "Berlin",
-                "Germany"
+                "Berlin, Germany"
         );
 
         User pinar = new User(
-                "Pinar",
-                "Salih",
+                "Pinar Salih",
                 "pinar@gmail.com",
                 "93689144",
                 "pinarsalihgs",
-                "test",
+                "testing",
                 Calendar.getInstance(),
                 "profile2.png",
                 UserRoles.USER.name(),
                 "My name is Pinar and I'm 22 years old.",
                 "pinar-banner.jpg",
                 "http://www.google.com",
-                "Oslo",
-                "Norway"
+                "Oslo, Norway"
         );
 
         User esra = new User(
-                "Esra",
-                "Salih",
+                "Esra Salih",
                 "pinar@gmail.com",
                 "93897123",
                 "esra123",
@@ -77,8 +72,7 @@ public class UserserviceApplication implements CommandLineRunner {
                 "My name is Esra and I'm 17 years old. I love munching on pancakes.",
                 "esra-banner.jpg",
                 "http://www.google.com",
-                "London",
-                "UK"
+                "London, UK"
         );
 
         userRepository.save(adem);
