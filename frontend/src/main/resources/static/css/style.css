@@ -135,7 +135,7 @@ button:focus {
 .navbar-tweet-options-menu {
     position: relative;
     display: inline-flex;
-    margin-right: 0.2em;
+    margin-right: 0.18em;
     z-index: 1;
 }
 
@@ -161,7 +161,7 @@ button:focus {
     width: 12.45em;
     background-color: #ffffff;
     border-radius: 0.25em;
-    padding-top: 0.64em;
+    padding-top: 0.43em;
     padding-bottom: 0.64em;
     padding-right: 0;
     position: absolute;
@@ -175,7 +175,7 @@ button:focus {
 .navbar-arrows {
     float: right;
     position: relative;
-    margin-top: -1.2em;
+    margin-top: -1em;
     margin-right: 2em;
 }
 
@@ -204,6 +204,17 @@ button:focus {
     border: none;
     display: table;
     height: 1.86em;
+    cursor: pointer;
+}
+
+.navbar-caret-menu-button-big {
+    width: 100%;
+    background: none;
+    border: none;
+    height: 2.95em;
+    display: block;
+    text-align: left;
+    cursor: pointer;
 }
 
 .navbar-caret-menu-button:hover {
@@ -220,6 +231,20 @@ button:focus {
     padding-left: 1em;
     vertical-align: middle;
     display: table-cell;
+    font-weight: 300;
+}
+
+.navbar-caret-menu-button-text-bold {
+    font-size: 1.1em;
+    color: #000000;
+    padding-left: 0.55em;
+    font-weight: 700;
+}
+
+.navbar-caret-menu-button-text-light {
+    font-size: 0.85em;
+    color: #657786;
+    padding-left: 0.7em;
     font-weight: 300;
 }
 
@@ -548,6 +573,7 @@ button:focus {
 .follow-button-area {
     display: table-cell;
     vertical-align: middle;
+    padding-right: 0.7em;
 }
 
 .follow-button-area-container {
@@ -560,7 +586,6 @@ button:focus {
 }
 
 /*-----------------------------*/
-
 
 .follow-box-pic {
     margin-top: 3.62em;
@@ -580,7 +605,6 @@ button:focus {
     position: relative;
 }
 
-
 .follow-box-banner-img {
     width: 100%;
     background-size: cover;
@@ -591,17 +615,6 @@ button:focus {
     top: 0;
     bottom: 0;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 .follow-box-content {
     background-color: white;
@@ -639,8 +652,6 @@ button:focus {
     font-size: 0.8em;
 }
 
-
-
 .follow-box-follow-btn-container {
     position: relative;
     float: right;
@@ -648,7 +659,6 @@ button:focus {
     margin-right: 1.58em;
     margin-top: 1em;
 }
-
 
 .follow-button-sm {
     border-radius: 5em;
@@ -704,7 +714,6 @@ button:focus {
     padding-left: 0.35em;
     padding-right: 0.35em;
 }
-
 
 
 
@@ -988,8 +997,6 @@ button:focus {
 }
 
 
-
-
 /************ TWEET BOX OPTIONS ************/
 
 .tweet-options-menu {
@@ -1103,8 +1110,6 @@ button:focus {
 }
 
 
-
-
 /************ FOLLOW BOX ************/
 
 .follow-box {
@@ -1112,4 +1117,10 @@ button:focus {
     width: 18em;
     position: absolute;
     background-color: #ffffff;
+}
+
+.validation-box {
+    color: #E0245E;
+    padding-top: 0.3em;
+    padding-left: 0.1em;
 }

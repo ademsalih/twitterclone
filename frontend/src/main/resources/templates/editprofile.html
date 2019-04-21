@@ -6,7 +6,7 @@
 
     <body style="background-color: white">
 
-        <div th:replace="fragment/signup-menu :: div"></div>
+        <div th:replace="fragment/menu :: div"></div>
 
         <div class="container">
 
@@ -17,16 +17,20 @@
                     <form class="custom-form" th:action="@{/register}" method="post" th:object="${user}">
 
                         <input th:field="*{name}" name="name" class="custom-form-input" type="text" placeholder="Full name">
-                        <div class="validation-box" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+                        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+                        <br>
 
                         <input th:field="*{email}" name="email" class="custom-form-input form-spacing" type="text" placeholder="Email">
-                        <div class="validation-box" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
+                        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
+                        <br>
 
                         <input th:field="*{userName}" name="userName" class="custom-form-input form-spacing" type="text" placeholder="Username">
-                        <div class="validation-box" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Username Error</div>
+                        <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Username Error</div>
+                        <br>
 
                         <input type="password" th:field="*{password}" name="password" class="custom-form-input form-spacing" placeholder="Password">
-                        <div class="validation-box" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
+                        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
+                        <br>
 
                         <button class="sign-up-button" type="submit">
                             <span class="sign-up-button-text">Sign up</span>

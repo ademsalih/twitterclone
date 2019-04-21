@@ -35,9 +35,30 @@
                         <div class="navbar-arrows">
                             <div class="navbar-arrow-up-shadow"></div><div class="navbar-arrow-up"></div>
                         </div>
+
+                        <form th:action="@{'/' + ${currentUser} }">
+                            <button class="navbar-caret-menu-button-big" type="submit">
+                                <div style="line-height: 1.3em; padding-top: 0.25em">
+                                    <span class="navbar-caret-menu-button-text-bold" th:text="${profile.name}"></span>
+                                    <br>
+                                    <span class="navbar-caret-menu-button-text-light" th:text="'@' + ${profile.userName}"></span>
+                                </div>
+                            </button>
+                        </form>
+                        <hr class="navbar-menu-separator">
                         <form>
                             <button class="navbar-caret-menu-button">
-                                <span class="navbar-caret-menu-button-text">Profile settings</span>
+                                <span class="navbar-caret-menu-button-text">Edit profile</span>
+                            </button>
+                        </form>
+                        <form>
+                            <button class="navbar-caret-menu-button">
+                                <span class="navbar-caret-menu-button-text">Privacy Policy</span>
+                            </button>
+                        </form>
+                        <form>
+                            <button class="navbar-caret-menu-button">
+                                <span class="navbar-caret-menu-button-text">Help Center</span>
                             </button>
                         </form>
                         <hr class="navbar-menu-separator">

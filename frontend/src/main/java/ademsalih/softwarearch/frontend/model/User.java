@@ -2,12 +2,10 @@ package ademsalih.softwarearch.frontend.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+
 import lombok.Setter;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @Getter
 @Setter
@@ -16,21 +14,22 @@ public class User {
 
     private long user_id;
 
-    @NotNull
+    @NotEmpty(message = "What is your name?")
+    @Size(max = 50, message = "Max 50 characters")
     private String name;
 
-    @NotNull
+    @NotEmpty(message = "Email required")
+    @Email
     private String email;
 
-    private String phone;
-
-    @NotNull
-    @Size(min = 1, max = 10)
+    @NotEmpty(message = "Username required")
+    @Size(max = 15, message = "Max 15 characters")
     private String userName;
 
-    @NotNull
-    @Size(min = 5)
+    @Size(min = 5, message = "Minimum 5 characters")
     private String password;
+
+    private String phone;
 
     private String accountCreated;
 
@@ -43,11 +42,11 @@ public class User {
 
     private String bannerImageName;
 
-    @Pattern( regexp = "http:\\/\\/www\\..+\\.\\w+" )
+    @Pattern(regexp = "http:\\/\\/www\\..+\\.\\w+")
     private String link;
     private String location;
 
-    public User(@NotNull String name, @NotNull String email, @NonNull String phone, @NotNull @Size(min = 1, max = 10) String userName, @NotNull @Size(min = 5) String password, String accountCreated, String profileImageName, String userRole, @Size(max = 160) String bio, String bannerImageName, String link, String location) {
+    public User(String name, String email, String phone, String userName, String password, String accountCreated, String profileImageName, String userRole, String bio, String bannerImageName, String link, String location) {
         this.name = name;
         this.email = email;
         this.phone = phone;
