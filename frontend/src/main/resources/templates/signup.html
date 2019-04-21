@@ -6,7 +6,7 @@
 
     <body style="background-color: white">
 
-        <div th:replace="fragment/menu :: div"></div>
+        <div th:replace="fragment/signup-menu :: div"></div>
 
         <div class="container">
 
@@ -72,14 +72,5 @@
 
         </div>
 
-        <script>
-            window.onload = function() {
-                var bird = document.getElementById("bird");
-                bird.className = bird.className.replace(" bird", " bird-signup");
-
-                var nav = document.getElementById("nav");
-                nav.className = nav.className.replace(" navbarGradient navbar-shadow", " navbarGradient-signup navbar-shadow-line");
-            };
-        </script>
     </body>
 </html>
