@@ -54,6 +54,15 @@
 
                 }
             });
+
+            document.body.addEventListener('click', function (event) {
+
+                var pic = document.getElementById("navbar-pic-button");
+                if (!pic.contains(event.target)) {
+                    var popup = pic.nextElementSibling;
+                    popup.style.visibility = "hidden";
+                }
+            });
         };
 
         function popUp(event) {

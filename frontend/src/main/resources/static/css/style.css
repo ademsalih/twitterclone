@@ -19,13 +19,230 @@ button:focus {
     outline: none !important;
 }
 
-/************ NAVBAR SIGNUP ************/
+
+/************ NAVBAR ************/
+
+.navbar {
+    padding: 0;
+    display: block;
+    height: 46px;
+}
+
+.navbar-shadow {
+    -webkit-box-shadow: 0px 1px 1px 0px rgba(17, 17, 17, 0.32);
+    -moz-box-shadow: 0px 1px 1px 0px rgba(17, 17, 17, 0.32);
+    box-shadow: 0px 1px 1px 0px rgba(17, 17, 17, 0.32);
+}
+
+.navbarGradient {
+    background: #ffffff;
+    opacity: 1.0;
+}
+
+.container {
+    height: 100%;
+    max-width: 1220px;
+}
+
+/* Home Button */
+.navbar-button-container {
+    height: 100%;
+    z-index: 1;
+}
+
+.home-button {
+    border-bottom: 0.15em solid #1DA1F2;
+    text-decoration: none;
+    height: 100%;
+    width: 5.7em;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.home-button:hover {
+    text-decoration: none;
+}
 
 .navbar-home-icon{
+    height: 1.15em;
+}
+
+.navbar-home-text {
+    font-weight: 700;
+    font-size: 0.82em;
+    color: #1DA1F2 !important;
+}
+
+/* Navbar Bird */
+.navbar-brand {
+    padding: 0 15px;
+    height: 46px;
+    line-height: 46px;
+
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    text-align: center;
+    margin: auto;
+}
+
+.bird {
+    color: #1DA1F2;
+    font-size: 1em;
+}
+
+/* Navbar Right Button Area */
+.navbar-right-box {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    float: right;
+    z-index: 1;
+}
+
+.navbar-search-box-container {
+    display: inline-block;
     height: 2em;
 }
 
+.navbar-search-box {
+    border: 0.09em solid #E6ECF0;
+    height: 2.65em;
+    width: 18.4em;
+    border-radius: 3em;
+    background-color: #F5F8FA;
+    font-size: 0.75em;
+    font-weight: 300;
+    padding-left: 1.2em;
+}
 
+.navbar-search-box::placeholder {
+    color: #617381;
+}
+
+.search-glass {
+    width: 0.9em;
+    height: 0.9em;
+    margin-left: -2em;
+}
+
+/* Navbar Picture */
+.navbar-tweet-options-menu {
+    position: relative;
+    display: inline-flex;
+    margin-right: 0.2em;
+    z-index: 1;
+}
+
+.navbar-pic-button {
+    margin-left: 0.3em;
+    margin-right: 0.5em;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.navbar-pic {
+    border-radius: 3em;
+    width: 2em;
+    position: relative;
+    float: right;
+}
+
+.navbar-caret-popup {
+    margin-left: -9.35em;
+    visibility: hidden;
+    margin-top: 2.75em;
+    width: 12.45em;
+    background-color: #ffffff;
+    border-radius: 0.25em;
+    padding-top: 0.64em;
+    padding-bottom: 0.64em;
+    padding-right: 0;
+    position: absolute;
+    z-index: 1;
+
+    -webkit-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.23);
+    -moz-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.23);
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.23);
+}
+
+.navbar-arrows {
+    float: right;
+    position: relative;
+    margin-top: -1.2em;
+    margin-right: 2em;
+}
+
+.navbar-arrow-up {
+    width: 0;
+    height: 0;
+    border-left: 0.6em solid transparent;
+    border-right: 0.6em solid transparent;
+    border-bottom: 0.6em solid #ffffff;
+    position: absolute;
+}
+
+.navbar-arrow-up-shadow {
+    width: 0;
+    height: 0;
+    border-left: 0.6em solid transparent;
+    border-right: 0.6em solid transparent;
+    border-bottom: 0.6em solid rgb(220, 220, 220);
+    position: absolute;
+    margin-top: -0.05em;
+}
+
+.navbar-caret-menu-button {
+    width: 100%;
+    background: none;
+    border: none;
+    display: table;
+    height: 1.86em;
+}
+
+.navbar-caret-menu-button:hover {
+    background-color: #1DA1F2;
+}
+
+.navbar-caret-menu-button:hover span {
+    color:white;
+}
+
+.navbar-caret-menu-button-text {
+    font-size: 0.85em;
+    color: #5f707f;
+    padding-left: 1em;
+    vertical-align: middle;
+    display: table-cell;
+    font-weight: 300;
+}
+
+.navbar-menu-separator {
+    margin-top: 0.38em;
+    margin-bottom: 0.38em;
+    width: 12.25em;
+}
+
+.navbar-tweet-button {
+    border: 0;
+    background-color: #4AB3F4;
+    width: 4.6em;
+    height: 2.15em;
+    border-radius: 3em;
+    cursor: pointer;
+}
+
+.navbar-tweet-buttont-text {
+    color: white;
+    font-weight: 700;
+    font-size: 0.85em;
+}
 
 /************ NAVBAR SIGNUP ************/
 
@@ -44,52 +261,6 @@ button:focus {
 }
 
 
-/************ NAVBAR ************/
-
-.navbarGradient {
-    background: #ffffff;
-    opacity: 1.0;
-}
-
-.navbar {
-    min-height: 46px;
-}
-
-.navbar-shadow {
-    -webkit-box-shadow: 0px 1px 1px 0px rgba(17, 17, 17, 0.32);
-    -moz-box-shadow: 0px 1px 1px 0px rgba(17, 17, 17, 0.32);
-    box-shadow: 0px 1px 1px 0px rgba(17, 17, 17, 0.32);
-}
-
-.navbar-brand {
-    padding: 0 15px;
-    height: 46px;
-    line-height: 46px;
-
-    position: absolute;
-    width: 100%;
-    left: 0;
-    top: 0;
-    text-align: center;
-    margin: auto;
-}
-
-.navbar-toggle {
-    /* (80px - button height 34px) / 2 = 23px */
-    margin-top: 23px;
-    padding: 9px 10px !important;
-}
-
-.pic-sm {
-    height: 1.5em;
-    width: 1.5em;
-    border-radius: 50%;
-}
-
-.bird {
-    color: #1DA1F2;
-    font-size: 1em;
-}
 
 
 /************ SIGNUP PAGE ************/
@@ -159,9 +330,6 @@ button:focus {
 .linkify {
     color: #48A0EB !important;
 }
-
-
-
 
 
 

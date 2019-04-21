@@ -1,43 +1,60 @@
 <div xmlns:th="http://www.w3.org/1999/xhtml">
-    <nav id="nav" class="navbar navbar-expand-lg navbar-dark fixed-top navbarGradient navbar-shadow">
-
+    <nav class="navbar navbar-shadow navbar-dark fixed-top navbarGradient">
         <div class="container">
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="navbar-brand">
-                <a th:href="@{/home}">
-                    <i id="bird" class="fab fa-twitter bird"></i>
+            <!-- Home Button -->
+            <div class="navbar-button-container">
+                <a href="http://www.google.com" class="home-button">
+                    <div>
+                        <img class="navbar-home-icon" th:src="@{'/assets/home-filled-blue-3.svg'}">
+                        <span class="navbar-home-text">Home</span>
+                    </div>
                 </a>
             </div>
 
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-                <ul class="nav navbar-nav navbar-left">
-                    <li>
-                        <a href="#">
-                            <img class="navbar-home-icon" th:src="@{'/assets/home-icon.svg'}"><span>Home</span>
-                        </a>
-                    </li>
-                </ul>
-
-                <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-
-                    <img class="pic-sm" th:src="@{'/static/images/profile/' + 'profile1.png'}" alt="profile-image">
-
-                    <li><a href="#"></a></li>
-                </ul>
-
+            <!-- Twitter Bird -->
+            <div class="navbar-brand">
+                <a th:href="@{/home}"><i class="fab fa-twitter bird"></i></a>
             </div>
 
+            <!-- Navbar Right Box -->
+            <div class="navbar-right-box">
 
+                <!-- Navbar Search Field -->
+                <div class="navbar-search-box-container">
+                    <input class="navbar-search-box" type="text" placeholder="Search Twitter">
+                    <img class="search-glass" th:src="@{'/assets/navbar-search-glass.svg'}" alt="">
+                </div>
+
+                <!-- Navbar Profile Image -->
+                <div class="navbar-tweet-options-menu">
+                    <button onclick="popUp(event)" id="navbar-pic-button" class="navbar-pic-button">
+                        <img class="navbar-pic" th:src="@{'/assets/profile-new.png'}">
+                    </button>
+                    <div class="navbar-caret-popup">
+                        <div class="navbar-arrows">
+                            <div class="navbar-arrow-up-shadow"></div><div class="navbar-arrow-up"></div>
+                        </div>
+                        <form>
+                            <button class="navbar-caret-menu-button">
+                                <span class="navbar-caret-menu-button-text">Profile settings</span>
+                            </button>
+                        </form>
+                        <hr class="navbar-menu-separator">
+                        <form>
+                            <button class="navbar-caret-menu-button">
+                                <span class="navbar-caret-menu-button-text">Log out @ademsalih</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Navbar Tweet Button -->
+                <button class="navbar-tweet-button">
+                    <span class="navbar-tweet-buttont-text">Tweet</span>
+                </button>
+            </div>
 
         </div>
-
-
     </nav>
 </div>
