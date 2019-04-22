@@ -56,7 +56,9 @@
                 <div class="col-2 use-full-height follow-button-area-container">
                     <div class="text-right follow-button-area">
                         <div th:if="${currentUser == profile.user_id}" class="stat-banner-button-container">
-                            <button class="edit-profile-button">Edit profile</button>
+                            <form th:action="@{/profileaccount}" method="get">
+                                <button type="submit" class="edit-profile-button">Edit profile</button>
+                            </form>
                         </div>
                         <div th:if="${currentUser != profile.user_id}" class="stat-banner-button-container">
                             <form th:action="@{'/follow/' + ${profile.user_id} }" method="post" modelAttribute="follow">

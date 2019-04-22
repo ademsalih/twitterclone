@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <title>Twitter / Settings</title>
+    <head th:replace="fragment/header :: head"></head>
+
+    <body style="margin-top: 3.6em;">
+
+        <div th:replace="fragment/menu :: div"></div>
+
+        <div class="container">
+
+            <div class="row" style="height: 100%">
+                <div th:replace="fragment/settings-sidebar :: div"></div>
+
+                <div class="col-6" style="height: 100%;">
+
+                    <div class="middle-area-container">
+
+                        <div class="header-area">
+                            <span class="settings-page-header">Other</span>
+                        </div>
+
+                        <hr class="divider">
+
+                        <div class="content-area">
+
+                            <form th:action="@{/profileothersave}" method="post" th:object="${profile}">
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <td class="form-info-text" align="right">Phone</td>
+                                        <td class="second-column">
+                                            <input class="custom-settings-input" th:field="*{phone}" name="phone" placeholder="Phone">
+                                        </td>
+                                    </tr>
+
+                                    <tr class="table-row-spacing"></tr>
+
+                                    <tr>
+                                        <td class="form-info-text" align="right">Bio</td>
+                                        <td class="second-column">
+                                            <input class="custom-settings-input" th:field="*{bio}" name="bio" placeholder="Bio">
+                                        </td>
+                                    </tr>
+
+                                    <tr class="table-row-spacing"></tr>
+
+                                    <tr>
+                                        <td class="form-info-text" align="right">Link</td>
+                                        <td class="second-column">
+                                            <input class="custom-settings-input" th:field="*{link}" name="link" placeholder="Link">
+                                        </td>
+                                    </tr>
+
+                                    <tr class="table-row-spacing"></tr>
+
+                                    <tr>
+                                        <td class="form-info-text" align="right">Location</td>
+                                        <td class="second-column">
+                                            <select name="location">
+                                                <option th:each="location : ${locations}" th:field="*{location}" name="location"  th:text="${location}" th:value="${location}"></option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr class="table-row-spacing"></tr>
+
+                                    <tr>
+                                        <td></td>
+                                        <td class="second-column">
+                                            <button class="save-changes-button" type="submit">Save changes</button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="col-3" style="height: 100%;"></div>
+            </div>
+
+        </div>
+
+    </body>
+</html>

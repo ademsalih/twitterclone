@@ -5,10 +5,15 @@ import ademsalih.softwarearch.frontend.service.FollowService;
 import ademsalih.softwarearch.frontend.service.TimeFormatService;
 import ademsalih.softwarearch.frontend.service.TweetService;
 import ademsalih.softwarearch.frontend.service.UserService;
+import ademsalih.softwarearch.frontend.viewmodel.AccountEditUser;
+import ademsalih.softwarearch.frontend.viewmodel.OtherEditUser;
+import ademsalih.softwarearch.frontend.viewmodel.PasswordEditUser;
+import ademsalih.softwarearch.frontend.viewmodel.PictureEditUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -58,52 +63,6 @@ public class HomeController implements WebMvcConfigurer {
 
     @GetMapping("/signup")
     public String signup(User user, Model model) {
-
-        List<String> locations = new ArrayList<>();
-
-        /*BufferedReader bufferedReader;
-
-        try {
-
-            String IMAGE_LOCATION = "/src/main/resources/static/lists/worldcities.csv";
-
-            String projectDir = System.getProperty("user.dir");
-            String totalPath = projectDir + IMAGE_LOCATION;
-
-            bufferedReader = new BufferedReader(new FileReader(totalPath));
-
-            String line = bufferedReader.readLine();
-            line = bufferedReader.readLine();
-
-            while (line != null) {
-                line = bufferedReader.readLine();
-
-                String[] chunks = line.split(",");
-
-                String city = chunks[0];
-
-                city = city.substring(1,city.length()-1);
-
-                String country = chunks[4];
-                country = country.substring(1, country.length()-1);
-
-                String location = city + ", " + country;
-
-                locations.add(location);
-
-            }
-        } catch (IOException ioe) {
-
-        }*/
-
-
-        locations.add("Oslo, Norway");
-        locations.add("Istanbul, Turkey");
-        locations.add("London, UK");
-
-        model.addAttribute("locations", locations);
-
-
         return "signup";
     }
 
@@ -122,6 +81,195 @@ public class HomeController implements WebMvcConfigurer {
         userService.registerUser(user);
 
         return "redirect:/home";
+    }
+
+    @GetMapping("/profileaccount")
+    public String profileAccount(Model model) {
+
+        User profile = userService.getUserById(user_id);
+        model.addAttribute("profile", profile);
+        model.addAttribute("settingNumber", 0);
+        return "profile-account";
+    }
+
+    @PostMapping("/profileaccountsave")
+    public String profileAccountSave(@Valid @ModelAttribute AccountEditUser user, BindingResult bindingResult, HttpServletRequest httpServletRequest) {
+
+        if (bindingResult.hasErrors()) {
+            String referer = httpServletRequest.getHeader("Referer");
+            return "redirect:" + referer;
+        }
+
+        User serverUser = userService.getUserById(user_id);
+
+        serverUser.setName(user.getName());
+        serverUser.setEmail(user.getEmail());
+        serverUser.setUserName(user.getUserName());
+
+        userService.updateUser(serverUser);
+        return "redirect:/home";
+    }
+
+    @GetMapping("/profilepassword")
+    public String profilePassword(Model model) {
+
+        User profile = userService.getUserById(user_id);
+        model.addAttribute("profile", profile);
+        model.addAttribute("settingNumber", 1);
+        return "profile-password";
+    }
+
+    @PostMapping("/profilepasswordsave")
+    public String profilePasswordSave(@Valid @ModelAttribute PasswordEditUser user, BindingResult bindingResult, HttpServletRequest httpServletRequest) {
+
+        if (bindingResult.hasErrors()) {
+            String referer = httpServletRequest.getHeader("Referer");
+            return "redirect:" + referer;
+        }
+
+        User serverUser = userService.getUserById(user_id);
+        serverUser.setPassword(user.getPassword());
+
+        userService.updateUser(serverUser);
+        return "redirect:/home";
+    }
+
+
+
+
+
+
+
+    @GetMapping("/profilepicture")
+    public String profilePicture(Model model) {
+
+        User profile = userService.getUserById(user_id);
+        model.addAttribute("profile", profile);
+
+        model.addAttribute("picuser", new PictureEditUser());
+
+
+        model.addAttribute("settingNumber", 2);
+        return "profile-pictures";
+    }
+
+    @PostMapping("/profilepicturesave")
+    public String profilePictureSave(@ModelAttribute("picuser") PictureEditUser user,
+                                     HttpServletRequest httpServletRequest,
+                                     @RequestParam(value = "profileImageName", required=false) MultipartFile profileImage,
+                                     @RequestParam(value = "bannerImageName", required=false) MultipartFile bannerImage) {
+
+        if (profileImage.isEmpty() && bannerImage.isEmpty()) {
+            String referer = httpServletRequest.getHeader("Referer");
+            return "redirect:" + referer;
+        }
+
+        User serverUser = userService.getUserById(user_id);
+
+        if (!profileImage.isEmpty()) {
+            try {
+                String IMAGE_LOCATION = "/src/main/upload/static/images/profile/";
+
+                String projectDir = System.getProperty("user.dir");
+                String absolutePath = projectDir + IMAGE_LOCATION;
+
+                Path path = Paths.get(absolutePath + profileImage.getOriginalFilename());
+
+                Files.write(path,profileImage.getBytes());
+
+                serverUser.setProfileImageName(user.getProfileImageName().getOriginalFilename());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (!bannerImage.isEmpty()) {
+            try {
+                String IMAGE_LOCATION = "/src/main/upload/static/images/banner/";
+
+                String projectDir = System.getProperty("user.dir");
+                String absolutePath = projectDir + IMAGE_LOCATION;
+
+                Path path = Paths.get(absolutePath + bannerImage.getOriginalFilename());
+
+                Files.write(path,bannerImage.getBytes());
+
+                serverUser.setBannerImageName(user.getBannerImageName().getOriginalFilename());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        userService.updateUser(serverUser);
+        return "redirect:/home";
+    }
+
+
+
+
+
+
+
+
+
+
+    @GetMapping("/profileother")
+    public String profileOther(Model model) {
+
+        User profile = userService.getUserById(user_id);
+        model.addAttribute("profile", profile);
+        model.addAttribute("settingNumber", 3);
+
+        List<String> locations = new ArrayList<>();
+        locations.add("Oslo, Norway");
+        locations.add("Istanbul, Turkey");
+        locations.add("London, UK");
+        locations.add("Berlin, Germany");
+        locations.add("Dublin, Ireland");
+        locations.add("Ankara, Turkey");
+        locations.add("Bergen, Norway");
+
+        model.addAttribute("locations", locations);
+        return "profile-other";
+    }
+
+    @PostMapping("/profileothersave")
+    public String profileOtherSave(@Valid @ModelAttribute OtherEditUser user, BindingResult bindingResult, HttpServletRequest httpServletRequest) {
+
+        if (bindingResult.hasErrors()) {
+            String referer = httpServletRequest.getHeader("Referer");
+            return "redirect:" + referer;
+        }
+
+        User serverUser = userService.getUserById(user_id);
+
+        serverUser.setPhone(user.getPhone());
+        serverUser.setBio(user.getBio());
+        serverUser.setLink(user.getLink());
+        serverUser.setLocation(user.getLocation());
+
+
+        userService.updateUser(serverUser);
+        return "redirect:/home";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    @PostMapping("/deleteaccount")
+    public String deleteAccount() {
+        // userservice.deleteAccount();
+        return "redirect:/login";
     }
 
     @PostMapping("/follow/{id}")

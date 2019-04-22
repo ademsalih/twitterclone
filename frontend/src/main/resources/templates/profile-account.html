@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <title>Twitter / Settings</title>
+    <head th:replace="fragment/header :: head"></head>
+
+    <body style="margin-top: 3.6em;">
+
+        <div th:replace="fragment/menu :: div"></div>
+
+        <div class="container">
+
+            <div class="row" style="height: 100%">
+                <div th:replace="fragment/settings-sidebar :: div"></div>
+
+                <div class="col-6" style="height: 100%;">
+
+                    <div class="middle-area-container">
+
+                        <div class="header-area">
+                            <span class="settings-page-header">Account</span>
+                        </div>
+
+                        <hr class="divider">
+
+                        <div class="content-area">
+
+                            <form th:action="@{/profileaccountsave}" method="post" th:object="${profile}">
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <td class="form-info-text" align="right">Name</td>
+                                        <td class="second-column">
+                                            <input class="custom-settings-input" th:field="*{name}" type="text" name="name" placeholder="Full Name">
+                                        </td>
+                                    </tr>
+                                    <tr class="table-row-spacing"></tr>
+
+
+                                    <tr>
+                                        <td class="form-info-text" align="right">Username</td>
+                                        <td class="second-column">
+                                            <input class="custom-settings-input" th:field="*{userName}" type="text" name="userName" placeholder="Username">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="second-column">
+                                            <span class="form-detail-text">https://twitter.com/aemsalih</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-row-spacing"></tr>
+
+
+                                    <tr>
+                                        <td class="form-info-text" align="right">Email</td>
+                                        <td class="second-column">
+                                            <input class="custom-settings-input" th:field="*{email}" name="email" type="text" placeholder="Email">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td></td>
+                                        <td class="second-column">
+                                            <span class="form-detail-text">Email will not be publicly displayed. <span class="linkify">Learn more</span>.</span>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="table-row-spacing"></tr>
+
+                                    <tr>
+                                        <td></td>
+                                        <td class="second-column">
+                                            <button class="save-changes-button" type="submit">Save changes</button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+
+                        </div>
+
+                        <hr class="divider">
+
+                        <div class="deactivate-area">
+                            <a href="http://www.google.com" class="deactivate-text">Deactivate your account</a>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="col-3" style="height: 100%;"></div>
+            </div>
+
+        </div>
+
+    </body>
+</html>

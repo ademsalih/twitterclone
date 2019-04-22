@@ -1,7 +1,5 @@
 package ademsalih.softwarearch.frontend.service;
 
-import ademsalih.softwarearch.frontend.model.FollowStatus;
-import ademsalih.softwarearch.frontend.model.Tweet;
 import ademsalih.softwarearch.frontend.model.User;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -28,5 +26,9 @@ public class UserService {
 
     public User registerUser(User user) {
         return restTemplate.postForObject(BASE_URL, user, User.class);
+    }
+
+    public void updateUser(User user) {
+        restTemplate.put(BASE_URL + "/" + user.getUser_id(), user);
     }
 }

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <title>Twitter / Settings</title>
+    <head th:replace="fragment/header :: head"></head>
+
+    <body style="margin-top: 3.6em;">
+
+        <div th:replace="fragment/menu :: div"></div>
+
+        <div class="container">
+
+            <div class="row" style="height: 100%">
+                <div th:replace="fragment/settings-sidebar :: div"></div>
+
+                <div class="col-6" style="height: 100%;">
+
+                    <div class="middle-area-container">
+
+                        <div class="header-area">
+                            <span class="settings-page-header">Pictures</span>
+                        </div>
+
+                        <hr class="divider">
+
+                        <div class="content-area">
+
+                            <form th:action="@{/profilepicturesave}" method="post" modelAttribute="picuser" enctype="multipart/form-data">
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <td class="form-info-text" align="right">Profile</td>
+                                        <td class="second-column">
+                                            <input accept="image/gif,image/jpeg,image/jpg,image/png" class="custom-settings-input" type="file" name="profileImageName">
+                                        </td>
+                                    </tr>
+                                    <tr class="table-row-spacing"></tr>
+
+
+                                    <tr>
+                                        <td class="form-info-text" align="right">Banner</td>
+                                        <td class="second-column">
+                                            <input accept="image/gif,image/jpeg,image/jpg,image/png" class="custom-settings-input" type="file" name="bannerImageName">
+                                        </td>
+                                    </tr>
+                                    <tr class="table-row-spacing"></tr>
+
+
+                                    <tr class="table-row-spacing"></tr>
+
+                                    <tr>
+                                        <td></td>
+                                        <td class="second-column">
+                                            <button class="save-changes-button" type="submit">Save changes</button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="col-3" style="height: 100%;"></div>
+            </div>
+
+        </div>
+
+    </body>
+</html>

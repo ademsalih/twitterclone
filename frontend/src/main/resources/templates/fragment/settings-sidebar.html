@@ -1,0 +1,50 @@
+<div class="col-3" style="height: 100%; position: relative;" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="left-area-container">
+
+        <div class="settings-profile-box">
+
+            <img th:src="@{'/static/images/profile/' + ${profile.profileImageName} }" class="settings-profile-box-pic">
+
+            <div style="background-color: #1DA1F2; width: 100%; height: 60.5%">
+
+            </div>
+
+            <div style="background-color: white; width: 100%; height: 39.5%">
+
+                <div class="settings-name-box">
+                    <span th:text="${profile.name}" class="settings-profile-name"></span><br>
+                    <span th:text=" '@' + ${profile.userName}" class="settings-handle-name"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-panel-box">
+
+            <a th:href="@{/profileaccount}" class="settings-panel-box-button">
+                <span class="settings-button-text-light">Account</span>
+                <img class="settings-button-caret" th:src="@{'/assets/right-caret.svg'}">
+            </a>
+            <hr class="divider">
+
+            <a th:href="@{/profilepassword}" class="settings-panel-box-button">
+                <span class="settings-button-text-light">Password</span>
+                <img class="settings-button-caret" th:src="@{'/assets/right-caret.svg'}">
+            </a>
+            <hr class="divider">
+
+            <a th:href="@{/profilepicture}" class="settings-panel-box-button">
+                <span class="settings-button-text-light">Pictures</span>
+                <img class="settings-button-caret" th:src="@{'/assets/right-caret.svg'}">
+            </a>
+            <hr class="divider">
+
+            <a th:href="@{/profileother}" class="settings-panel-box-button">
+                <span class="settings-button-text-light">Other</span>
+                <img class="settings-button-caret" th:src="@{'/assets/right-caret.svg'}">
+            </a>
+            <hr class="divider">
+
+
+        </div>
+    </div>
+</div>

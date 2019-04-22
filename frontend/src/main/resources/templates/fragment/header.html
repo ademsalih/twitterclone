@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="icon" type="image/png" th:href="@{'/assets/fav-icon.png'}">
 
     <script>
         window.onload = function() {
@@ -63,7 +64,31 @@
                     popup.style.visibility = "hidden";
                 }
             });
+
+            // ------------------------------------------------------------------------//
+            var selectedButton = "[[${settingNumber}]]";
+            var buttons = document.getElementsByClassName("settings-panel-box-button");
+            for (var i = 0; i < buttons.length; i++) {
+                var settingsButton = buttons.item(i);
+                if (i == parseInt(selectedButton)) {
+                    markAsActive(settingsButton);
+                } else {
+                    markAsInactive(settingsButton);
+                }
+            }
         };
+
+        function markAsActive(button) {
+            button.firstElementChild.className = "settings-button-text-bold";
+            button.lastElementChild.src='/assets/right-caret-black.svg';
+            button.onmouseover = function() { button.lastElementChild.src = '/assets/right-caret-blue.svg'; }
+            button.onmouseout = function() { button.lastElementChild.src = '/assets/right-caret-black.svg'; }
+        }
+
+        function markAsInactive(button) {
+            button.onmouseover = function() {button.lastElementChild.src = '/assets/right-caret-blue.svg';}
+            button.onmouseout = function() {button.lastElementChild.src = '/assets/right-caret.svg';}
+        }
 
         function popUp(event) {
 
