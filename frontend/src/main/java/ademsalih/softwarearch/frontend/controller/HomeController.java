@@ -132,28 +132,35 @@ public class HomeController implements WebMvcConfigurer {
     }
 
     @GetMapping("/profilepassword")
-    public String profilePassword(Model model) {
+    public String profilePassword(PasswordEditUser passwordEditUser, Model model) {
         model.addAttribute("settingNumber", 1);
 
-        User profile = userService.getUserById(user_id);
-        model.addAttribute("profile", profile);
+        User serverProfile = userService.getUserById(user_id);
+        model.addAttribute("profile", serverProfile);
 
         return "profile-password";
     }
 
     @PostMapping("/profilepasswordsave")
-    public String profilePasswordSave(@Valid @ModelAttribute PasswordEditUser user, BindingResult bindingResult, HttpServletRequest httpServletRequest) {
+    public String profilePasswordSave(
+            @Valid PasswordEditUser user,
+            BindingResult bindingResult,
+            HttpServletRequest httpServletRequest,
+            Model model) {
 
         if (bindingResult.hasErrors()) {
-            String referer = httpServletRequest.getHeader("Referer");
-            return "redirect:" + referer;
+            model.addAttribute("settingNumber", 1);
+
+            User serverProfile = userService.getUserById(user_id);
+            model.addAttribute("profile", serverProfile);
+            return "profile-password";
         }
 
         User serverUser = userService.getUserById(user_id);
         serverUser.setPassword(user.getPassword());
 
         userService.updateUser(serverUser);
-        return "redirect:/home";
+        return "redirect:/profilepassword";
     }
 
 
