@@ -25,13 +25,19 @@
 
                         <div class="content-area">
 
-                            <form th:action="@{/profileaccountsave}" method="post" th:object="${profile}">
+                            <form th:action="@{/profileaccountsave}" method="post" th:object="${accountEditUser}">
                                 <table>
                                     <tbody>
                                     <tr>
-                                        <td class="form-info-text" align="right">Name</td>
+                                        <td class="form-info-text" align="right">Full Name</td>
                                         <td class="second-column">
-                                            <input class="custom-settings-input" th:field="*{name}" type="text" name="name" placeholder="Full Name">
+                                            <input class="custom-settings-input" th:field="*{name}" type="text" name="name">
+                                        </td>
+                                    </tr>
+                                    <tr th:if="${#fields.hasErrors('name')}">
+                                        <td></td>
+                                        <td class="second-column">
+                                            <div class="edit-validation" th:errors="*{name}"></div>
                                         </td>
                                     </tr>
                                     <tr class="table-row-spacing"></tr>
@@ -40,13 +46,19 @@
                                     <tr>
                                         <td class="form-info-text" align="right">Username</td>
                                         <td class="second-column">
-                                            <input class="custom-settings-input" th:field="*{userName}" type="text" name="userName" placeholder="Username">
+                                            <input class="custom-settings-input" th:field="*{userName}" type="text" name="userName">
+                                        </td>
+                                    </tr>
+                                    <tr th:if="${#fields.hasErrors('userName')}">
+                                        <td></td>
+                                        <td class="second-column">
+                                            <div class="edit-validation" th:errors="*{userName}"></div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td></td>
                                         <td class="second-column">
-                                            <span class="form-detail-text">https://twitter.com/aemsalih</span>
+                                            <span th:text=" 'https://twitter.com/' + ${profile.userName}" class="form-detail-text"></span>
                                         </td>
                                     </tr>
                                     <tr class="table-row-spacing"></tr>
@@ -55,7 +67,13 @@
                                     <tr>
                                         <td class="form-info-text" align="right">Email</td>
                                         <td class="second-column">
-                                            <input class="custom-settings-input" th:field="*{email}" name="email" type="text" placeholder="Email">
+                                            <input class="custom-settings-input" th:field="*{email}" name="email" type="email">
+                                        </td>
+                                    </tr>
+                                    <tr th:if="${#fields.hasErrors('email')}">
+                                        <td></td>
+                                        <td class="second-column">
+                                            <div class="edit-validation" th:errors="*{email}"></div>
                                         </td>
                                     </tr>
 
@@ -83,8 +101,9 @@
                         <hr class="divider">
 
                         <div class="deactivate-area">
-                            <a href="http://www.google.com" class="deactivate-text">Deactivate your account</a>
+                            <a th:href="@{'/deleteaccount'}" class="deactivate-text">Delete your account</a>
                         </div>
+
 
                     </div>
 

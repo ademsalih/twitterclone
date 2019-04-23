@@ -4,9 +4,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import lombok.Setter;
-import org.springframework.lang.Nullable;
-
-import javax.validation.constraints.*;
 
 @Getter
 @Setter
@@ -15,19 +12,12 @@ public class User {
 
     private long user_id;
 
-    @NotNull(message = "What is your name?")
-    @Size(max = 50, message = "Max 50 characters")
     private String name;
 
-    @NotNull(message = "Email required")
-    @Email
     private String email;
 
-    @NotNull(message = "Username required")
-    @Size(max = 15, message = "Max 15 characters")
     private String userName;
 
-    @Size(min = 6, message = "Too short")
     private String password;
 
     private String phone;
@@ -38,7 +28,6 @@ public class User {
 
     private String userRole;
 
-    @Size(max = 160)
     private String bio;
 
     private String bannerImageName;

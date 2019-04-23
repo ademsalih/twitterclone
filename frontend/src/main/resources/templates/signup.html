@@ -14,7 +14,7 @@
                 <div class="col-5 form-container">
                     <span class="join-twitter-header">Join Twitter today.</span>
 
-                    <form class="custom-form" th:action="@{/register}" method="post" th:object="${user}">
+                    <form class="custom-form" th:action="@{/register}" method="post" th:object="${signUpUser}">
 
                         <input th:field="*{name}" name="name" class="custom-form-input" type="text" placeholder="Full name">
                         <div class="validation-box" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>

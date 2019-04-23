@@ -539,6 +539,10 @@ button:focus {
     cursor: pointer;
 }
 
+.edit-profile-button:hover {
+    background-color: #F5F8FA;
+}
+
 .follow-button {
     border-radius: 5em;
     background-color: transparent;
@@ -1126,6 +1130,13 @@ button:focus {
     padding-left: 0.1em;
 }
 
+.edit-validation {
+    color: #E0245E;
+    font-size: 0.9em;
+    padding-top: 0.3em;
+    padding-left: 0.1em;
+}
+
 
 /************ SETTINGS PAGE ************/
 
@@ -1247,7 +1258,6 @@ button:focus {
 
 .content-area {
     padding-top: 0.7em;
-    height: 25em;
     width: 36.77em;
     background-color: white;
     padding-left: 4.2em;
@@ -1288,6 +1298,7 @@ button:focus {
     border-radius: 0.2em;
 }
 
+
 .save-changes-button {
     font-size: 0.9em;
     font-weight: 600;
@@ -1298,6 +1309,7 @@ button:focus {
     border: none;
     background-color: #4AB3F4;
     cursor: pointer;
+    margin-bottom: 2em;
 }
 
 .second-column {

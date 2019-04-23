@@ -5,10 +5,7 @@ import ademsalih.softwarearch.frontend.service.FollowService;
 import ademsalih.softwarearch.frontend.service.TimeFormatService;
 import ademsalih.softwarearch.frontend.service.TweetService;
 import ademsalih.softwarearch.frontend.service.UserService;
-import ademsalih.softwarearch.frontend.viewmodel.AccountEditUser;
-import ademsalih.softwarearch.frontend.viewmodel.OtherEditUser;
-import ademsalih.softwarearch.frontend.viewmodel.PasswordEditUser;
-import ademsalih.softwarearch.frontend.viewmodel.PictureEditUser;
+import ademsalih.softwarearch.frontend.viewmodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,16 +59,23 @@ public class HomeController implements WebMvcConfigurer {
     }
 
     @GetMapping("/signup")
-    public String signup(User user, Model model) {
+    public String signup(SignUpUser signUpUser, Model model) {
         return "signup";
     }
 
     @PostMapping("/register")
-    public String register(@Valid User user, BindingResult bindingResult) {
+    public String register(@Valid SignUpUser signUpUser, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "signup";
         }
+
+        User user = new User();
+
+        user.setName(signUpUser.getName());
+        user.setEmail(signUpUser.getEmail());
+        user.setUserName(signUpUser.getUserName());
+        user.setPassword(signUpUser.getPassword());
 
         user.setUserRole("USER");
         user.setBannerImageName("default-banner-image.jpg");
@@ -83,39 +87,57 @@ public class HomeController implements WebMvcConfigurer {
         return "redirect:/home";
     }
 
-    @GetMapping("/profileaccount")
-    public String profileAccount(Model model) {
 
-        User profile = userService.getUserById(user_id);
-        model.addAttribute("profile", profile);
+
+    @GetMapping("/profileaccount")
+    public String profileAccount(AccountEditUser accountEditUser, Model model) {
         model.addAttribute("settingNumber", 0);
+
+        User serverProfile = userService.getUserById(user_id);
+        model.addAttribute("profile", serverProfile);
+
+
+        accountEditUser.setName(serverProfile.getName());
+        accountEditUser.setUserName(serverProfile.getUserName());
+        accountEditUser.setEmail(serverProfile.getEmail());
+
         return "profile-account";
     }
 
     @PostMapping("/profileaccountsave")
-    public String profileAccountSave(@Valid @ModelAttribute AccountEditUser user, BindingResult bindingResult, HttpServletRequest httpServletRequest) {
+    public String profileAccountSave(
+            @Valid AccountEditUser accountEditUser,
+            BindingResult bindingResult,
+            HttpServletRequest httpServletRequest,
+            Model model) {
 
         if (bindingResult.hasErrors()) {
-            String referer = httpServletRequest.getHeader("Referer");
-            return "redirect:" + referer;
+            model.addAttribute("settingNumber", 0);
+
+            User serverProfile = userService.getUserById(user_id);
+            model.addAttribute("profile", serverProfile);
+
+            return "profile-account";
         }
+
 
         User serverUser = userService.getUserById(user_id);
 
-        serverUser.setName(user.getName());
-        serverUser.setEmail(user.getEmail());
-        serverUser.setUserName(user.getUserName());
+        serverUser.setName(accountEditUser.getName());
+        serverUser.setEmail(accountEditUser.getEmail());
+        serverUser.setUserName(accountEditUser.getUserName());
 
         userService.updateUser(serverUser);
-        return "redirect:/home";
+        return "redirect:/profileaccount";
     }
 
     @GetMapping("/profilepassword")
     public String profilePassword(Model model) {
+        model.addAttribute("settingNumber", 1);
 
         User profile = userService.getUserById(user_id);
         model.addAttribute("profile", profile);
-        model.addAttribute("settingNumber", 1);
+
         return "profile-password";
     }
 
