@@ -48,4 +48,10 @@ public class TweetService {
     public void deleteRetweet(long id) {
         restTemplate.delete(BASE_URL + "retweets/" + id);
     }
+
+    public List<Tweet> getSearchResultTweets(String query) {
+        return Arrays.stream(
+                restTemplate.getForObject(BASE_URL + "search?query='" + query + "'", Tweet[].class)
+        ).collect(Collectors.toList());
+    }
 }

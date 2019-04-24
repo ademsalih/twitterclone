@@ -22,8 +22,12 @@
 
                 <!-- Navbar Search Field -->
                 <div class="navbar-search-box-container">
-                    <input class="navbar-search-box" type="text" placeholder="Search Twitter">
-                    <img class="search-glass" th:src="@{'/assets/navbar-search-glass.svg'}" alt="">
+                    <form th:action="@{/search}" style="padding: 0; margin: 0;">
+                        <input class="navbar-search-box" name="query" type="text" placeholder="Search Twitter">
+                        <img class="search-glass" th:src="@{'/assets/navbar-search-glass.svg'}" alt="">
+                        <button style="display: none" type="submit"></button>
+                    </form>
+
                 </div>
 
                 <!-- Navbar Profile Image -->
@@ -36,7 +40,7 @@
                             <div class="navbar-arrow-up-shadow"></div><div class="navbar-arrow-up"></div>
                         </div>
 
-                        <form th:action="@{'/' + ${currentUser} }">
+                        <form th:action="@{'/' + ${profile.user_id} }">
                             <button class="navbar-caret-menu-button-big" type="submit">
                                 <div style="line-height: 1.3em; padding-top: 0.25em">
                                     <span class="navbar-caret-menu-button-text-bold" th:text="${profile.name}"></span>

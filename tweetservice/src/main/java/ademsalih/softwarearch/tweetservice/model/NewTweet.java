@@ -4,6 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.search.annotations.Analyze;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,6 +19,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@Indexed
 public class NewTweet extends Tweet {
 
     @Id
@@ -26,6 +32,7 @@ public class NewTweet extends Tweet {
 
     private String imageName;
 
+    @Field(index = Index.YES, analyze= Analyze.YES, store= Store.NO)
     private String message;
 
     @OneToMany(mappedBy = "newTweet", cascade = CascadeType.ALL)

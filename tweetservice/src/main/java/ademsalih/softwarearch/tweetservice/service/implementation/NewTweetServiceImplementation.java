@@ -1,6 +1,7 @@
 package ademsalih.softwarearch.tweetservice.service.implementation;
 
 import ademsalih.softwarearch.tweetservice.model.NewTweet;
+import ademsalih.softwarearch.tweetservice.model.Tweet;
 import ademsalih.softwarearch.tweetservice.repository.NewTweetRepository;
 import ademsalih.softwarearch.tweetservice.service.NewTweetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,4 +47,15 @@ public class NewTweetServiceImplementation implements NewTweetService {
     public void deleteNewTweet(long id) {
         newTweetRepository.deleteById(id);
     }
+
+    @Override
+    public List<NewTweet> getTweetForSearch(String query) {
+
+
+
+
+        return null;
+    }
+
+
 }

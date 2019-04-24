@@ -14,7 +14,9 @@
                 <div class="col-3">
                     <div class="profile-box">
                         <img th:src="@{'/static/images/profile/' + ${profile.profileImageName} }" class="profile-box-pic">
-                        <div class="profile-box-top-box"></div>
+                        <div class="profile-box-top-box">
+                            <img class="follow-box-banner-img" th:src="@{'/static/images/banner/' + ${profile.bannerImageName} }" alt="">
+                        </div>
 
                         <div class="profile-box-bottom-box">
                             <div class="name-box">

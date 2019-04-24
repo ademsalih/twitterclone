@@ -4,15 +4,20 @@ import ademsalih.softwarearch.tweetservice.model.NewTweet;
 import ademsalih.softwarearch.tweetservice.model.Retweet;
 import ademsalih.softwarearch.tweetservice.model.Tweet;
 import ademsalih.softwarearch.tweetservice.service.FeedService;
+import ademsalih.softwarearch.tweetservice.service.TweetSearchService;
 import ademsalih.softwarearch.tweetservice.service.RetweetService;
 import ademsalih.softwarearch.tweetservice.service.NewTweetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class TweetController {
+
+    @Autowired
+    private TweetSearchService searchservice;
 
     @Autowired
     NewTweetService newTweetService;
@@ -76,6 +81,21 @@ public class TweetController {
     @GetMapping("/retweets/user/{id}")
     public List<Retweet> getAllRetweets(@PathVariable long id) {
         return retweetService.getRetweetsForUser(id);
+    }
+
+    @GetMapping("/search")
+    public List<NewTweet> searchTweets(@RequestParam("query") String query) {
+
+        List<NewTweet> searchResults = new ArrayList<>();
+
+        try {
+            searchResults = searchservice.search(query);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return searchResults;
     }
 
 

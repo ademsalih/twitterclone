@@ -22,20 +22,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long user_id;
 
-    @NotNull
+
     private String name;
 
-    @NotNull
+
     private String email;
 
-    @Size(min=5, max = 10)
     private String phone;
 
-    @NotNull
     private String userName;
 
-    @NotNull
-    @Size(min=5)
     private String password;
 
     private Calendar accountCreated;

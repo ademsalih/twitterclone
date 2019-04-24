@@ -1,6 +1,7 @@
 package ademsalih.softwarearch.tweetservice.service;
 
 import ademsalih.softwarearch.tweetservice.model.NewTweet;
+import ademsalih.softwarearch.tweetservice.model.Tweet;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface NewTweetService {
     NewTweet saveNewTweet(NewTweet newTweet);
 
     void deleteNewTweet(long id);
+
+    List<NewTweet> getTweetForSearch(String query);
 }

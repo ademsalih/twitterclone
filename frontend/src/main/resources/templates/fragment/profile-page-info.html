@@ -11,13 +11,13 @@
 
         <table>
             <tbody>
-            <tr th:if="${profile.location != null}" class="table-row">
+            <tr th:if="${profile.location != ''}" class="table-row">
                 <td>
                     <img class="icon" th:src="@{'/assets/place-icon-2.svg'}">
                     <span th:text="${profile.location}" class="more-info-text-link"></span>
                 </td>
             </tr>
-            <tr th:if="${profile.link != null}" class="table-row">
+            <tr th:if="${profile.link != ''}" class="table-row">
                 <td>
                     <img th:src="@{'/assets/link-icon-2.svg'}" alt="" class="icon">
                     <a th:href="${profile.link}" target="_blank">

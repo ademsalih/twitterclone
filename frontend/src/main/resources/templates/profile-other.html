@@ -25,22 +25,34 @@
 
                         <div class="content-area">
 
-                            <form th:action="@{/profileothersave}" method="post" th:object="${profile}">
+                            <form th:action="@{/profileothersave}" method="post" th:object="${otherEditUser}">
                                 <table>
                                     <tbody>
                                     <tr>
                                         <td class="form-info-text" align="right">Phone</td>
                                         <td class="second-column">
-                                            <input class="custom-settings-input" th:field="*{phone}" name="phone">
+                                            <input maxlength="14" class="custom-settings-input" th:field="*{phone}" name="phone" type="text">
+                                        </td>
+                                    </tr>
+                                    <tr th:if="${#fields.hasErrors('phone')}">
+                                        <td></td>
+                                        <td class="second-column">
+                                            <div class="edit-validation" th:errors="*{phone}"></div>
                                         </td>
                                     </tr>
 
                                     <tr class="table-row-spacing"></tr>
 
                                     <tr>
-                                        <td class="form-info-text" align="right">Bio</td>
+                                        <td class="form-info-text" align="right" valign="top">Bio</td>
                                         <td class="second-column">
-                                            <input class="custom-settings-input" th:field="*{bio}" name="bio">
+                                            <textarea rows="5" class="custom-settings-textarea" th:field="*{bio}" name="bio"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr th:if="${#fields.hasErrors('bio')}">
+                                        <td></td>
+                                        <td class="second-column">
+                                            <div class="edit-validation" th:errors="*{bio}"></div>
                                         </td>
                                     </tr>
 
@@ -52,6 +64,12 @@
                                             <input class="custom-settings-input" th:field="*{link}" name="link">
                                         </td>
                                     </tr>
+                                    <tr th:if="${#fields.hasErrors('link')}">
+                                        <td></td>
+                                        <td class="second-column">
+                                            <div class="edit-validation" th:errors="*{link}"></div>
+                                        </td>
+                                    </tr>
 
                                     <tr class="table-row-spacing"></tr>
 
@@ -59,6 +77,7 @@
                                         <td class="form-info-text" align="right">Location</td>
                                         <td class="second-column">
                                             <select name="location">
+                                                <option th:field="*{location}" name="location"  th:text="${'Do not show'}" th:value="${''}"></option>
                                                 <option th:each="location : ${locations}" th:field="*{location}" name="location"  th:text="${location}" th:value="${location}"></option>
                                             </select>
                                         </td>

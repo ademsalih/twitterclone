@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <title>Twitter</title>
+    <head th:replace="fragment/header :: head"></head>
+
+    <body>
+        <div th:replace="fragment/menu :: div"></div>
+        <div class="container" style="margin-top: 3.5em">
+
+            <div class="row justify-content-center">
+
+                <!------------ FEED ------------->
+                <div class="col-6" style="padding-left: 0.64em">
+
+                    <h4 th:text=" 'Search results for ' + ${query}"></h4>
+
+                    <!--------- TWEETS --------->
+                    <div th:replace="fragment/feed-tweets :: div"></div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </body>
+
+</html>

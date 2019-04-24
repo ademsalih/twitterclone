@@ -34,6 +34,7 @@ public class FeedServiceImplementation implements FeedService {
         return feed;
     }
 
+    @Override
     public List<Tweet> getFeedForUser(long id) {
 
         List<Tweet> feed = new ArrayList<>();

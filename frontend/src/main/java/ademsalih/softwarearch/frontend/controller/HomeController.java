@@ -30,7 +30,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
-public class HomeController implements WebMvcConfigurer {
+public class HomeController {
 
     @Autowired
     TweetService tweetService;
@@ -53,9 +53,63 @@ public class HomeController implements WebMvcConfigurer {
         return "login";
     }
 
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/login").setViewName("login");
+    @GetMapping("/search")
+    public String search(@RequestParam("query") String query, Model model) {
+        User serverProfile = userService.getUserById(user_id);
+        model.addAttribute("profile", serverProfile);
+
+        model.addAttribute("retweet", new Retweet());
+        model.addAttribute("query", query);
+
+        List<Tweet> searchResultTweets = tweetService.getSearchResultTweets(query);
+
+        Collections.sort(searchResultTweets, Comparator.comparing(Tweet::getDateTime));
+        Collections.reverse(searchResultTweets);
+
+
+
+
+        List<UserTweet> feedTweets = new ArrayList<>();
+
+        for (Tweet tweet : searchResultTweets) {
+
+            User user = userService.getUserById(tweet.getUser_id());
+
+            UserTweet userTweet = new UserTweet(
+                    user.getUser_id(),
+                    tweet.getId(),
+                    user.getName(),
+                    user.getUserName(),
+                    user.getProfileImageName(),
+                    new TimeFormatService().formatTimeAgo(tweet.getDateTime()),
+                    tweet.getImageName(),
+                    tweet.getMessage()
+            );
+
+            if (tweet.getNewTweet() != null) {
+
+                User retweeter = userService.getUserById(tweet.getNewTweet().getUser_id());
+
+                UserTweet retweet = new UserTweet(
+                        retweeter.getUser_id(),
+                        tweet.getNewTweet().getId(),
+                        retweeter.getName(),
+                        retweeter.getUserName(),
+                        retweeter.getProfileImageName(),
+                        new TimeFormatService().formatTimeAgo(tweet.getNewTweet().getDateTime()),
+                        tweet.getNewTweet().getImageName(),
+                        tweet.getNewTweet().getMessage()
+                );
+
+                userTweet.setNewTweet(retweet);
+            }
+
+            feedTweets.add(userTweet);
+        }
+
+        model.addAttribute("feedTweets", feedTweets);
+
+        return "search-results";
     }
 
     @GetMapping("/signup")
@@ -232,7 +286,7 @@ public class HomeController implements WebMvcConfigurer {
         }
 
         userService.updateUser(serverUser);
-        return "redirect:/home";
+        return "redirect:/profilepicture";
     }
 
 
@@ -245,11 +299,17 @@ public class HomeController implements WebMvcConfigurer {
 
 
     @GetMapping("/profileother")
-    public String profileOther(Model model) {
-
-        User profile = userService.getUserById(user_id);
-        model.addAttribute("profile", profile);
+    public String profileOther(OtherEditUser otherEditUser, Model model) {
         model.addAttribute("settingNumber", 3);
+
+        User serverProfile = userService.getUserById(user_id);
+        model.addAttribute("profile", serverProfile);
+
+        otherEditUser.setPhone(serverProfile.getPhone());
+        otherEditUser.setBio(serverProfile.getBio());
+        otherEditUser.setLink(serverProfile.getLink());
+        otherEditUser.setLocation(serverProfile.getLocation());
+
 
         List<String> locations = new ArrayList<>();
         locations.add("Oslo, Norway");
@@ -265,23 +325,40 @@ public class HomeController implements WebMvcConfigurer {
     }
 
     @PostMapping("/profileothersave")
-    public String profileOtherSave(@Valid @ModelAttribute OtherEditUser user, BindingResult bindingResult, HttpServletRequest httpServletRequest) {
+    public String profileOtherSave(
+            @Valid OtherEditUser otherEditUser,
+            BindingResult bindingResult,
+            HttpServletRequest httpServletRequest,
+            Model model) {
 
         if (bindingResult.hasErrors()) {
-            String referer = httpServletRequest.getHeader("Referer");
-            return "redirect:" + referer;
+            model.addAttribute("settingNumber", 3);
+
+            User serverProfile = userService.getUserById(user_id);
+            model.addAttribute("profile", serverProfile);
+
+            List<String> locations = new ArrayList<>();
+            locations.add("Oslo, Norway");
+            locations.add("Istanbul, Turkey");
+            locations.add("London, UK");
+            locations.add("Berlin, Germany");
+            locations.add("Dublin, Ireland");
+            locations.add("Ankara, Turkey");
+            locations.add("Bergen, Norway");
+
+            model.addAttribute("locations", locations);
+            return "profile-other";
         }
 
         User serverUser = userService.getUserById(user_id);
 
-        serverUser.setPhone(user.getPhone());
-        serverUser.setBio(user.getBio());
-        serverUser.setLink(user.getLink());
-        serverUser.setLocation(user.getLocation());
-
+        serverUser.setPhone(otherEditUser.getPhone());
+        serverUser.setBio(otherEditUser.getBio());
+        serverUser.setLink(otherEditUser.getLink());
+        serverUser.setLocation(otherEditUser.getLocation());
 
         userService.updateUser(serverUser);
-        return "redirect:/home";
+        return "redirect:/profileother";
     }
 
 

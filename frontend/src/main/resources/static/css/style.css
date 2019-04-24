@@ -738,13 +738,27 @@ button:focus {
     height: 4.5em;
     border-radius: 50%;
     border: 0.18em solid #ffffff;
+    z-index: 1;
 }
 
 .profile-box-top-box {
-    background-color: #1DA1F2;
     width: 100%;
-    height: 46%
+    height: 46%;
+    overflow: hidden;
+    position: relative;
 }
+
+.profile-box-top-box-settings {
+    width: 100%;
+    height: 60.5%;
+    overflow: hidden;
+    position: relative;
+}
+
+
+
+
+
 
 .profile-box-bottom-box {
     background-color: white;
@@ -1159,6 +1173,7 @@ button:focus {
     height: 4.5em;
     border-radius: 50%;
     border: 0.18em solid #ffffff;
+    z-index: 1;
 }
 
 .settings-name-box {
@@ -1296,6 +1311,16 @@ button:focus {
     padding-left: 0.3em;
     border: 0.1em solid #E6ECF0;
     border-radius: 0.2em;
+}
+
+.custom-settings-textarea {
+    font-size: 0.84em;
+    font-weight: 400;
+    width: 16.8em;
+    padding-left: 0.3em;
+    border: 0.1em solid #E6ECF0;
+    border-radius: 0.2em;
+    resize: none;
 }
 
 
