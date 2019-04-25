@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
-    <title>Twitter</title>
+    <title th:text=" 'News about ' + ${query} + ' on Twitter' "></title>
     <head th:replace="fragment/header :: head"></head>
 
     <body>
@@ -12,8 +12,8 @@
 
                 <!------------ FEED ------------->
                 <div class="col-6" style="padding-left: 0.64em">
-
-                    <h4 th:text=" 'Search results for ' + ${query}"></h4>
+                    <br>
+                    <h5 th:text=" 'Search results for ' + ${query}"></h5>
 
                     <!--------- TWEETS --------->
                     <div th:replace="fragment/feed-tweets :: div"></div>

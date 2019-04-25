@@ -51,7 +51,7 @@ public class TweetService {
 
     public List<Tweet> getSearchResultTweets(String query) {
         return Arrays.stream(
-                restTemplate.getForObject(BASE_URL + "search?query='" + query + "'", Tweet[].class)
+                restTemplate.getForObject(BASE_URL + "search?query=" + query, Tweet[].class)
         ).collect(Collectors.toList());
     }
 }

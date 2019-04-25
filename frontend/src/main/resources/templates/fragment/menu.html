@@ -66,9 +66,9 @@
                             </button>
                         </form>
                         <hr class="navbar-menu-separator">
-                        <form>
-                            <button class="navbar-caret-menu-button">
-                                <span class="navbar-caret-menu-button-text">Log out @ademsalih</span>
+                        <form th:action="@{/logout}" method="post">
+                            <button type="submit" class="navbar-caret-menu-button">
+                                <span class="navbar-caret-menu-button-text" th:text=" 'Log out @' + ${profile.userName}"></span>
                             </button>
                         </form>
                     </div>

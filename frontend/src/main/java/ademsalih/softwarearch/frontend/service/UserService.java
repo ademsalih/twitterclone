@@ -31,4 +31,8 @@ public class UserService {
     public void updateUser(User user) {
         restTemplate.put(BASE_URL + "/" + user.getUser_id(), user);
     }
+
+    public User getUserByUsername(String username){
+        return restTemplate.getForObject(BASE_URL + "/username/" + username, User.class);
+    }
 }

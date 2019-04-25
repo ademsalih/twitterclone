@@ -6,16 +6,16 @@
 
     <body style="height: 80%">
 
-        <div th:replace="fragment/menu :: div"></div>
+        <!--<div th:replace="fragment/menu :: div"></div>-->
 
             <div class="container" style="height: 80%;position: relative">
 
                 <div style="position: absolute; width: 30%;margin: 0 auto; left: 0; right: 0; top:50%">
-                    <h4>Log in</h4>
+                    <h4>Twitter Login</h4>
                     <form th:action="@{/login}" method="POST">
 
                         <div class="form-group">
-                            <input type="email"  name="username" class="form-control" placeholder="Username">
+                            <input type="text"  name="username" class="form-control" placeholder="Username">
                         </div>
                         <div class="form-group">
                             <input type="password" name="password" class="form-control" placeholder="Password">

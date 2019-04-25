@@ -41,6 +41,14 @@ public class UserController {
         return userService.getUserById(id);
     }
 
+
+    @GetMapping("/users/username/{userName}")
+    public User getUserByUserName(@PathVariable String userName) {
+        return userService.findUserByUserName(userName).get();
+    }
+
+
+
     // OK
     @PutMapping("/users/{id}")
     public User updateUser(@RequestBody User user, @PathVariable long id) {
@@ -84,6 +92,8 @@ public class UserController {
     public FollowStatus isFollowing(@PathVariable("user_id") long userId, @PathVariable("following_id") long followingId) {
         return userService.checkIfIsFollowing(userId, followingId);
     }
+
+
 
 
 }

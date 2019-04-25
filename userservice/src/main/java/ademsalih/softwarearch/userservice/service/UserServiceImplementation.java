@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImplementation implements UserService {
@@ -70,7 +71,6 @@ public class UserServiceImplementation implements UserService {
 
         List<Follow> follows = followRepository.findAll();
 
-
         for (Follow f : follows) {
             if (f.getUser().getUser_id() == user && f.getFollowing_user().getUser_id() == following) {
                 return new FollowStatus(true);
@@ -79,4 +79,15 @@ public class UserServiceImplementation implements UserService {
 
         return new FollowStatus(false);
     }
+
+    @Override
+    public Optional<User> findUserByEmail(String email) {
+        return userRepository.findUserByEmail(email);
+    }
+
+    @Override
+    public Optional<User> findUserByUserName(String userName) {
+        return userRepository.findUserByUserName(userName);
+    }
+
 }

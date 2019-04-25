@@ -1,12 +1,11 @@
 package ademsalih.softwarearch.frontend.controller;
 
 import ademsalih.softwarearch.frontend.model.*;
-import ademsalih.softwarearch.frontend.service.FollowService;
-import ademsalih.softwarearch.frontend.service.TimeFormatService;
-import ademsalih.softwarearch.frontend.service.TweetService;
-import ademsalih.softwarearch.frontend.service.UserService;
+import ademsalih.softwarearch.frontend.service.*;
 import ademsalih.softwarearch.frontend.viewmodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +23,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Principal;
 import java.util.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -41,20 +41,29 @@ public class HomeController {
     @Autowired
     FollowService followService;
 
-    long user_id = 1;
+    @Autowired
+    LoginService loginService;
+
+    //long user_id = 3;
 
     @GetMapping("/admin")
     public String admin() {
         return "admin";
     }
 
-    @GetMapping("/login")
+    @GetMapping({"/","/login"})
     public String login() {
         return "login";
     }
 
     @GetMapping("/search")
     public String search(@RequestParam("query") String query, Model model) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User authUser = userService.getUserByUsername(auth.getName());
+
+        long user_id = authUser.getUser_id();
+
         User serverProfile = userService.getUserById(user_id);
         model.addAttribute("profile", serverProfile);
 
@@ -65,8 +74,6 @@ public class HomeController {
 
         Collections.sort(searchResultTweets, Comparator.comparing(Tweet::getDateTime));
         Collections.reverse(searchResultTweets);
-
-
 
 
         List<UserTweet> feedTweets = new ArrayList<>();
@@ -120,6 +127,13 @@ public class HomeController {
     @PostMapping("/register")
     public String register(@Valid SignUpUser signUpUser, BindingResult bindingResult) {
 
+        User databaseUser = userService.getUserByUsername(signUpUser.getUserName());
+
+        if (databaseUser != null) {
+            bindingResult.rejectValue("userName", "error.user", "An account already exists with this username");
+        }
+
+
         if (bindingResult.hasErrors()) {
             return "signup";
         }
@@ -147,6 +161,11 @@ public class HomeController {
     public String profileAccount(AccountEditUser accountEditUser, Model model) {
         model.addAttribute("settingNumber", 0);
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User authUser = userService.getUserByUsername(auth.getName());
+
+        long user_id = authUser.getUser_id();
+
         User serverProfile = userService.getUserById(user_id);
         model.addAttribute("profile", serverProfile);
 
@@ -164,6 +183,11 @@ public class HomeController {
             BindingResult bindingResult,
             HttpServletRequest httpServletRequest,
             Model model) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User authUser = userService.getUserByUsername(auth.getName());
+
+        long user_id = authUser.getUser_id();
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("settingNumber", 0);
@@ -189,6 +213,11 @@ public class HomeController {
     public String profilePassword(PasswordEditUser passwordEditUser, Model model) {
         model.addAttribute("settingNumber", 1);
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User authUser = userService.getUserByUsername(auth.getName());
+
+        long user_id = authUser.getUser_id();
+
         User serverProfile = userService.getUserById(user_id);
         model.addAttribute("profile", serverProfile);
 
@@ -201,6 +230,11 @@ public class HomeController {
             BindingResult bindingResult,
             HttpServletRequest httpServletRequest,
             Model model) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User authUser = userService.getUserByUsername(auth.getName());
+
+        long user_id = authUser.getUser_id();
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("settingNumber", 1);
@@ -217,14 +251,13 @@ public class HomeController {
         return "redirect:/profilepassword";
     }
 
-
-
-
-
-
-
     @GetMapping("/profilepicture")
     public String profilePicture(Model model) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User authUser = userService.getUserByUsername(auth.getName());
+
+        long user_id = authUser.getUser_id();
 
         User profile = userService.getUserById(user_id);
         model.addAttribute("profile", profile);
@@ -241,6 +274,11 @@ public class HomeController {
                                      HttpServletRequest httpServletRequest,
                                      @RequestParam(value = "profileImageName", required=false) MultipartFile profileImage,
                                      @RequestParam(value = "bannerImageName", required=false) MultipartFile bannerImage) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User authUser = userService.getUserByUsername(auth.getName());
+
+        long user_id = authUser.getUser_id();
 
         if (profileImage.isEmpty() && bannerImage.isEmpty()) {
             String referer = httpServletRequest.getHeader("Referer");
@@ -289,17 +327,13 @@ public class HomeController {
         return "redirect:/profilepicture";
     }
 
-
-
-
-
-
-
-
-
-
     @GetMapping("/profileother")
     public String profileOther(OtherEditUser otherEditUser, Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User authUser = userService.getUserByUsername(auth.getName());
+
+        long user_id = authUser.getUser_id();
+
         model.addAttribute("settingNumber", 3);
 
         User serverProfile = userService.getUserById(user_id);
@@ -331,6 +365,11 @@ public class HomeController {
             HttpServletRequest httpServletRequest,
             Model model) {
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User authUser = userService.getUserByUsername(auth.getName());
+
+        long user_id = authUser.getUser_id();
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("settingNumber", 3);
 
@@ -361,17 +400,6 @@ public class HomeController {
         return "redirect:/profileother";
     }
 
-
-
-
-
-
-
-
-
-
-
-
     @PostMapping("/deleteaccount")
     public String deleteAccount() {
         // userservice.deleteAccount();
@@ -380,6 +408,11 @@ public class HomeController {
 
     @PostMapping("/follow/{id}")
     public String follow(@PathVariable long id, HttpServletRequest request) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User authUser = userService.getUserByUsername(auth.getName());
+
+        long user_id = authUser.getUser_id();
 
         Follow follow = new Follow();
 
@@ -394,6 +427,11 @@ public class HomeController {
 
     @GetMapping("unfollow/{id}")
     public String unfollow(@PathVariable long id, HttpServletRequest request) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User authUser = userService.getUserByUsername(auth.getName());
+
+        long user_id = authUser.getUser_id();
 
         followService.deleteFollow(user_id, id);
 
@@ -412,7 +450,10 @@ public class HomeController {
 
     @GetMapping("/{id}/following")
     public String followings(@PathVariable long id, Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User authUser = userService.getUserByUsername(auth.getName());
 
+        long user_id = authUser.getUser_id();
 
         model.addAttribute("retweet", new Retweet());
         model.addAttribute("follow", new Follow());
@@ -483,6 +524,11 @@ public class HomeController {
     @GetMapping("/{id}/followers")
     public String followers(@PathVariable long id, Model model) {
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User authUser = userService.getUserByUsername(auth.getName());
+
+        long user_id = authUser.getUser_id();
+
         model.addAttribute("group", 3);
 
         model.addAttribute("retweet", new Retweet());
@@ -547,6 +593,11 @@ public class HomeController {
 
     @GetMapping("/{id}")
     public String profile(@PathVariable long id, Model model) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User authUser = userService.getUserByUsername(auth.getName());
+
+        long user_id = authUser.getUser_id();
 
         model.addAttribute("retweet", new Retweet());
         model.addAttribute("follow", new Follow());
@@ -647,6 +698,11 @@ public class HomeController {
     @PostMapping("/tweet")
     public String tweet(@ModelAttribute("tweet") Tweet tweet, @RequestParam(value = "file", required=false) MultipartFile file, HttpServletRequest request) {
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User authUser = userService.getUserByUsername(auth.getName());
+
+        long user_id = authUser.getUser_id();
+
         tweet.setUser_id(user_id);
         tweet.setNewTweet(null);
         tweet.setDateTime(Calendar.getInstance());
@@ -678,6 +734,11 @@ public class HomeController {
     @PostMapping("/retweet/{id}")
     public String retweet(@ModelAttribute("retweet") Retweet retweet, @PathVariable("id") long id, HttpServletRequest request) {
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User authUser = userService.getUserByUsername(auth.getName());
+
+        long user_id = authUser.getUser_id();
+
         retweet.setDateTime(Calendar.getInstance());
         retweet.setUser_id(user_id);
 
@@ -706,7 +767,7 @@ public class HomeController {
         return "redirect:" + referer;
     }
 
-    @GetMapping("/")
+    /*@GetMapping("/")
     public String feed(Model model) {
 
         List<Tweet> tweetsList = tweetService.getFeed();
@@ -755,10 +816,14 @@ public class HomeController {
         model.addAttribute("feedTweets", feedTweets);
 
         return "frontpage";
-    }
+    }*/
 
     @GetMapping("/home")
     public String home(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User userPrincipal = userService.getUserByUsername(auth.getName());
+
+        long user_id = userPrincipal.getUser_id();
 
         User loggedInUser = userService.getUserById(user_id);
         model.addAttribute("profile", loggedInUser);

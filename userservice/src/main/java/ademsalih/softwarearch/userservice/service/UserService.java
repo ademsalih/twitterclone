@@ -8,6 +8,7 @@ import ademsalih.softwarearch.userservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public interface UserService {
@@ -27,5 +28,9 @@ public interface UserService {
     void deleteFollowing(long user, long following);
 
     FollowStatus checkIfIsFollowing(long user, long following);
+
+    Optional<User> findUserByEmail(String email);
+
+    Optional<User> findUserByUserName(String userName);
 
 }
