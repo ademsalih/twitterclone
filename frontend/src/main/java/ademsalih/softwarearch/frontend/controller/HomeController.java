@@ -4,30 +4,23 @@ import ademsalih.softwarearch.frontend.model.*;
 import ademsalih.softwarearch.frontend.service.*;
 import ademsalih.softwarearch.frontend.viewmodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.security.Principal;
 import java.util.*;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 public class HomeController {
@@ -44,7 +37,7 @@ public class HomeController {
     @Autowired
     LoginService loginService;
 
-    //long user_id = 3;
+    //long user = 3;
 
     @GetMapping("/admin")
     public String admin() {
@@ -80,7 +73,7 @@ public class HomeController {
 
         for (Tweet tweet : searchResultTweets) {
 
-            User user = userService.getUserById(tweet.getUser_id());
+            User user = userService.getUserById(tweet.getUser());
 
             UserTweet userTweet = new UserTweet(
                     user.getUser_id(),
@@ -95,7 +88,7 @@ public class HomeController {
 
             if (tweet.getNewTweet() != null) {
 
-                User retweeter = userService.getUserById(tweet.getNewTweet().getUser_id());
+                User retweeter = userService.getUserById(tweet.getNewTweet().getUser());
 
                 UserTweet retweet = new UserTweet(
                         retweeter.getUser_id(),
@@ -189,6 +182,13 @@ public class HomeController {
 
         long user_id = authUser.getUser_id();
 
+
+        User databaseUser = userService.getUserByUsername(accountEditUser.getUserName());
+
+        if (databaseUser != null && databaseUser.getUser_id() != user_id) {
+            bindingResult.rejectValue("userName", "error.user", "An account already exists with this username");
+        }
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("settingNumber", 0);
 
@@ -198,13 +198,19 @@ public class HomeController {
             return "profile-account";
         }
 
-
         User serverUser = userService.getUserById(user_id);
+
+
+        Collection<SimpleGrantedAuthority> nowAuthorities =(Collection<SimpleGrantedAuthority>)SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(accountEditUser.getUserName(), serverUser.getPassword(), nowAuthorities);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+
 
         serverUser.setName(accountEditUser.getName());
         serverUser.setEmail(accountEditUser.getEmail());
         serverUser.setUserName(accountEditUser.getUserName());
-
         userService.updateUser(serverUser);
         return "redirect:/profileaccount";
     }
@@ -400,10 +406,14 @@ public class HomeController {
         return "redirect:/profileother";
     }
 
-    @PostMapping("/deleteaccount")
+    @GetMapping("/deleteaccount")
     public String deleteAccount() {
-        // userservice.deleteAccount();
-        return "redirect:/login";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User authUser = userService.getUserByUsername(auth.getName());
+
+        tweetService.deleteTweetsByUser(authUser.getUser_id());
+        userService.deleteUser(authUser.getUser_id());
+        return "redirect:/logout";
     }
 
     @PostMapping("/follow/{id}")
@@ -653,7 +663,7 @@ public class HomeController {
 
         for (Tweet tweet : tweets) {
 
-            User user = userService.getUserById(tweet.getUser_id());
+            User user = userService.getUserById(tweet.getUser());
 
             UserTweet userTweet = new UserTweet(
                     user.getUser_id(),
@@ -668,7 +678,7 @@ public class HomeController {
 
             if (tweet.getNewTweet() != null) {
 
-                User retweeter = userService.getUserById(tweet.getNewTweet().getUser_id());
+                User retweeter = userService.getUserById(tweet.getNewTweet().getUser());
 
                 UserTweet retweet = new UserTweet(
                         retweeter.getUser_id(),
@@ -703,7 +713,7 @@ public class HomeController {
 
         long user_id = authUser.getUser_id();
 
-        tweet.setUser_id(user_id);
+        tweet.setUser(user_id);
         tweet.setNewTweet(null);
         tweet.setDateTime(Calendar.getInstance());
 
@@ -740,7 +750,7 @@ public class HomeController {
         long user_id = authUser.getUser_id();
 
         retweet.setDateTime(Calendar.getInstance());
-        retweet.setUser_id(user_id);
+        retweet.setUser(user_id);
 
         Tweet tweet = new Tweet();
         tweet.setId(id);
@@ -779,10 +789,10 @@ public class HomeController {
 
         for (Tweet tweet : tweetsList) {
 
-            User user = userService.getUserById(tweet.getUser_id());
+            User user = userService.getUserById(tweet.getUser());
 
             UserTweet userTweet = new UserTweet(
-                    user.getUser_id(),
+                    user.getUser(),
                     tweet.getId(),
                     user.getName(),
                     user.getUserName(),
@@ -794,10 +804,10 @@ public class HomeController {
 
             if (tweet.getNewTweet() != null) {
 
-                User retweeter = userService.getUserById(tweet.getNewTweet().getUser_id());
+                User retweeter = userService.getUserById(tweet.getNewTweet().getUser());
 
                 UserTweet retweet = new UserTweet(
-                        retweeter.getUser_id(),
+                        retweeter.getUser(),
                         tweet.getNewTweet().getId(),
                         retweeter.getName(),
                         retweeter.getUserName(),
@@ -852,7 +862,6 @@ public class HomeController {
 
 
 
-
         List<Tweet> tweetsList = new ArrayList<>();
 
         for (Follow f : followings) {
@@ -875,7 +884,7 @@ public class HomeController {
 
         for (Tweet tweet : tweetsList) {
 
-            User user = userService.getUserById(tweet.getUser_id());
+            User user = userService.getUserById(tweet.getUser());
 
             UserTweet userTweet = new UserTweet(
                     user.getUser_id(),
@@ -890,7 +899,7 @@ public class HomeController {
 
             if (tweet.getNewTweet() != null) {
 
-                User retweeter = userService.getUserById(tweet.getNewTweet().getUser_id());
+                User retweeter = userService.getUserById(tweet.getNewTweet().getUser());
 
                 UserTweet retweet = new UserTweet(
                         retweeter.getUser_id(),

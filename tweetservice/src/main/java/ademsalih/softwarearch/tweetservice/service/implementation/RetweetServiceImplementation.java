@@ -27,7 +27,7 @@ public class RetweetServiceImplementation implements RetweetService {
         List<Retweet> userRetweets = new ArrayList<>();
 
         for (Retweet r : allRetweets) {
-            if (r.getUser_id() == id) userRetweets.add(r);
+            if (r.getUser() == id) userRetweets.add(r);
         }
         return userRetweets;
     }

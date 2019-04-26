@@ -1,7 +1,6 @@
 package ademsalih.softwarearch.tweetservice.service.implementation;
 
 import ademsalih.softwarearch.tweetservice.model.NewTweet;
-import ademsalih.softwarearch.tweetservice.model.Tweet;
 import ademsalih.softwarearch.tweetservice.repository.NewTweetRepository;
 import ademsalih.softwarearch.tweetservice.service.NewTweetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ public class NewTweetServiceImplementation implements NewTweetService {
         List<NewTweet> userNewTweets = new ArrayList<>();
 
         for (NewTweet t : allNewTweets) {
-            if (t.getUser_id() == id) userNewTweets.add(t);
+            if (t.getUser() == id) userNewTweets.add(t);
         }
 
         return userNewTweets;
@@ -51,10 +50,13 @@ public class NewTweetServiceImplementation implements NewTweetService {
     @Override
     public List<NewTweet> getTweetForSearch(String query) {
 
-
-
-
         return null;
+    }
+
+    @Override
+    public void deleteAllTweetsForUser(long id) {
+        List<NewTweet> userTweets = newTweetRepository.findNewTweetsByUser(id);
+        newTweetRepository.deleteAll(userTweets);
     }
 
 

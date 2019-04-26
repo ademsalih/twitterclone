@@ -48,6 +48,11 @@ public class TweetController {
         newTweetService.deleteNewTweet(id);
     }
 
+    @DeleteMapping("/newtweets/all/{id}")
+    public void deleteAllNewTweets(@PathVariable long id) {
+        newTweetService.deleteAllTweetsForUser(id);
+    }
+
     @GetMapping("/newtweets/{id}")
     public NewTweet getNewTweet(@PathVariable long id) {
         return newTweetService.getNewTweet(id);

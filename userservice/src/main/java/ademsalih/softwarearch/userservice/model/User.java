@@ -46,12 +46,12 @@ public class User {
 
     private String location;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Follow> following = new ArrayList<>();
 
 
-    @OneToMany(mappedBy = "following_user")
+    @OneToMany(mappedBy = "following_user", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Follow> followers = new ArrayList<>();
 

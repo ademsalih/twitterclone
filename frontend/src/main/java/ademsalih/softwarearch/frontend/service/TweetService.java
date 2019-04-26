@@ -54,4 +54,8 @@ public class TweetService {
                 restTemplate.getForObject(BASE_URL + "search?query=" + query, Tweet[].class)
         ).collect(Collectors.toList());
     }
+
+    public void deleteTweetsByUser(long id) {
+        restTemplate.delete(BASE_URL + "/newtweets/all/" + id);
+    }
 }

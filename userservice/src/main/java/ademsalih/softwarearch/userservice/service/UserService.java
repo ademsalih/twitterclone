@@ -31,6 +31,6 @@ public interface UserService {
 
     Optional<User> findUserByEmail(String email);
 
-    Optional<User> findUserByUserName(String userName);
+    User findUserByUserName(String userName);
 
 }

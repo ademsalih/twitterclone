@@ -26,7 +26,7 @@ public class NewTweet extends Tweet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private long user_id;
+    private long user;
 
     private Calendar dateTime;
 
@@ -39,10 +39,10 @@ public class NewTweet extends Tweet {
     @JsonIgnore
     private List<Retweet> retweets = new ArrayList<>();
 
-    public NewTweet(String message, Calendar dateTime, long user_id, String imageName) {
+    public NewTweet(String message, Calendar dateTime, long user, String imageName) {
         this.message = message;
         this.dateTime = dateTime;
-        this.user_id = user_id;
+        this.user = user;
         this.imageName = imageName;
     }
 

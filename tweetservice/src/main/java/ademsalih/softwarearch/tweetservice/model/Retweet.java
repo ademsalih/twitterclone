@@ -18,7 +18,7 @@ public class Retweet extends Tweet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private long user_id;
+    private long user;
 
     private Calendar dateTime;
 
@@ -27,8 +27,8 @@ public class Retweet extends Tweet {
     @JoinColumn(name = "tweet_id")
     private NewTweet newTweet;
 
-    public Retweet(long user_id, Calendar dateTime, NewTweet newTweet) {
-        this.user_id = user_id;
+    public Retweet(long user, Calendar dateTime, NewTweet newTweet) {
+        this.user = user;
         this.dateTime = dateTime;
         this.newTweet = newTweet;
     }

@@ -35,4 +35,8 @@ public class UserService {
     public User getUserByUsername(String username){
         return restTemplate.getForObject(BASE_URL + "/username/" + username, User.class);
     }
+
+    public void deleteUser(long user_id) {
+        restTemplate.delete(BASE_URL + "/" + user_id);
+    }
 }

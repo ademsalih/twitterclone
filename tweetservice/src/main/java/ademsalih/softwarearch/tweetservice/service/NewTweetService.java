@@ -18,4 +18,6 @@ public interface NewTweetService {
     void deleteNewTweet(long id);
 
     List<NewTweet> getTweetForSearch(String query);
+
+    void deleteAllTweetsForUser(long id);
 }

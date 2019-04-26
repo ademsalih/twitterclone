@@ -14,7 +14,7 @@ public class Tweet implements Comparator {
 
     private long id;
 
-    private long user_id;
+    private long user;
 
     protected Calendar dateTime;
 
@@ -24,8 +24,8 @@ public class Tweet implements Comparator {
 
     private Tweet newTweet;
 
-    public Tweet(long user_id, Calendar dateTime, String imageName, String message, Tweet newTweet) {
-        this.user_id = user_id;
+    public Tweet(long user, Calendar dateTime, String imageName, String message, Tweet newTweet) {
+        this.user = user;
         this.dateTime = dateTime;
         this.imageName = imageName;
         this.message = message;
