@@ -14,14 +14,14 @@
             <tr th:if="${profile.location != ''}" class="table-row">
                 <td>
                     <img class="icon" th:src="@{'/assets/place-icon-2.svg'}">
-                    <span th:text="${profile.location}" class="more-info-text-link"></span>
+                    <span th:text="${profile.location}" class="more-info-text"></span>
                 </td>
             </tr>
             <tr th:if="${profile.link != ''}" class="table-row">
                 <td>
                     <img th:src="@{'/assets/link-icon-2.svg'}" alt="" class="icon">
                     <a th:href="${profile.link}" target="_blank">
-                        <span th:text="${#strings.substring(profile.link, 11)}  " class="more-info-text-link"></span>
+                        <span th:text="${shortUrl}" class="more-info-text-link"></span>
                     </a>
                 </td>
             </tr>

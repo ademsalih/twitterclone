@@ -34,7 +34,7 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        return userRepository.findUsersByUserRole(UserRoles.USER.name());
     }
 
     @Override

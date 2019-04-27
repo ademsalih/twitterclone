@@ -2,6 +2,8 @@ package ademsalih.softwarearch.frontend.controller;
 
 import ademsalih.softwarearch.frontend.model.*;
 import ademsalih.softwarearch.frontend.service.*;
+import ademsalih.softwarearch.frontend.tools.TimeFormatService;
+import ademsalih.softwarearch.frontend.tools.URLShortener;
 import ademsalih.softwarearch.frontend.viewmodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -36,13 +38,6 @@ public class HomeController {
 
     @Autowired
     LoginService loginService;
-
-    //long user = 3;
-
-    @GetMapping("/admin")
-    public String admin() {
-        return "admin";
-    }
 
     @GetMapping({"/","/login"})
     public String login() {
@@ -469,6 +464,8 @@ public class HomeController {
         model.addAttribute("follow", new Follow());
 
         model.addAttribute("group", 2);
+        model.addAttribute("shortUrl", new URLShortener().shorten(authUser.getLink()));
+
 
         model.addAttribute("currentUser", user_id);
 
@@ -540,6 +537,8 @@ public class HomeController {
         long user_id = authUser.getUser_id();
 
         model.addAttribute("group", 3);
+        model.addAttribute("shortUrl", new URLShortener().shorten(authUser.getLink()));
+
 
         model.addAttribute("retweet", new Retweet());
         model.addAttribute("follow", new Follow());
@@ -613,6 +612,8 @@ public class HomeController {
         model.addAttribute("follow", new Follow());
 
         model.addAttribute("group", 1);
+        model.addAttribute("shortUrl", new URLShortener().shorten(authUser.getLink()));
+
 
         // get user information for that user
         User profileUser = userService.getUserById(id);
@@ -696,6 +697,7 @@ public class HomeController {
 
             feedTweets.add(userTweet);
         }
+
 
         model.addAttribute("feedTweets", feedTweets);
 

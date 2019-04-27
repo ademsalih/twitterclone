@@ -75,9 +75,25 @@ public class UserserviceApplication implements CommandLineRunner {
                 "London, UK"
         );
 
+        User admin = new User(
+                "Admin",
+                "admin@gmail.com",
+                "",
+                "admin",
+                "admin",
+                Calendar.getInstance(),
+                "admin.png",
+                UserRoles.ADMIN.name(),
+                "",
+                "admin-banner.jpg",
+                "",
+                ""
+        );
+
         userRepository.save(adem);
         userRepository.save(pinar);
         userRepository.save(esra);
+        userRepository.save(admin);
 
         followRepository.save(new Follow(esra, adem));
         followRepository.save(new Follow(adem, esra));
