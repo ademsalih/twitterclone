@@ -285,7 +285,12 @@ button:focus {
     font-size: 1em;
 }
 
+/************ NAVBAR ADMIN ************/
 
+.navbarGradient-admin {
+    background-image: linear-gradient(to right, #179bf2, #08d1f1);
+    opacity: 1.0;
+}
 
 
 /************ SIGNUP PAGE ************/
@@ -1139,7 +1144,7 @@ button:focus {
 }
 
 .validation-box {
-    color: #E0245E;
+    color: #e0245e;
     padding-top: 0.3em;
     padding-left: 0.1em;
 }
@@ -1347,4 +1352,31 @@ button:focus {
 
 .linkify {
     color: #48A0EB !important;
+}
+
+
+/************ ADMIN ************/
+
+.adminbutton {
+    font-weight: 600;
+    font-size: 0.9em;
+    border-radius: 3em;
+    padding: 0.4em 0.8em 0.4em 0.8em;
+    color: white !important;
+    cursor: pointer;
+    text-decoration: none !important;
+    border: none;
+}
+
+.white-button {
+    background-color: transparent;
+    border: 0.1em white solid;
+}
+
+.red-button {
+    background-color: #cb0033;
+}
+
+.blue-button {
+    background-color: #4ab3f4;
 }

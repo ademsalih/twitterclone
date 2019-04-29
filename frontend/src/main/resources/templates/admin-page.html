@@ -1,20 +1,42 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1>Welcome to admin page</h1>
 
-    <div th:each="user : ${users}">
-        <p th:text="${user.name}"></p>
-    </div>
+    <title>Twitter | Admin</title>
+    <head th:replace="fragment/header :: head"></head>
+
+    <body>
+        <div th:replace="fragment/admin-menu :: div"></div>
+        <div class="container">
 
 
-    <form th:action="@{/logout}" method="post">
-        <button type="submit">Log out</button>
-    </form>
+            <div class="col-sm-9 mx-auto">
+                <br>
+                <h4>Twitter Admin Page</h4>
 
-</body>
+                <br>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Email</th>
+                        <th scope="col" style="width: 35%">Options</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user : ${users}">
+                        <td th:text="${user.name}" scope="row"></td>
+                        <td th:text="${user.userName}"></td>
+                        <td th:text="${user.email}"></td>
+                        <td>
+                            <a class="adminbutton blue-button" th:href="@{'/updatepassword/' + ${user.user_id} }">Update Password</a>
+                            <a class="adminbutton red-button" th:href="@{'/deleteaccount/' + ${user.user_id} }">Delete Account</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </body>
 </html>

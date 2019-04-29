@@ -1,0 +1,25 @@
+<div xmlns:th="http://www.w3.org/1999/xhtml">
+    <nav class="navbar navbar-shadow-line navbar-dark fixed-top navbarGradient-admin">
+        <div class="container">
+
+            <!-- Home Button -->
+            <div class="navbar-button-container">
+            </div>
+
+            <!-- Twitter Bird -->
+            <div class="navbar-brand">
+                <a th:href="@{/}"><i class="fab fa-twitter bird-signup"></i></a>
+            </div>
+
+            <!-- Navbar Right Box -->
+            <div class="navbar-right-box">
+                <form th:action="@{/logout}" method="post">
+                    <button class="adminbutton white-button" type="submit">Log out</button>
+                </form>
+            </div>
+
+
+
+        </div>
+    </nav>
+</div>
