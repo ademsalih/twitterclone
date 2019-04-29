@@ -52,23 +52,54 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/static/**"
         };
 
+        String[] adminURLs = new String[]{
+                "/admin",
+                "/deleteaccount/**",
+                "/updatepassword/**",
+                "/passwordsave/**"
+        };
+
+        String[] userURLs = new String[]{
+                "/search",
+                "/profileaccount",
+                "/profileaccountsave",
+                "/profilepassword",
+                "/profilepasswordsave",
+                "/profilepicture",
+                "/profilepicturesave",
+                "/profileother",
+                "/profileothersave",
+                "/deleteaccount",
+                "/follow/**",
+                "/unfollow/**",
+                "/following/**",
+                "/**/following",
+                "/**/followers",
+                "/**",
+                "/tweet",
+                "/retweet/**",
+                "/deleteTweet/**",
+                "/deleteRetweet/**",
+                "/home"
+        };
+
 
         http.authorizeRequests()
                 .antMatchers(resources)
                 .permitAll()
 
-                .antMatchers("/add","/remove/**")
+
+                .antMatchers(adminURLs)
                 .hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
 
+                .antMatchers(userURLs)
+                .hasRole("USER")
+                .anyRequest()
+                .authenticated()
+                
 
-
-                /*.and()
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/home")
-                .permitAll()*/
 
 
                 .and()
@@ -77,9 +108,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login")
                 .successHandler(myAuthenticationSuccessHandler())
                 .permitAll()
-
-
-
 
 
                 .and()

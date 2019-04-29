@@ -143,8 +143,6 @@ public class HomeController {
         return "redirect:/home";
     }
 
-
-
     @GetMapping("/profileaccount")
     public String profileAccount(AccountEditUser accountEditUser, Model model) {
         model.addAttribute("settingNumber", 0);
@@ -430,7 +428,7 @@ public class HomeController {
         return "redirect:" + referer;
     }
 
-    @GetMapping("unfollow/{id}")
+    @GetMapping("/unfollow/{id}")
     public String unfollow(@PathVariable long id, HttpServletRequest request) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -465,7 +463,7 @@ public class HomeController {
 
         model.addAttribute("group", 2);
         model.addAttribute("shortUrl", new URLShortener().shorten(authUser.getLink()));
-
+        model.addAttribute("title", "People followed by " + authUser.getName() + " (@" + authUser.getUserName() + ") | Twitter");
 
         model.addAttribute("currentUser", user_id);
 
@@ -538,6 +536,7 @@ public class HomeController {
 
         model.addAttribute("group", 3);
         model.addAttribute("shortUrl", new URLShortener().shorten(authUser.getLink()));
+        model.addAttribute("title", "People following " + authUser.getName() + " (@" + authUser.getUserName() + ") | Twitter");
 
 
         model.addAttribute("retweet", new Retweet());
@@ -778,57 +777,6 @@ public class HomeController {
         String referer = request.getHeader("Referer");
         return "redirect:" + referer;
     }
-
-    /*@GetMapping("/")
-    public String feed(Model model) {
-
-        List<Tweet> tweetsList = tweetService.getFeed();
-
-        Collections.sort(tweetsList, Comparator.comparing(Tweet::getDateTime));
-        Collections.reverse(tweetsList);
-
-        List<UserTweet> feedTweets = new ArrayList<>();
-
-        for (Tweet tweet : tweetsList) {
-
-            User user = userService.getUserById(tweet.getUser());
-
-            UserTweet userTweet = new UserTweet(
-                    user.getUser(),
-                    tweet.getId(),
-                    user.getName(),
-                    user.getUserName(),
-                    user.getProfileImageName(),
-                    new TimeFormatService().formatTimeAgo(tweet.getDateTime()),
-                    tweet.getImageName(),
-                    tweet.getMessage()
-            );
-
-            if (tweet.getNewTweet() != null) {
-
-                User retweeter = userService.getUserById(tweet.getNewTweet().getUser());
-
-                UserTweet retweet = new UserTweet(
-                        retweeter.getUser(),
-                        tweet.getNewTweet().getId(),
-                        retweeter.getName(),
-                        retweeter.getUserName(),
-                        retweeter.getProfileImageName(),
-                        new TimeFormatService().formatTimeAgo(tweet.getNewTweet().getDateTime()),
-                        tweet.getNewTweet().getImageName(),
-                        tweet.getNewTweet().getMessage()
-                );
-
-                userTweet.setNewTweet(retweet);
-            }
-
-            feedTweets.add(userTweet);
-        }
-
-        model.addAttribute("feedTweets", feedTweets);
-
-        return "frontpage";
-    }*/
 
     @GetMapping("/home")
     public String home(Model model) {
