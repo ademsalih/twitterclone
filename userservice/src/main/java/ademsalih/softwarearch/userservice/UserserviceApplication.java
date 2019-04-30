@@ -35,7 +35,7 @@ public class UserserviceApplication implements CommandLineRunner {
                 "adem@gmail.com",
                 "93689146",
                 "adem",
-                "123456",
+                "111111",
                 Calendar.getInstance(),
                 "profile1.png",
                 UserRoles.USER.name(),

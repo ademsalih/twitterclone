@@ -784,7 +784,7 @@ public class HomeController {
     }
 
     @GetMapping("/home")
-    public String home(Model model) {
+    public String home(Model model, HttpServletRequest httpServletRequest) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User userPrincipal = userService.getUserByUsername(auth.getName());
 
@@ -816,20 +816,25 @@ public class HomeController {
         model.addAttribute("totalTweets", totalTweets);
 
 
-
         List<Tweet> tweetsList = new ArrayList<>();
 
-        for (Follow f : followings) {
+        if (httpServletRequest.getParameter("tweets").equals("friends")) {
 
-            List<Tweet> tweets = tweetService.getTweetsForUserById(f.getFollowing_user().getUser_id());
-            List<Tweet> retweets = tweetService.getRetweetsForUserById(f.getFollowing_user().getUser_id());
+            for (Follow f : followings) {
 
-            tweetsList.addAll(tweets);
-            tweetsList.addAll(retweets);
+                List<Tweet> tweets = tweetService.getTweetsForUserById(f.getFollowing_user().getUser_id());
+                List<Tweet> retweets = tweetService.getRetweetsForUserById(f.getFollowing_user().getUser_id());
+
+                tweetsList.addAll(tweets);
+                tweetsList.addAll(retweets);
+            }
+
+            tweetsList.addAll(userTweets);
+            tweetsList.addAll(userRetweets);
+
+        } else {
+            tweetsList.addAll(tweetService.getFeed());
         }
-
-        tweetsList.addAll(userTweets);
-        tweetsList.addAll(userRetweets);
 
 
         Collections.sort(tweetsList, Comparator.comparing(Tweet::getDateTime));
@@ -877,7 +882,100 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping({"/", "/all"})
+
+
+
+
+
+    @GetMapping("/all")
+    public String loggedInAllTweets(Model model) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User userPrincipal = userService.getUserByUsername(auth.getName());
+
+        long user_id = userPrincipal.getUser_id();
+
+        User loggedInUser = userService.getUserById(user_id);
+        model.addAttribute("profile", loggedInUser);
+
+        model.addAttribute("currentUser", user_id);
+
+        // Models for tweeting and retweeting
+        model.addAttribute("tweet", new Tweet());
+        model.addAttribute("retweet", new Retweet());
+
+        // Get follower count the logged in user
+        List<Follow> followers = followService.getFollowersForUserById(user_id);
+        int followerCount = followers.size();
+        model.addAttribute("followerCount", followerCount);
+
+        // Get following count the logged in user
+        List<Follow> followings = followService.getFollowingsForUserById(user_id);
+        int followingCount = followings.size();
+        model.addAttribute("followingCount", followingCount);
+
+        // Get total tweet count the logged in user
+        List<Tweet> userTweets = tweetService.getTweetsForUserById(user_id);
+        List<Tweet> userRetweets = tweetService.getRetweetsForUserById(user_id);
+        int totalTweets = userTweets.size() + userRetweets.size();
+        model.addAttribute("totalTweets", totalTweets);
+
+
+
+        List<Tweet> tweetsList = tweetService.getFeed();
+
+
+        Collections.sort(tweetsList, Comparator.comparing(Tweet::getDateTime));
+        Collections.reverse(tweetsList);
+
+        List<UserTweet> feedTweets = new ArrayList<>();
+
+        for (Tweet tweet : tweetsList) {
+
+            User user = userService.getUserById(tweet.getUser());
+
+            UserTweet userTweet = new UserTweet(
+                    user.getUser_id(),
+                    tweet.getId(),
+                    user.getName(),
+                    user.getUserName(),
+                    user.getProfileImageName(),
+                    new TimeFormatService().formatTimeAgo(tweet.getDateTime()),
+                    tweet.getImageName(),
+                    tweet.getMessage()
+            );
+
+            if (tweet.getNewTweet() != null) {
+
+                User retweeter = userService.getUserById(tweet.getNewTweet().getUser());
+
+                UserTweet retweet = new UserTweet(
+                        retweeter.getUser_id(),
+                        tweet.getNewTweet().getId(),
+                        retweeter.getName(),
+                        retweeter.getUserName(),
+                        retweeter.getProfileImageName(),
+                        new TimeFormatService().formatTimeAgo(tweet.getNewTweet().getDateTime()),
+                        tweet.getNewTweet().getImageName(),
+                        tweet.getNewTweet().getMessage()
+                );
+
+                userTweet.setNewTweet(retweet);
+            }
+
+            feedTweets.add(userTweet);
+        }
+
+        model.addAttribute("feedTweets", feedTweets);
+
+        return "frontpage";
+    }
+
+
+
+
+
+    @GetMapping("/")
     public String allTweets(Model model) {
 
         List<Tweet> tweetsList = tweetService.getFeed();

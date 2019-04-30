@@ -4,7 +4,7 @@
 
             <!-- Home Button -->
             <div class="navbar-button-container">
-                <a th:href="@{'/home'}" class="home-button">
+                <a th:href="@{'/home?' + 'tweets=friends' }" class="home-button" title="Tweets from friends">
                     <div>
                         <img class="navbar-home-icon" th:src="@{'/assets/home-filled-blue-3.svg'}">
                         <span class="navbar-home-text">Home</span>
@@ -14,7 +14,7 @@
 
             <!-- Twitter Bird -->
             <div class="navbar-brand">
-                <a th:href="@{/}"><i class="fab fa-twitter bird"></i></a>
+                <a th:href="@{'/home?' + 'tweets=all' }" title="All tweets"><i class="fab fa-twitter bird"></i></a>
             </div>
 
             <!-- Navbar Right Box -->
