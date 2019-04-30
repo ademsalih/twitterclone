@@ -76,6 +76,17 @@
                     markAsInactive(settingsButton);
                 }
             }
+
+            // ------------------------------------------------------------------------//
+
+
+            var active = [[${tweetBoxActive}]];
+
+            if (active == true) {
+
+                var tweetBox = document.getElementById('tweetBox');
+                tweetBox.focus();
+            }
         };
 
         function markAsActive(button) {

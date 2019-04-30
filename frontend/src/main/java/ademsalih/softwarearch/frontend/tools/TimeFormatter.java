@@ -6,11 +6,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class TimeFormatService {
+public class TimeFormatter {
 
     private final Calendar now = Calendar.getInstance();
 
-    public TimeFormatService() {
+    public TimeFormatter() {
 
     }
 

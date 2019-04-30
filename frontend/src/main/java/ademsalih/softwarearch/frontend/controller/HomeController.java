@@ -2,7 +2,7 @@ package ademsalih.softwarearch.frontend.controller;
 
 import ademsalih.softwarearch.frontend.model.*;
 import ademsalih.softwarearch.frontend.service.*;
-import ademsalih.softwarearch.frontend.tools.TimeFormatService;
+import ademsalih.softwarearch.frontend.tools.TimeFormatter;
 import ademsalih.softwarearch.frontend.tools.URLShortener;
 import ademsalih.softwarearch.frontend.viewmodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +76,7 @@ public class HomeController {
                     user.getName(),
                     user.getUserName(),
                     user.getProfileImageName(),
-                    new TimeFormatService().formatTimeAgo(tweet.getDateTime()),
+                    new TimeFormatter().formatTimeAgo(tweet.getDateTime()),
                     tweet.getImageName(),
                     tweet.getMessage()
             );
@@ -91,7 +91,7 @@ public class HomeController {
                         retweeter.getName(),
                         retweeter.getUserName(),
                         retweeter.getProfileImageName(),
-                        new TimeFormatService().formatTimeAgo(tweet.getNewTweet().getDateTime()),
+                        new TimeFormatter().formatTimeAgo(tweet.getNewTweet().getDateTime()),
                         tweet.getNewTweet().getImageName(),
                         tweet.getNewTweet().getMessage()
                 );
@@ -475,7 +475,7 @@ public class HomeController {
 
         // get user information for that user
         User profileUser = userService.getUserById(id);
-        profileUser.setAccountCreated(new TimeFormatService().formatJoinDate(profileUser.getAccountCreated()));
+        profileUser.setAccountCreated(new TimeFormatter().formatJoinDate(profileUser.getAccountCreated()));
 
         model.addAttribute("profile", profileUser);
 
@@ -552,7 +552,7 @@ public class HomeController {
 
         // get user information for that user
         User profileUser = userService.getUserById(id);
-        profileUser.setAccountCreated(new TimeFormatService().formatJoinDate(profileUser.getAccountCreated()));
+        profileUser.setAccountCreated(new TimeFormatter().formatJoinDate(profileUser.getAccountCreated()));
         model.addAttribute("profile", profileUser);
 
         FollowStatus f = followService.getFollowingStatus(user_id, id);
@@ -623,7 +623,7 @@ public class HomeController {
         // get user information for that user
         User profileUser = userService.getUserById(id);
 
-        profileUser.setAccountCreated(new TimeFormatService().formatJoinDate(profileUser.getAccountCreated()));
+        profileUser.setAccountCreated(new TimeFormatter().formatJoinDate(profileUser.getAccountCreated()));
         model.addAttribute("profile", profileUser);
 
 
@@ -677,7 +677,7 @@ public class HomeController {
                     user.getName(),
                     user.getUserName(),
                     user.getProfileImageName(),
-                    new TimeFormatService().formatTimeAgo(tweet.getDateTime()),
+                    new TimeFormatter().formatTimeAgo(tweet.getDateTime()),
                     tweet.getImageName(),
                     tweet.getMessage()
             );
@@ -692,7 +692,7 @@ public class HomeController {
                         retweeter.getName(),
                         retweeter.getUserName(),
                         retweeter.getProfileImageName(),
-                        new TimeFormatService().formatTimeAgo(tweet.getNewTweet().getDateTime()),
+                        new TimeFormatter().formatTimeAgo(tweet.getNewTweet().getDateTime()),
                         tweet.getNewTweet().getImageName(),
                         tweet.getNewTweet().getMessage()
                 );
@@ -796,6 +796,11 @@ public class HomeController {
 
         model.addAttribute("currentUser", user_id);
 
+
+        boolean tweetBoxActive = httpServletRequest.getParameter("tweet") == null ? false : true;
+        model.addAttribute("tweetBoxActive", tweetBoxActive);
+
+
         // Models for tweeting and retweeting
         model.addAttribute("tweet", new Tweet());
         model.addAttribute("retweet", new Retweet());
@@ -853,7 +858,7 @@ public class HomeController {
                     user.getName(),
                     user.getUserName(),
                     user.getProfileImageName(),
-                    new TimeFormatService().formatTimeAgo(tweet.getDateTime()),
+                    new TimeFormatter().formatTimeAgo(tweet.getDateTime()),
                     tweet.getImageName(),
                     tweet.getMessage()
             );
@@ -868,7 +873,7 @@ public class HomeController {
                         retweeter.getName(),
                         retweeter.getUserName(),
                         retweeter.getProfileImageName(),
-                        new TimeFormatService().formatTimeAgo(tweet.getNewTweet().getDateTime()),
+                        new TimeFormatter().formatTimeAgo(tweet.getNewTweet().getDateTime()),
                         tweet.getNewTweet().getImageName(),
                         tweet.getNewTweet().getMessage()
                 );
@@ -941,7 +946,7 @@ public class HomeController {
                     user.getName(),
                     user.getUserName(),
                     user.getProfileImageName(),
-                    new TimeFormatService().formatTimeAgo(tweet.getDateTime()),
+                    new TimeFormatter().formatTimeAgo(tweet.getDateTime()),
                     tweet.getImageName(),
                     tweet.getMessage()
             );
@@ -956,7 +961,7 @@ public class HomeController {
                         retweeter.getName(),
                         retweeter.getUserName(),
                         retweeter.getProfileImageName(),
-                        new TimeFormatService().formatTimeAgo(tweet.getNewTweet().getDateTime()),
+                        new TimeFormatter().formatTimeAgo(tweet.getNewTweet().getDateTime()),
                         tweet.getNewTweet().getImageName(),
                         tweet.getNewTweet().getMessage()
                 );
@@ -1000,7 +1005,7 @@ public class HomeController {
                     user.getName(),
                     user.getUserName(),
                     user.getProfileImageName(),
-                    new TimeFormatService().formatTimeAgo(tweet.getDateTime()),
+                    new TimeFormatter().formatTimeAgo(tweet.getDateTime()),
                     tweet.getImageName(),
                     tweet.getMessage()
             );
@@ -1015,7 +1020,7 @@ public class HomeController {
                         retweeter.getName(),
                         retweeter.getUserName(),
                         retweeter.getProfileImageName(),
-                        new TimeFormatService().formatTimeAgo(tweet.getNewTweet().getDateTime()),
+                        new TimeFormatter().formatTimeAgo(tweet.getNewTweet().getDateTime()),
                         tweet.getNewTweet().getImageName(),
                         tweet.getNewTweet().getMessage()
                 );

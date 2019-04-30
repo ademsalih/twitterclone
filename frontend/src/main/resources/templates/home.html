@@ -63,7 +63,7 @@
                         <div class="outer">
                             <form th:action="@{/tweet}" method="post" modelAttribute="tweet" enctype="multipart/form-data">
                                 <input type="hidden" th:value="${tweet.id}" name="id">
-                                <input maxlength="140" th:value="${tweet.message}" class="new-tweet-input" type="text" placeholder="What's happening?" name="message">
+                                <input id="tweetBox" maxlength="140" th:value="${tweet.message}" class="new-tweet-input" type="text" placeholder="What's happening?" name="message">
                                 <div class="upload-btn-wrapper">
                                     <button type="submit" class="btn">
                                         <img class="upload-image-icon" th:src="@{'/assets/upload-icon.png'}">
