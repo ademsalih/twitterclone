@@ -29,8 +29,8 @@ public interface UserService {
 
     FollowStatus checkIfIsFollowing(long user, long following);
 
-    Optional<User> findUserByEmail(String email);
-
     User findUserByUserName(String userName);
+
+    User findUserByEmail(String email);
 
 }

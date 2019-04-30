@@ -115,16 +115,11 @@ public class HomeController {
     @PostMapping("/register")
     public String register(@Valid SignUpUser signUpUser, BindingResult bindingResult) {
 
-        User databaseUser = null;
+        User userNameUser = !signUpUser.getUserName().isEmpty() ? userService.getUserByUsername(signUpUser.getUserName()) : null;
+        if (userNameUser != null) bindingResult.rejectValue("userName", "error.user", "An account already exists with this username");
 
-        if (!signUpUser.getUserName().isEmpty()) {
-            databaseUser = userService.getUserByUsername(signUpUser.getUserName());
-
-        }
-
-        if (databaseUser != null) {
-            bindingResult.rejectValue("userName", "error.user", "An account already exists with this username");
-        }
+        User emailUser = !signUpUser.getEmail().isEmpty() ? userService.getUserByEmail(signUpUser.getEmail()) : null;
+        if (emailUser != null) bindingResult.rejectValue("email", "error.user", "An account already exists with this email");
 
 
         if (bindingResult.hasErrors()) {
@@ -181,10 +176,16 @@ public class HomeController {
         long user_id = authUser.getUser_id();
 
 
-        User databaseUser = userService.getUserByUsername(accountEditUser.getUserName());
+        User userNameUser = userService.getUserByUsername(accountEditUser.getUserName());
 
-        if (databaseUser != null && databaseUser.getUser_id() != user_id) {
+        if (userNameUser != null && userNameUser.getUser_id() != user_id) {
             bindingResult.rejectValue("userName", "error.user", "An account already exists with this username");
+        }
+
+        User emailUser = userService.getUserByEmail(accountEditUser.getEmail());
+
+        if (emailUser != null && emailUser.getUser_id() != user_id) {
+            if (emailUser != null) bindingResult.rejectValue("email", "error.user", "An account already exists with this email");
         }
 
         if (bindingResult.hasErrors()) {
@@ -744,7 +745,7 @@ public class HomeController {
 
         tweetService.postTweet(tweet);
 
-        return "redirect:/home";
+        return "redirect:/home?tweets=friends";
     }
 
     @PostMapping("/retweet/{id}")

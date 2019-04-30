@@ -62,7 +62,7 @@ public class UserserviceApplication implements CommandLineRunner {
 
         User esra = new User(
                 "Esra Salih",
-                "pinar@gmail.com",
+                "esra@gmail.com",
                 "93897123",
                 "esra123",
                 "123456",
