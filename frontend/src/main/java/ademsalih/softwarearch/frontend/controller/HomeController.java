@@ -39,7 +39,7 @@ public class HomeController {
     @Autowired
     LoginService loginService;
 
-    @GetMapping({"/","/login"})
+    @GetMapping("/login")
     public String login() {
         return "login";
     }
@@ -115,7 +115,12 @@ public class HomeController {
     @PostMapping("/register")
     public String register(@Valid SignUpUser signUpUser, BindingResult bindingResult) {
 
-        User databaseUser = userService.getUserByUsername(signUpUser.getUserName());
+        User databaseUser = null;
+
+        if (!signUpUser.getUserName().isEmpty()) {
+            databaseUser = userService.getUserByUsername(signUpUser.getUserName());
+
+        }
 
         if (databaseUser != null) {
             bindingResult.rejectValue("userName", "error.user", "An account already exists with this username");
@@ -870,6 +875,61 @@ public class HomeController {
 
         model.addAttribute("feedTweets", feedTweets);
         return "home";
+    }
+
+    @GetMapping({"/", "/all"})
+    public String allTweets(Model model) {
+
+        List<Tweet> tweetsList = tweetService.getFeed();
+
+
+        model.addAttribute("retweet", new Retweet());
+
+
+        Collections.sort(tweetsList, Comparator.comparing(Tweet::getDateTime));
+        Collections.reverse(tweetsList);
+
+        List<UserTweet> feedTweets = new ArrayList<>();
+
+        for (Tweet tweet : tweetsList) {
+
+            User user = userService.getUserById(tweet.getUser());
+
+            UserTweet userTweet = new UserTweet(
+                    user.getUser_id(),
+                    tweet.getId(),
+                    user.getName(),
+                    user.getUserName(),
+                    user.getProfileImageName(),
+                    new TimeFormatService().formatTimeAgo(tweet.getDateTime()),
+                    tweet.getImageName(),
+                    tweet.getMessage()
+            );
+
+            if (tweet.getNewTweet() != null) {
+
+                User retweeter = userService.getUserById(tweet.getNewTweet().getUser());
+
+                UserTweet retweet = new UserTweet(
+                        retweeter.getUser_id(),
+                        tweet.getNewTweet().getId(),
+                        retweeter.getName(),
+                        retweeter.getUserName(),
+                        retweeter.getProfileImageName(),
+                        new TimeFormatService().formatTimeAgo(tweet.getNewTweet().getDateTime()),
+                        tweet.getNewTweet().getImageName(),
+                        tweet.getNewTweet().getMessage()
+                );
+
+                userTweet.setNewTweet(retweet);
+            }
+
+            feedTweets.add(userTweet);
+        }
+
+        model.addAttribute("feedTweets", feedTweets);
+
+        return "frontpage";
     }
 
 }

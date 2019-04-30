@@ -48,8 +48,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/include/**",
                 "/css/**",
                 "/images/**",
+                "/assets/**",
                 "/js/**",
-                "/static/**"
+                "/static/**",
+                "/all"
         };
 
         String[] adminURLs = new String[]{
@@ -98,7 +100,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .hasRole("USER")
                 .anyRequest()
                 .authenticated()
-                
+
 
 
 

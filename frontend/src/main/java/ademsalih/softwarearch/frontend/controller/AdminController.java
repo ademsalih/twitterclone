@@ -48,7 +48,6 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-
     @GetMapping("/updatepassword/{id}")
     public String updatePassword(PasswordEditUser passwordEditUser, Model model, @PathVariable long id) {
 

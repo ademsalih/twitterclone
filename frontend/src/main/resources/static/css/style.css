@@ -288,7 +288,7 @@ button:focus {
 /************ NAVBAR ADMIN ************/
 
 .navbarGradient-admin {
-    background-image: linear-gradient(to right, #179bf2, #08bff1);
+    background-image: linear-gradient(to right, #179bf2, #06b4f1);
     opacity: 1.0;
 }
 
