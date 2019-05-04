@@ -120,13 +120,10 @@ public class UserServiceImplementation implements UserService {
 
         Collections.shuffle(users);
 
-        if (users.size() > 3) {
-
-            for (int i = 3; i < users.size(); i++) {
-                users.remove(users.get(i));
-            }
+        while (users.size() > 3) {
+            users.remove(0);
         }
-
+        
         return users;
     }
 }

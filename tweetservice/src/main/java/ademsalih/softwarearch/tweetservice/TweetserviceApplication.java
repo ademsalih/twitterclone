@@ -141,20 +141,6 @@ public class TweetserviceApplication implements CommandLineRunner {
         );
 
 
-
-
-        /*NewTweet don4 = new NewTweet(
-                "",
-                Calendar.getInstance(),
-                5,
-                null
-        );*/
-
-
-
-
-
-
         newTweetRepository.save(adem1);
         newTweetRepository.save(adem2);
 
