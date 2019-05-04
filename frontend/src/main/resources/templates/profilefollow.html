@@ -20,6 +20,10 @@
                     <div class="container">
                         <div class="row" style=" padding-left: 0; padding-right: 0">
 
+                            <div th:if="${followUsers.empty}" class="no-follow-container">
+                                <span class="no-follow-text">Nothing to see here</span>
+                            </div>
+
                             <!---- FOLLOW BOX ---->
                             <div th:each="u : ${followUsers}" class="single-follow-box" >
                                 <div style="width: 18em;height: 17.48em; background-color: #657786">
@@ -47,14 +51,14 @@
                                             <img class="fl-box-hamburger-menu-icon" th:src="@{'/assets/hamburger-dots-icon-2.png'}">
                                         </div>
                                         <div class="name-box-2">
-                                            <a th:href="@{'/' + ${u.user_id} }">
+                                            <a th:href="@{'/' + ${u.userName} }">
                                                 <span th:text=" ${u.name}" class="profile-name-2"></span><br>
                                             </a>
 
 
                                             <div class="handle-at-username">
                                                 <span class="handle-name">@</span>
-                                                <a th:href="@{'/' + ${u.user_id} }">
+                                                <a th:href="@{'/' + ${u.userName} }">
                                                     <span th:text="${u.userName}" class="handle-name-2"></span>
                                                 </a>
                                             </div>

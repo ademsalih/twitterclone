@@ -18,7 +18,7 @@ public class SignUpUser {
     private String name;
 
     @NotBlank(message = "Email required")
-    @Email
+    @Email(message = "That's not a valid email")
     private String email;
 
     @NotBlank(message = "Username required")

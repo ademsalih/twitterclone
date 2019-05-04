@@ -1,0 +1,38 @@
+<div class="who-to-follow-box" xmlns:th="http://www.w3.org/1999/xhtml">
+    <span class="who-header">Who to follow</span>
+
+    <div th:if="${newUsers.empty}" class="wtf-later-container">
+        <div class="wtf-later-box">
+            <span class="wtf-later-text">No users to follow</span>
+        </div>
+    </div>
+
+    <div th:if="${!newUsers.empty}" class="wtf-user-container">
+
+        <div th:each="user,iStat : ${newUsers}">
+
+            <div style="display: flex">
+                <a th:href="@{'/' + ${user.userName} }">
+                    <img th:src="@{'/static/images/profile/' + ${user.profileImageName} }" class="wtf-pic">
+                </a>
+                <div class="wtf-user-name-box">
+
+                    <a th:href="@{'/' + ${user.userName} }">
+                        <span class="name" th:text="${user.name}"></span>
+                        <span class="grey-text" th:text="' @' + ${user.userName}"></span>
+                    </a>
+
+                    <form th:action="@{'/follow/' + ${user.user_id} }" method="post">
+                        <button type="submit" class="wtf-follow-button">Follow</button>
+                    </form>
+                </div>
+            </div>
+
+            <hr th:if="${iStat.index + 1 != iStat.size}" class="wtf-line">
+
+        </div>
+
+    </div>
+
+
+</div>

@@ -136,6 +136,8 @@ public class HomeController {
         user.setUserRole("USER");
         user.setBannerImageName("default-banner-image.jpg");
         user.setProfileImageName("default-profile-image.jpg");
+        user.setLocation("");
+        user.setLink("");
         user.setAccountCreated(Calendar.getInstance().getTime().toInstant().toString());
 
         userService.registerUser(user);
@@ -709,7 +711,8 @@ public class HomeController {
 
 
         model.addAttribute("feedTweets", feedTweets);
-
+        List<User> suggestions = userService.getFollowSuggestions(user_id);
+        model.addAttribute("newUsers", suggestions);
 
         return "profiletweets";
     }
@@ -828,23 +831,29 @@ public class HomeController {
 
         List<Tweet> tweetsList = new ArrayList<>();
 
-        if (httpServletRequest.getParameter("tweets").equals("friends")) {
+        if (httpServletRequest.getParameter("tweets") != null) {
+            if (httpServletRequest.getParameter("tweets").equals("friends")) {
 
-            for (Follow f : followings) {
+                for (Follow f : followings) {
 
-                List<Tweet> tweets = tweetService.getTweetsForUserById(f.getFollowing_user().getUser_id());
-                List<Tweet> retweets = tweetService.getRetweetsForUserById(f.getFollowing_user().getUser_id());
+                    List<Tweet> tweets = tweetService.getTweetsForUserById(f.getFollowing_user().getUser_id());
+                    List<Tweet> retweets = tweetService.getRetweetsForUserById(f.getFollowing_user().getUser_id());
 
-                tweetsList.addAll(tweets);
-                tweetsList.addAll(retweets);
+                    tweetsList.addAll(tweets);
+                    tweetsList.addAll(retweets);
+                }
+
+                tweetsList.addAll(userTweets);
+                tweetsList.addAll(userRetweets);
+
+            } else {
+                tweetsList.addAll(tweetService.getFeed());
             }
-
-            tweetsList.addAll(userTweets);
-            tweetsList.addAll(userRetweets);
-
         } else {
-            tweetsList.addAll(tweetService.getFeed());
+            return "redirect:/home?tweets=friends";
         }
+
+
 
 
         Collections.sort(tweetsList, Comparator.comparing(Tweet::getDateTime));
@@ -894,7 +903,6 @@ public class HomeController {
         List<User> suggestions = userService.getFollowSuggestions(user_id);
 
         model.addAttribute("newUsers", suggestions);
-        model.addAttribute("size", suggestions.size());
 
         return "home";
     }
@@ -1036,6 +1044,11 @@ public class HomeController {
         model.addAttribute("feedTweets", feedTweets);
 
         return "frontpage";
+    }
+
+    @GetMapping("/error")
+    public String error() {
+        return "error";
     }
 
 }

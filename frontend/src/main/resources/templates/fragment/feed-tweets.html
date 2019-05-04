@@ -1,255 +1,264 @@
-<div th:each="t : ${feedTweets}" xmlns:th="http://www.w3.org/1999/xhtml">
+<div xmlns:th="http://www.w3.org/1999/xhtml">
 
-    <!--------- NEW TWEET --------->
-    <div th:if="${t.newTweet == null}">
-        <div class="tweetbox">
+    <div th:each="t : ${feedTweets}">
 
-            <div class="tweetbox-image-box">
-                <img class="tweet-profile-pic" th:src="@{'/static/images/profile/' + ${t.profileImageName} }" alt="">
-            </div>
+        <!--------- NEW TWEET --------->
+        <div th:if="${t.newTweet == null}">
+            <div class="tweetbox">
 
-            <div class="tweetbox-content">
+                <div class="tweetbox-image-box">
+                    <img class="tweet-profile-pic" th:src="@{'/static/images/profile/' + ${t.profileImageName} }" alt="">
+                </div>
+
+                <div class="tweetbox-content">
 
 
-                <div th:if="${t.user_id == currentUser}" class="tweet-options-menu">
+                    <div th:if="${t.user_id == currentUser}" class="tweet-options-menu">
 
-                    <button onclick="popUp(event)" class="caret-button">
-                        <img class="caret-img" th:src="@{'/assets/down-arrow-grey.png'}" />
-                    </button>
+                        <button onclick="popUp(event)" class="caret-button">
+                            <img class="caret-img" th:src="@{'/assets/down-arrow-grey.png'}" />
+                        </button>
 
-                    <div class="caret-popup">
-                        <div class="arrows">
-                            <div class="arrow-up-shadow"></div>
-                            <div class="arrow-up"></div>
+                        <div class="caret-popup">
+                            <div class="arrows">
+                                <div class="arrow-up-shadow"></div>
+                                <div class="arrow-up"></div>
+                            </div>
+
+                            <form>
+                                <button class="caret-menu-button">
+                                    <span class="caret-menu-button-text">Share via Direct Message</span>
+                                </button>
+                            </form>
+
+                            <form>
+                                <button class="caret-menu-button">
+                                    <span class="caret-menu-button-text">Copy link to Tweet</span>
+                                </button>
+                            </form>
+
+                            <form>
+                                <button class="caret-menu-button">
+                                    <span class="caret-menu-button-text">Embed Tweet</span>
+                                </button>
+                            </form>
+
+                            <form>
+                                <button class="caret-menu-button">
+                                    <span class="caret-menu-button-text">Pin to your profile page</span>
+                                </button>
+                            </form>
+
+                            <form th:action="@{'/deleteTweet/' + ${t.tweet_id} }" method="get">
+                                <button class="caret-menu-button">
+                                    <span class="caret-menu-button-text">Delete Tweet</span>
+                                </button>
+                            </form>
+
+                            <hr class="menu-separator">
+
+                            <form>
+                                <button class="caret-menu-button">
+                                    <span class="caret-menu-button-text">Add to new Moment</span>
+                                </button>
+                            </form>
+
                         </div>
 
-                        <form>
-                            <button class="caret-menu-button">
-                                <span class="caret-menu-button-text">Share via Direct Message</span>
-                            </button>
-                        </form>
+                    </div>
 
-                        <form>
-                            <button class="caret-menu-button">
-                                <span class="caret-menu-button-text">Copy link to Tweet</span>
-                            </button>
-                        </form>
 
-                        <form>
-                            <button class="caret-menu-button">
-                                <span class="caret-menu-button-text">Embed Tweet</span>
-                            </button>
-                        </form>
 
-                        <form>
-                            <button class="caret-menu-button">
-                                <span class="caret-menu-button-text">Pin to your profile page</span>
-                            </button>
-                        </form>
+                    <div class="name-field">
 
-                        <form th:action="@{'/deleteTweet/' + ${t.tweet_id} }" method="get">
-                            <button class="caret-menu-button">
-                                <span class="caret-menu-button-text">Delete Tweet</span>
-                            </button>
-                        </form>
+                        <a th:href="@{'/' + ${t.userName} }">
+                            <span class="name" th:text="${t.name}"></span>
+                            <span class="grey-text" th:text="' @' + ${t.userName}"></span>
+                        </a>
 
-                        <hr class="menu-separator">
 
-                        <form>
-                            <button class="caret-menu-button">
-                                <span class="caret-menu-button-text">Add to new Moment</span>
-                            </button>
-                        </form>
+                        <span class="grey-text">⋅</span>
+                        <span class="grey-text" th:text="${t.dateTime}"></span>
+                        <br>
+                        <span class="tweet-message" th:text="${t.message}"></span>
+                    </div>
+
+                    <img th:if="${t.imageName != null}" class="tweet-pic" th:src="@{'/static/images/tweet/' + ${t.imageName} }" alt="">
+
+                    <div class="interaction-field">
+
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td class="interaction-item">
+                                    <img class="icon" th:src="@{'/assets/comment.png'}">
+                                    <span class="interaction-text"></span>
+                                </td>
+                                <td class="interaction-item">
+
+                                    <form th:action="@{'/retweet/' + ${t.tweet_id} }" method="post" modelAttribute="retweet">
+
+                                        <input type="hidden" th:value="${retweet.rid}" name="rid">
+
+                                        <a class="no-text-decoration" href="#" onclick="this.parentNode.submit();">
+                                            <div class="interaction-div">
+                                                <img class="retweet-icon" th:src="@{'/assets/gray-retweet.png'}">
+                                                <!--<span class="interaction-text"></span>-->
+                                            </div>
+
+                                        </a>
+
+                                    </form>
+
+                                </td>
+                                <td class="interaction-item">
+                                    <img class="icon" th:src="@{'/assets/heart.png'}">
+                                    <span class="interaction-text"></span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
 
                     </div>
 
                 </div>
 
+            </div>
+        </div>
 
+        <!--------- RETWEET --------->
+        <div th:if="${t.newTweet != null}">
 
-                <div class="name-field">
+            <div class="tweetbox">
 
+                <div class="retweet-box">
                     <a th:href="@{'/' + ${t.userName} }">
-                        <span class="name" th:text="${t.name}"></span>
-                        <span class="grey-text" th:text="' @' + ${t.userName}"></span>
+                        <img class="user-retweet-icon" th:src="@{'/assets/gray-retweet.png'}">
+                        <span class="retweeted-text" th:text="${t.name} + ' Retweeted' "></span>
                     </a>
-
-
-                    <span class="grey-text">⋅</span>
-                    <span class="grey-text" th:text="${t.dateTime}"></span>
-                    <br>
-                    <span class="tweet-message" th:text="${t.message}"></span>
                 </div>
 
-                <img th:if="${t.imageName != null}" class="tweet-pic" th:src="@{'/static/images/tweet/' + ${t.imageName} }" alt="">
-
-                <div class="interaction-field">
-
-                    <table>
-                        <tbody>
-                        <tr>
-                            <td class="interaction-item">
-                                <img class="icon" th:src="@{'/assets/comment.png'}">
-                                <span class="interaction-text"></span>
-                            </td>
-                            <td class="interaction-item">
-
-                                <form th:action="@{'/retweet/' + ${t.tweet_id} }" method="post" modelAttribute="retweet">
-
-                                    <input type="hidden" th:value="${retweet.rid}" name="rid">
-
-                                    <a class="no-text-decoration" href="#" onclick="this.parentNode.submit();">
-                                        <div class="interaction-div">
-                                            <img class="retweet-icon" th:src="@{'/assets/gray-retweet.png'}">
-                                            <!--<span class="interaction-text"></span>-->
-                                        </div>
-
-                                    </a>
-
-                                </form>
-
-                            </td>
-                            <td class="interaction-item">
-                                <img class="icon" th:src="@{'/assets/heart.png'}">
-                                <span class="interaction-text"></span>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-
+                <div class="tweetbox-image-box">
+                    <img class="tweet-profile-pic-retweet" th:src="@{'/static/images/profile/' + ${t.newTweet.profileImageName} }" alt="">
                 </div>
 
-            </div>
+                <div class="tweetbox-content">
 
-        </div>
-    </div>
+                    <div th:if="${t.user_id == currentUser}" class="tweet-options-menu-retweet">
 
-    <!--------- RETWEET --------->
-    <div th:if="${t.newTweet != null}">
+                        <button onclick="popUp(event)" class="caret-button">
+                            <img class="caret-img" th:src="@{'/assets/down-arrow-grey.png'}" />
+                        </button>
 
-        <div class="tweetbox">
+                        <div class="caret-popup">
+                            <div class="arrows">
+                                <div class="arrow-up-shadow"></div>
+                                <div class="arrow-up"></div>
+                            </div>
 
-            <div class="retweet-box">
-                <a th:href="@{'/' + ${t.userName} }">
-                    <img class="user-retweet-icon" th:src="@{'/assets/gray-retweet.png'}">
-                    <span class="retweeted-text" th:text="${t.name} + ' Retweeted' "></span>
-                </a>
-            </div>
+                            <form>
+                                <button class="caret-menu-button">
+                                    <span class="caret-menu-button-text">Share via Direct Message</span>
+                                </button>
+                            </form>
 
-            <div class="tweetbox-image-box">
-                <img class="tweet-profile-pic-retweet" th:src="@{'/static/images/profile/' + ${t.newTweet.profileImageName} }" alt="">
-            </div>
+                            <form>
+                                <button class="caret-menu-button">
+                                    <span class="caret-menu-button-text">Copy link to Tweet</span>
+                                </button>
+                            </form>
 
-            <div class="tweetbox-content">
+                            <form>
+                                <button class="caret-menu-button">
+                                    <span class="caret-menu-button-text">Embed Tweet</span>
+                                </button>
+                            </form>
 
-                <div th:if="${t.user_id == currentUser}" class="tweet-options-menu-retweet">
+                            <form>
+                                <button class="caret-menu-button">
+                                    <span class="caret-menu-button-text">Pin to your profile page</span>
+                                </button>
+                            </form>
 
-                    <button onclick="popUp(event)" class="caret-button">
-                        <img class="caret-img" th:src="@{'/assets/down-arrow-grey.png'}" />
-                    </button>
+                            <form th:action="@{'/deleteRetweet/' + ${t.tweet_id} }" method="get">
+                                <button class="caret-menu-button">
+                                    <span class="caret-menu-button-text">Delete Tweet</span>
+                                </button>
+                            </form>
 
-                    <div class="caret-popup">
-                        <div class="arrows">
-                            <div class="arrow-up-shadow"></div>
-                            <div class="arrow-up"></div>
+                            <hr class="menu-separator">
+
+                            <form>
+                                <button class="caret-menu-button">
+                                    <span class="caret-menu-button-text">Add to new Moment</span>
+                                </button>
+                            </form>
+
                         </div>
 
-                        <form>
-                            <button class="caret-menu-button">
-                                <span class="caret-menu-button-text">Share via Direct Message</span>
-                            </button>
-                        </form>
+                    </div>
 
-                        <form>
-                            <button class="caret-menu-button">
-                                <span class="caret-menu-button-text">Copy link to Tweet</span>
-                            </button>
-                        </form>
+                    <div class="name-field-retweet">
+                        <a th:href="@{'/' + ${t.newTweet.userName} }">
+                            <span class="name" th:text="${t.newTweet.name}"></span>
+                            <span class="grey-text" th:text="' @' + ${t.newTweet.userName}"></span>
+                        </a>
+                        <span class="grey-text">⋅</span>
+                        <span class="grey-text" th:text="${t.newTweet.dateTime}"></span>
+                        <br>
+                        <span class="tweet-message" th:text="${t.newTweet.message}"></span>
+                    </div>
 
-                        <form>
-                            <button class="caret-menu-button">
-                                <span class="caret-menu-button-text">Embed Tweet</span>
-                            </button>
-                        </form>
+                    <img th:if="${t.newTweet.imageName != null}" class="tweet-pic" th:src="@{'/static/images/tweet/' + ${t.newTweet.imageName} }" alt="">
 
-                        <form>
-                            <button class="caret-menu-button">
-                                <span class="caret-menu-button-text">Pin to your profile page</span>
-                            </button>
-                        </form>
+                    <div class="interaction-field">
 
-                        <form th:action="@{'/deleteRetweet/' + ${t.tweet_id} }" method="get">
-                            <button class="caret-menu-button">
-                                <span class="caret-menu-button-text">Delete Tweet</span>
-                            </button>
-                        </form>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td class="interaction-item">
+                                    <img class="icon" th:src="@{'/assets/comment.png'}">
+                                    <span class="interaction-text"></span>
+                                </td>
+                                <td class="interaction-item">
 
-                        <hr class="menu-separator">
 
-                        <form>
-                            <button class="caret-menu-button">
-                                <span class="caret-menu-button-text">Add to new Moment</span>
-                            </button>
-                        </form>
+                                    <form th:action="@{'/retweet/' + ${t.newTweet.tweet_id} }" method="post" modelAttribute="retweet">
+
+                                        <input type="hidden" th:value="${retweet.rid}" name="rid">
+
+                                        <a class="no-text-decoration" href="#" onclick="this.parentNode.submit();">
+                                            <div class="interaction-div">
+                                                <img class="retweet-icon" th:src="@{'/assets/gray-retweet.png'}">
+                                                <!--<span class="interaction-text"></span>-->
+                                            </div>
+
+                                        </a>
+
+                                    </form>
+
+                                </td>
+                                <td class="interaction-item">
+                                    <img class="icon" th:src="@{'/assets/heart.png'}">
+                                    <span class="interaction-text"></span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
 
                     </div>
 
                 </div>
 
-                <div class="name-field-retweet">
-                    <a th:href="@{'/' + ${t.newTweet.userName} }">
-                        <span class="name" th:text="${t.newTweet.name}"></span>
-                        <span class="grey-text" th:text="' @' + ${t.newTweet.userName}"></span>
-                    </a>
-                    <span class="grey-text">⋅</span>
-                    <span class="grey-text" th:text="${t.newTweet.dateTime}"></span>
-                    <br>
-                    <span class="tweet-message" th:text="${t.newTweet.message}"></span>
-                </div>
-
-                <img th:if="${t.newTweet.imageName != null}" class="tweet-pic" th:src="@{'/static/images/tweet/' + ${t.newTweet.imageName} }" alt="">
-
-                <div class="interaction-field">
-
-                    <table>
-                        <tbody>
-                        <tr>
-                            <td class="interaction-item">
-                                <img class="icon" th:src="@{'/assets/comment.png'}">
-                                <span class="interaction-text"></span>
-                            </td>
-                            <td class="interaction-item">
-
-
-                                <form th:action="@{'/retweet/' + ${t.newTweet.tweet_id} }" method="post" modelAttribute="retweet">
-
-                                    <input type="hidden" th:value="${retweet.rid}" name="rid">
-
-                                    <a class="no-text-decoration" href="#" onclick="this.parentNode.submit();">
-                                        <div class="interaction-div">
-                                            <img class="retweet-icon" th:src="@{'/assets/gray-retweet.png'}">
-                                            <!--<span class="interaction-text"></span>-->
-                                        </div>
-
-                                    </a>
-
-                                </form>
-
-                            </td>
-                            <td class="interaction-item">
-                                <img class="icon" th:src="@{'/assets/heart.png'}">
-                                <span class="interaction-text"></span>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-
             </div>
 
         </div>
 
     </div>
 
+    <div class="tweetbox-empty">
+        <div>
+            <i class="fab fa-twitter bird-black"></i>
+        </div>
+    </div>
 </div>

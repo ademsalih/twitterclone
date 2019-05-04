@@ -17,10 +17,6 @@
 
                 <div class="col-6" style="padding-left: 0.3em">
 
-                    <div th:if="${feedTweets.empty}">
-                        <p>No tweets yet...</p>
-                    </div>
-
                     <!--------- TWEETS --------->
                     <div th:replace="fragment/feed-tweets :: div"></div>
 
@@ -28,7 +24,8 @@
 
                 <div class="col-3" style="padding-left: 0;">
                     <!--------- FOLLOW BOX --------->
-                    <div class="follow-box"></div>
+                    <div th:replace="fragment/who-to-follow-box :: div"></div>
+
                 </div>
 
             </div>

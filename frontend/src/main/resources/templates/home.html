@@ -110,40 +110,7 @@
 
                 <!--------- WHO TO FOLLOW BOX --------->
                 <div class="col-3" style="padding-left: 0.06em">
-                    <div class="who-to-follow-box">
-                        <span class="who-header">Who to follow</span>
-
-                        <div th:if="${newUsers.empty}" class="wtf-later-container">
-                            <div class="wtf-later-box">
-                                <span class="wtf-later-text">No users to follow</span>
-                            </div>
-                        </div>
-
-                        <div th:if="${!newUsers.empty}" class="wtf-user-container">
-
-                            <div th:each="user,iStat : ${newUsers}">
-
-                                <div style="display: flex">
-                                    <img th:src="@{'/static/images/profile/' + ${user.profileImageName} }" class="wtf-pic">
-                                    <div class="wtf-user-name-box">
-
-                                        <span class="name" th:text="${user.name}"></span>
-                                        <span class="grey-text" th:text="' @' + ${user.userName}"></span>
-
-                                        <form th:action="@{'/follow/' + ${user.user_id} }" method="post">
-                                            <button type="submit" class="wtf-follow-button">Follow</button>
-                                        </form>
-                                    </div>
-                                </div>
-
-                                <hr th:if="${iStat.index + 1 != size}" class="wtf-line">
-                                
-                            </div>
-
-                        </div>
-
-
-                    </div>
+                    <div th:replace="fragment/who-to-follow-box :: div"></div>
                 </div>
 
             </div>
