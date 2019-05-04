@@ -1,20 +1,24 @@
 <div xmlns:th="http://www.w3.org/1999/xhtml">
     <nav class="navbar navbar-shadow navbar-dark fixed-top navbarGradient">
-        <div class="container">
+        <div class="container" style="width: 860px">
 
             <!-- Home Button -->
-            <div class="navbar-button-container">
+            <div class="navbar-button-container-nli">
+
+                <a th:href="@{/}" style="text-decoration: none">
+                    <i class="fab fa-twitter bird"></i>
+                    <span class="navbar-bold-button">Home</span>
+                </a>
+
             </div>
 
             <!-- Twitter Bird -->
             <div class="navbar-brand">
-                <a th:href="@{/}"><i class="fab fa-twitter bird"></i></a>
             </div>
 
             <!-- Navbar Right Box -->
             <div class="navbar-right-box">
-
-                <a th:href="@{/login}">Log in/Sign up</a>
+                <a class="navbar-bold-button" th:href="@{/login}">Log in</a>
             </div>
 
         </div>

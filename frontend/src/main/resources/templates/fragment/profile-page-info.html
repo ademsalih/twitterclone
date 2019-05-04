@@ -13,13 +13,13 @@
             <tbody>
             <tr th:if="${profile.location != ''}" class="table-row">
                 <td>
-                    <img class="icon" th:src="@{'/assets/place-icon-2.svg'}">
+                    <img class="icon" th:src="@{'/assets/place-icon-2.png'}">
                     <span th:text="${profile.location}" class="more-info-text"></span>
                 </td>
             </tr>
             <tr th:if="${profile.link != ''}" class="table-row">
                 <td>
-                    <img th:src="@{'/assets/link-icon-2.svg'}" alt="" class="icon">
+                    <img th:src="@{'/assets/link-icon-2.png'}" alt="" class="icon">
                     <a th:href="${profile.link}" target="_blank">
                         <span th:text="${shortUrl}" class="more-info-text-link"></span>
                     </a>
@@ -27,7 +27,7 @@
             </tr>
             <tr class="table-row">
                 <td>
-                    <img th:src="@{'/assets/cal-icon-2.svg'}" alt="" class="icon">
+                    <img th:src="@{'/assets/cal-icon-2.png'}" alt="" class="icon">
                     <span th:text=" 'Joined ' + ${profile.accountCreated}" class="more-info-text"></span>
                 </td>
             </tr>

@@ -80,9 +80,9 @@
             // ------------------------------------------------------------------------//
 
 
-            var active = [[${tweetBoxActive}]];
+            var active = "[[${tweetBoxActive}]]";
 
-            if (active == true) {
+            if (active == "true") {
 
                 var tweetBox = document.getElementById('tweetBox');
                 tweetBox.focus();
@@ -91,14 +91,14 @@
 
         function markAsActive(button) {
             button.firstElementChild.className = "settings-button-text-bold";
-            button.lastElementChild.src='/assets/right-caret-black.svg';
-            button.onmouseover = function() { button.lastElementChild.src = '/assets/right-caret-blue.svg'; }
-            button.onmouseout = function() { button.lastElementChild.src = '/assets/right-caret-black.svg'; }
+            button.lastElementChild.src='/assets/right-caret-black.png';
+            button.onmouseover = function() { button.lastElementChild.src = '/assets/right-caret-blue.png'; }
+            button.onmouseout = function() { button.lastElementChild.src = '/assets/right-caret-black.png'; }
         }
 
         function markAsInactive(button) {
-            button.onmouseover = function() {button.lastElementChild.src = '/assets/right-caret-blue.svg';}
-            button.onmouseout = function() {button.lastElementChild.src = '/assets/right-caret.svg';}
+            button.onmouseover = function() {button.lastElementChild.src = '/assets/right-caret-blue.png';}
+            button.onmouseout = function() {button.lastElementChild.src = '/assets/right-caret.png';}
         }
 
         function popUp(event) {

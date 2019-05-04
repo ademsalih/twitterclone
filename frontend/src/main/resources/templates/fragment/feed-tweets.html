@@ -14,7 +14,7 @@
                 <div th:if="${t.user_id == currentUser}" class="tweet-options-menu">
 
                     <button onclick="popUp(event)" class="caret-button">
-                        <img class="caret-img" th:src="@{'/assets/down-arrow-grey.svg'}" />
+                        <img class="caret-img" th:src="@{'/assets/down-arrow-grey.png'}" />
                     </button>
 
                     <div class="caret-popup">
@@ -69,7 +69,7 @@
 
                 <div class="name-field">
 
-                    <a th:href="@{'/' + ${t.user_id} }">
+                    <a th:href="@{'/' + ${t.userName} }">
                         <span class="name" th:text="${t.name}"></span>
                         <span class="grey-text" th:text="' @' + ${t.userName}"></span>
                     </a>
@@ -100,8 +100,8 @@
 
                                     <a class="no-text-decoration" href="#" onclick="this.parentNode.submit();">
                                         <div class="interaction-div">
-                                            <img class="retweet-icon" th:src="@{'/assets/gray-retweet.svg'}">
-                                            <span class="interaction-text"></span>
+                                            <img class="retweet-icon" th:src="@{'/assets/gray-retweet.png'}">
+                                            <!--<span class="interaction-text"></span>-->
                                         </div>
 
                                     </a>
@@ -130,8 +130,8 @@
         <div class="tweetbox">
 
             <div class="retweet-box">
-                <a th:href="@{'/' + ${t.user_id} }">
-                    <img class="user-retweet-icon" th:src="@{'/assets/gray-retweet.svg'}">
+                <a th:href="@{'/' + ${t.userName} }">
+                    <img class="user-retweet-icon" th:src="@{'/assets/gray-retweet.png'}">
                     <span class="retweeted-text" th:text="${t.name} + ' Retweeted' "></span>
                 </a>
             </div>
@@ -145,7 +145,7 @@
                 <div th:if="${t.user_id == currentUser}" class="tweet-options-menu-retweet">
 
                     <button onclick="popUp(event)" class="caret-button">
-                        <img class="caret-img" th:src="@{'/assets/down-arrow-grey.svg'}" />
+                        <img class="caret-img" th:src="@{'/assets/down-arrow-grey.png'}" />
                     </button>
 
                     <div class="caret-popup">
@@ -197,7 +197,7 @@
                 </div>
 
                 <div class="name-field-retweet">
-                    <a th:href="@{'/' + ${t.newTweet.user_id} }">
+                    <a th:href="@{'/' + ${t.newTweet.userName} }">
                         <span class="name" th:text="${t.newTweet.name}"></span>
                         <span class="grey-text" th:text="' @' + ${t.newTweet.userName}"></span>
                     </a>
@@ -227,8 +227,8 @@
 
                                     <a class="no-text-decoration" href="#" onclick="this.parentNode.submit();">
                                         <div class="interaction-div">
-                                            <img class="retweet-icon" th:src="@{'/assets/gray-retweet.svg'}">
-                                            <span class="interaction-text"></span>
+                                            <img class="retweet-icon" th:src="@{'/assets/gray-retweet.png'}">
+                                            <!--<span class="interaction-text"></span>-->
                                         </div>
 
                                     </a>

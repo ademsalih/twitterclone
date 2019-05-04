@@ -6,7 +6,7 @@
             <div class="navbar-button-container">
                 <a th:href="@{'/home?' + 'tweets=friends' }" class="home-button" title="Tweets from friends">
                     <div>
-                        <img class="navbar-home-icon" th:src="@{'/assets/home-filled-blue-3.svg'}">
+                        <img class="navbar-home-icon" th:src="@{'/assets/home-filled-blue-3.png'}">
                         <span class="navbar-home-text">Home</span>
                     </div>
                 </a>
@@ -24,7 +24,7 @@
                 <div class="navbar-search-box-container">
                     <form th:action="@{/search}" style="padding: 0; margin: 0;">
                         <input class="navbar-search-box" name="query" type="text" placeholder="Search Twitter">
-                        <img class="search-glass" th:src="@{'/assets/navbar-search-glass.svg'}" alt="">
+                        <img class="search-glass" th:src="@{'/assets/navbar-search-glass.png'}" alt="">
                         <button style="display: none" type="submit"></button>
                     </form>
 
@@ -40,7 +40,7 @@
                             <div class="navbar-arrow-up-shadow"></div><div class="navbar-arrow-up"></div>
                         </div>
 
-                        <form th:action="@{'/' + ${profile.user_id} }">
+                        <form th:action="@{'/' + ${profile.userName} }">
                             <button class="navbar-caret-menu-button-big" type="submit">
                                 <div style="line-height: 1.3em; padding-top: 0.25em">
                                     <span class="navbar-caret-menu-button-text-bold" th:text="${profile.name}"></span>

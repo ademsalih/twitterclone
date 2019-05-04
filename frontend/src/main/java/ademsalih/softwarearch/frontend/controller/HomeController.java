@@ -457,12 +457,13 @@ public class HomeController {
         return s;
     }
 
-    @GetMapping("/{id}/following")
-    public String followings(@PathVariable long id, Model model) {
+    @GetMapping("/{username}/following")
+    public String followings(@PathVariable String username, Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User authUser = userService.getUserByUsername(auth.getName());
 
         long user_id = authUser.getUser_id();
+        long id = userService.getUserByUsername(username).getUser_id();
 
         model.addAttribute("retweet", new Retweet());
         model.addAttribute("follow", new Follow());
@@ -532,13 +533,14 @@ public class HomeController {
         return "profilefollow";
     }
 
-    @GetMapping("/{id}/followers")
-    public String followers(@PathVariable long id, Model model) {
+    @GetMapping("/{username}/followers")
+    public String followers(@PathVariable String username, Model model) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User authUser = userService.getUserByUsername(auth.getName());
 
         long user_id = authUser.getUser_id();
+        long id = userService.getUserByUsername(username).getUser_id();
 
         model.addAttribute("group", 3);
         model.addAttribute("shortUrl", new URLShortener().shorten(authUser.getLink()));
@@ -605,13 +607,15 @@ public class HomeController {
         return "profilefollow";
     }
 
-    @GetMapping("/{id}")
-    public String profile(@PathVariable long id, Model model) {
+    @GetMapping("/{username}")
+    public String profile(@PathVariable String username, Model model) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User authUser = userService.getUserByUsername(auth.getName());
 
         long user_id = authUser.getUser_id();
+
+        long id = userService.getUserByUsername(username).getUser_id();
 
         model.addAttribute("retweet", new Retweet());
         model.addAttribute("follow", new Follow());
@@ -976,7 +980,6 @@ public class HomeController {
 
         return "frontpage";
     }
-
 
 
 

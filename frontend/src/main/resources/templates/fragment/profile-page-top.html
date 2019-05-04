@@ -17,7 +17,7 @@
                     <div class="text-center tweets-stat">
                         <div class="use-full-height">
 
-                            <form class="use-full-height" th:action="@{ '/' + ${profile.user_id} }" method="get">
+                            <form class="use-full-height" th:action="@{ '/' + ${profile.userName} }" method="get">
                                 <button id="tweets" class="stat-button">
                                     <span class="stat-header-text">Tweets</span><br>
                                     <span id="tweets-text" th:text="${tweetCount}" class="stat-number-text"></span>
@@ -29,7 +29,7 @@
 
                     <div class="text-center tweets-stat">
                         <div class="use-full-height">
-                            <form class="use-full-height" th:action="@{ '/' + ${profile.user_id} + '/following'}" method="get">
+                            <form class="use-full-height" th:action="@{ '/' + ${profile.userName} + '/following'}" method="get">
                                 <button id="followings" type="submit" class="stat-button">
                                     <span class="stat-header-text">Following</span><br>
                                     <span id="followings-text" th:text="${followings}" class="stat-number-text"></span>
@@ -41,7 +41,7 @@
                     <div class="text-center tweets-stat">
                         <div class="use-full-height">
 
-                            <form class="use-full-height" th:action="@{ '/' + ${profile.user_id} + '/followers'}" method="get">
+                            <form class="use-full-height" th:action="@{ '/' + ${profile.userName} + '/followers'}" method="get">
                                 <button id="followers" type="submit" class="stat-button">
                                     <span class="stat-header-text">Followers</span><br>
                                     <span id="followers-text" th:text="${followers}" class="stat-number-text"></span>
@@ -69,7 +69,7 @@
                                 <button th:if="${isFollowing}" class="follow-button follow-button-checked"><span>Following</span></button>
                             </form>
                         </div>
-                        <img class="hamburger-menu-icon" th:src="@{'/assets/hamburger-dots-icon-2.svg'}">
+                        <img class="hamburger-menu-icon" th:src="@{'/assets/hamburger-dots-icon-2.png'}">
                     </div>
                 </div>
 

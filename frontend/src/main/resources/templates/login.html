@@ -4,11 +4,11 @@
     <title>Login</title>
     <head th:replace="fragment/header :: head"></head>
 
-    <body style="height: 80%">
+    <body>
 
             <div th:replace="fragment/not-logged-in-menu :: div"></div>
 
-            <div class="container" style="height: 80%;position: relative">
+<!--            <div class="container" style="height: 80%;position: relative">
 
                 <div style="position: absolute; width: 30%;margin: 0 auto; left: 0; right: 0; top:50%">
                     <h4>Twitter Login</h4>
@@ -25,6 +25,36 @@
 
                         <button class="btn btn-primary" style="float: right" type="submit">Log in</button>
                     </form>
+                </div>
+
+            </div>-->
+
+
+            <div class="container" style="margin-top: 3.5em;">
+
+                <div class="row justify-content-center">
+                    <div class="login-container">
+
+                        <div class="login-container-top login-container-padding">
+
+                            <span class="login-header">Log in to Twitter</span>
+
+                            <form th:action="@{/login}" method="post" class="login-form">
+                                <input class="custom-login-input" type="text" placeholder="Username" name="username">
+                                <br>
+                                <input class="custom-login-input login-form-spacing" type="password" placeholder="Password" name="password">
+                                <br>
+                                <button class="login-button" type="submit">Log in</button>
+                            </form>
+
+                        </div>
+
+                        <div class="login-container-bottom login-container-padding">
+                        <span class="info-text-login">
+                            New to Twitter? <a class="info-link-login" th:href="@{/signup}">Sign up now »</a>
+                        </span>
+                        </div>
+                    </div>
                 </div>
 
             </div>

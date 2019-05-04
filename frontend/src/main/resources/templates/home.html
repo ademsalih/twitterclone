@@ -20,13 +20,13 @@
 
                         <div class="profile-box-bottom-box">
                             <div class="name-box">
-                                <a th:href="@{'/' + ${profile.user_id} }">
+                                <a th:href="@{'/' + ${profile.userName} }">
                                     <span class="profile-name" th:text="${profile.name}"></span><br>
                                 </a>
 
                                 <div class="handle-at-username">
                                     <span class="handle-name">@</span>
-                                    <a th:href="@{'/' + ${profile.user_id} }">
+                                    <a th:href="@{'/' + ${profile.userName} }">
                                         <span class="handle-name" th:text="${profile.userName}"></span>
                                     </a>
                                 </div>
@@ -35,16 +35,45 @@
                             <table class="follow-stat-table">
                                 <thead>
                                     <tr>
-                                        <th class="follow-stat-header">Tweets</th>
-                                        <th class="follow-stat-header">Following</th>
-                                        <th class="follow-stat-header">Followers</th>
+                                        <th>
+                                            <a th:href="@{'/' + ${profile.userName} }" class="follow-stat-header">
+                                                Tweets
+                                            </a>
+                                        </th>
+
+
+                                        <th>
+                                            <a th:href="@{'/' + ${profile.userName} + '/following' }" class="follow-stat-header">
+                                                Following
+                                            </a>
+                                        </th>
+
+                                        <th>
+                                            <a th:href="@{'/' + ${profile.userName} + '/followers' }" class="follow-stat-header">
+                                                Followers
+                                            </a>
+                                        </th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="follow-stat-number" th:text="${totalTweets}"></td>
-                                        <td class="follow-stat-number" th:text="${followingCount}"></td>
-                                        <td class="follow-stat-number" th:text="${followerCount}"></td>
+                                        <td>
+                                            <a th:href="@{'/' + ${profile.userName} }" th:text="${totalTweets}" class="follow-stat-number">
+                                            </a>
+                                        </td>
+
+
+                                        <td>
+                                            <a th:href="@{'/' + ${profile.userName} + '/following' }" th:text="${followingCount}" class="follow-stat-number">
+                                            </a>
+                                        </td>
+
+
+                                        <td>
+                                            <a th:href="@{'/' + ${profile.userName} + '/followers' }" th:text="${followerCount}" class="follow-stat-number">
+                                            </a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -58,14 +87,14 @@
                     <!--------- POST NEW TWEET --------->
                     <div class="post-tweet-box">
                         <div class="newtweet-box-image-box">
-                            <img class="newtweet-profile-pic" th:src="@{'/assets/profile-new.png'}">
+                            <img class="newtweet-profile-pic" th:src="@{'/static/images/profile/' + ${profile.profileImageName} }">
                         </div>
                         <div class="outer">
                             <form th:action="@{/tweet}" method="post" modelAttribute="tweet" enctype="multipart/form-data">
                                 <input type="hidden" th:value="${tweet.id}" name="id">
                                 <input id="tweetBox" maxlength="140" th:value="${tweet.message}" class="new-tweet-input" type="text" placeholder="What's happening?" name="message">
                                 <div class="upload-btn-wrapper">
-                                    <button type="submit" class="btn">
+                                    <button type="submit" class="btn" style="cursor: pointer;">
                                         <img class="upload-image-icon" th:src="@{'/assets/upload-icon.png'}">
                                     </button>
                                     <input accept="image/gif,image/jpeg,image/jpg,image/png" type="file" name="file" />

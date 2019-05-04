@@ -44,6 +44,23 @@ button:focus {
     max-width: 1220px;
 }
 
+.navbar-bold-button {
+    font-weight: 600;
+    color: #667580 !important;
+    cursor: pointer;
+    font-size: 0.84em;
+    text-decoration: none !important;
+}
+
+.navbar-button-container-nli {
+    height: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    float: right;
+    z-index: 1;
+}
+
 /* Home Button */
 .navbar-button-container {
     height: 100%;
@@ -790,14 +807,16 @@ button:focus {
 }
 
 .follow-stat-header {
-    color: #657786;
+    color: #657786 !important;
     font-size: 0.7em;
+    text-decoration: none !important;
 }
 
 .follow-stat-number {
-    color: #1DA1F2;
+    color: #1DA1F2 !important;
     font-size: 1em;
     font-weight: bold;
+    text-decoration: none !important;
 }
 
 .follow-stat-table {
@@ -890,9 +909,8 @@ button:focus {
 .upload-image-icon {
     width: 1em;
     padding-bottom: 0.2em;
+    cursor: pointer;
 }
-
-
 
 
 /************ TWEET BOX ************/
@@ -1380,3 +1398,100 @@ button:focus {
 .blue-button {
     background-color: #4ab3f4;
 }
+
+
+/************ LOGIN PAGE ************/
+
+.login-container {
+    border: 1px solid #CFD5D8;
+    width: 52.3em;
+}
+
+.login-container-top {
+    background-color: white;
+    padding-top: 1.9em;
+}
+
+.login-container-bottom {
+    background-color: #F5F8FA;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    line-height: 1.8em;
+}
+
+.login-header {
+    font-weight: 600;
+    font-size: 1.57em;
+}
+
+.login-container-padding {
+    padding-left: 8.5em;
+}
+
+.login-form {
+    margin-top: 0.8em;
+}
+
+.custom-login-input {
+    font-size: 0.84em;
+    font-weight: 400;
+    height: 2.21em;
+    width: 21.8em;
+    padding-left: 0.3em;
+    border: 0.1em solid #E6ECF0;
+    border-radius: 0.2em;
+}
+
+.login-form-spacing {
+    margin-top: 1.2em;
+}
+
+.form-login {
+    margin-top: 3em;
+}
+
+.custom-login-input::placeholder {
+    color: #657786;
+    font-weight: 200;
+}
+
+.login-button {
+    border: none;
+    font-weight: 600;
+    font-size: 0.8em;
+    color: white;
+    background-color: #1DA1F2;
+    border-radius: 4em;
+    padding: 0.54em 1.43em 0.54em 1.43em;
+    margin-top: 2.2em;
+    cursor: pointer;
+    margin-bottom: 1.1em;
+}
+
+.info-text-login {
+    color: #657786;
+    font-weight: 400;
+    font-size: 0.8em;
+    margin-top: 2em;
+}
+
+.info-link-login {
+    color: #1C95E0;
+}
+
+.info-link-login:hover {
+    color: #1C95E0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
