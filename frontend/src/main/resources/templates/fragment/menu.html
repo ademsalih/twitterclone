@@ -68,7 +68,7 @@
                         <hr class="navbar-menu-separator">
                         <form th:action="@{/logout}" method="post">
                             <button type="submit" class="navbar-caret-menu-button">
-                                <span class="navbar-caret-menu-button-text" th:text=" 'Log out @' + ${profile.userName}"></span>
+                                <span class="navbar-caret-menu-button-text" th:text=" 'Log out @' + ${#strings.abbreviate(profile.userName,14)}"></span>
                             </button>
                         </form>
                     </div>

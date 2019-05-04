@@ -1,6 +1,7 @@
 package ademsalih.softwarearch.frontend.controller;
 
 import ademsalih.softwarearch.frontend.model.User;
+import ademsalih.softwarearch.frontend.service.LoginService;
 import ademsalih.softwarearch.frontend.service.TweetService;
 import ademsalih.softwarearch.frontend.service.UserService;
 import ademsalih.softwarearch.frontend.viewmodel.PasswordEditUser;
@@ -26,6 +27,9 @@ public class AdminController {
 
     @Autowired
     TweetService tweetService;
+
+    @Autowired
+    LoginService loginService;
 
     @GetMapping("/admin")
     public String admin(Model model) {
@@ -67,7 +71,7 @@ public class AdminController {
             return "admin-page-password";
         }
 
-        serverUser.setPassword(user.getPassword());
+        serverUser.setPassword(loginService.encodePassword(user.getPassword()));
 
         userService.updateUser(serverUser);
         return "redirect:/admin";

@@ -18,8 +18,9 @@
                 <div class="wtf-user-name-box">
 
                     <a th:href="@{'/' + ${user.userName} }">
-                        <span class="name" th:text="${user.name}"></span>
-                        <span class="grey-text" th:text="' @' + ${user.userName}"></span>
+                        <span class="name" th:text="${#strings.abbreviate(user.name,11)}"></span>
+
+                        <span class="grey-text" th:text="' @' + ${#strings.abbreviate(user.userName,11)}"></span>
                     </a>
 
                     <form th:action="@{'/follow/' + ${user.user_id} }" method="post">

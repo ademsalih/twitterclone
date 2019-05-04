@@ -131,7 +131,7 @@ public class HomeController {
         user.setName(signUpUser.getName());
         user.setEmail(signUpUser.getEmail());
         user.setUserName(signUpUser.getUserName());
-        user.setPassword(signUpUser.getPassword());
+        user.setPassword(loginService.encodePassword(signUpUser.getPassword()));
 
         user.setUserRole("USER");
         user.setBannerImageName("default-banner-image.jpg");
@@ -212,6 +212,7 @@ public class HomeController {
         serverUser.setName(accountEditUser.getName());
         serverUser.setEmail(accountEditUser.getEmail());
         serverUser.setUserName(accountEditUser.getUserName());
+
         userService.updateUser(serverUser);
         return "redirect:/profileaccount";
     }
@@ -252,7 +253,7 @@ public class HomeController {
         }
 
         User serverUser = userService.getUserById(user_id);
-        serverUser.setPassword(user.getPassword());
+        serverUser.setPassword(loginService.encodePassword(user.getPassword()));
 
         userService.updateUser(serverUser);
         return "redirect:/profilepassword";
@@ -467,18 +468,21 @@ public class HomeController {
         long user_id = authUser.getUser_id();
         long id = userService.getUserByUsername(username).getUser_id();
 
-        model.addAttribute("retweet", new Retweet());
-        model.addAttribute("follow", new Follow());
-
-        model.addAttribute("group", 2);
-        model.addAttribute("shortUrl", new URLShortener().shorten(authUser.getLink()));
-        model.addAttribute("title", "People followed by " + authUser.getName() + " (@" + authUser.getUserName() + ") | Twitter");
-
-        model.addAttribute("currentUser", user_id);
 
         // get user information for that user
         User profileUser = userService.getUserById(id);
         profileUser.setAccountCreated(new TimeFormatter().formatJoinDate(profileUser.getAccountCreated()));
+
+        model.addAttribute("retweet", new Retweet());
+        model.addAttribute("follow", new Follow());
+
+        model.addAttribute("group", 2);
+        model.addAttribute("shortUrl", new URLShortener().shorten(profileUser.getLink()));
+        model.addAttribute("title", "People followed by " + authUser.getName() + " (@" + authUser.getUserName() + ") | Twitter");
+
+        model.addAttribute("currentUser", user_id);
+
+
 
         model.addAttribute("profile", profileUser);
 
@@ -544,8 +548,12 @@ public class HomeController {
         long user_id = authUser.getUser_id();
         long id = userService.getUserByUsername(username).getUser_id();
 
+        // get user information for that user
+        User profileUser = userService.getUserById(id);
+        profileUser.setAccountCreated(new TimeFormatter().formatJoinDate(profileUser.getAccountCreated()));
+
         model.addAttribute("group", 3);
-        model.addAttribute("shortUrl", new URLShortener().shorten(authUser.getLink()));
+        model.addAttribute("shortUrl", new URLShortener().shorten(profileUser.getLink()));
         model.addAttribute("title", "People following " + authUser.getName() + " (@" + authUser.getUserName() + ") | Twitter");
 
 
@@ -554,9 +562,7 @@ public class HomeController {
 
         model.addAttribute("currentUser", user_id);
 
-        // get user information for that user
-        User profileUser = userService.getUserById(id);
-        profileUser.setAccountCreated(new TimeFormatter().formatJoinDate(profileUser.getAccountCreated()));
+
         model.addAttribute("profile", profileUser);
 
         FollowStatus f = followService.getFollowingStatus(user_id, id);
@@ -619,15 +625,17 @@ public class HomeController {
 
         long id = userService.getUserByUsername(username).getUser_id();
 
+        // get user information for that user
+        User profileUser = userService.getUserById(id);
+
         model.addAttribute("retweet", new Retweet());
         model.addAttribute("follow", new Follow());
 
         model.addAttribute("group", 1);
-        model.addAttribute("shortUrl", new URLShortener().shorten(authUser.getLink()));
+        model.addAttribute("shortUrl", new URLShortener().shorten(profileUser.getLink()));
 
 
-        // get user information for that user
-        User profileUser = userService.getUserById(id);
+
 
         profileUser.setAccountCreated(new TimeFormatter().formatJoinDate(profileUser.getAccountCreated()));
         model.addAttribute("profile", profileUser);

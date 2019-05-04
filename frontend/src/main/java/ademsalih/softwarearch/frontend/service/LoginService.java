@@ -14,12 +14,12 @@ public class LoginService implements UserDetailsService {
     @Autowired
     UserService userService;
 
-    /*private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public LoginService(BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }*/
+    }
 
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 
@@ -34,13 +34,13 @@ public class LoginService implements UserDetailsService {
     private UserDetails getUserDetails(User user) {
         return org.springframework.security.core.userdetails.User
                 .withUsername(user.getUserName())
-                .password("{noop}" + user.getPassword())
+                .password(user.getPassword())
                 .roles(user.getUserRole())
                 .build();
     }
 
-    /*public String encodePassword(String input) {
+    public String encodePassword(String input) {
         return bCryptPasswordEncoder.encode(input);
-    }*/
+    }
 
 }
