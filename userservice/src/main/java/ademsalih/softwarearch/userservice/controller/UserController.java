@@ -53,7 +53,6 @@ public class UserController {
     }
 
 
-
     // OK
     @PutMapping("/users/{id}")
     public User updateUser(@RequestBody User user, @PathVariable long id) {
@@ -65,6 +64,12 @@ public class UserController {
     @DeleteMapping("/users/{id}")
     public void deleteUser(@PathVariable long id) {
         userService.deleteUser(id);
+    }
+
+
+    @GetMapping("/users/{id}/followsuggestions")
+    public List<User> getUsers(@PathVariable long id) {
+        return userService.getFollowSuggestionsFor(id);
     }
 
     /** ----------------------- FOLLOWERS ------------------------ **/

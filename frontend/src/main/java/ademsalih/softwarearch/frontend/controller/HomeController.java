@@ -889,13 +889,15 @@ public class HomeController {
         }
 
         model.addAttribute("feedTweets", feedTweets);
+
+
+        List<User> suggestions = userService.getFollowSuggestions(user_id);
+
+        model.addAttribute("newUsers", suggestions);
+        model.addAttribute("size", suggestions.size());
+
         return "home";
     }
-
-
-
-
-
 
     @GetMapping("/all")
     public String loggedInAllTweets(Model model) {
@@ -980,9 +982,6 @@ public class HomeController {
 
         return "frontpage";
     }
-
-
-
 
     @GetMapping("/")
     public String allTweets(Model model) {

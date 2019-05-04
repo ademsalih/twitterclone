@@ -43,4 +43,10 @@ public class UserService {
     public void deleteUser(long user_id) {
         restTemplate.delete(BASE_URL + "/" + user_id);
     }
+
+    public List<User> getFollowSuggestions(long id) {
+        return  Arrays.stream(
+                restTemplate.getForObject(BASE_URL + "/" + id + "/" + "followsuggestions", User[].class)
+        ).collect(Collectors.toList());
+    }
 }

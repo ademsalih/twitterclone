@@ -822,6 +822,7 @@ button:focus {
 .follow-stat-table {
     width: 88%;
     margin: 0 auto;
+    margin-top: -0.4em;
 }
 
 
@@ -1481,6 +1482,93 @@ button:focus {
 
 .info-link-login:hover {
     color: #1C95E0;
+}
+
+
+
+/*********** WHO TO FOLLOW ***********/
+
+.who-to-follow-box {
+    background-color: white;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.7em;
+    height: 15.7em;
+    width: 18em;
+    position: absolute;
+}
+
+.who-header {
+    font-weight: 700;
+    font-size: 1.05em;
+}
+
+.wtf-pic {
+    width: 3.1em;
+    height: 3.1em;
+    border-radius: 5em;
+    margin-top: 0.3em;
+}
+
+.name {
+    font-size: 0.85em;
+    font-weight: bold;
+    color: black !important;
+}
+
+.grey-text {
+    font-size: 0.85em;
+    color: #657786;
+}
+
+.wtf-follow-button {
+    color: #1DA1F2;
+    font-size: 0.75em;
+    font-weight: 600;
+    border: 1px #1DA1F2 solid;
+    border-radius: 3em;
+    background-color: transparent;
+    padding: 0.25em 2.2em 0.25em 2.2em;
+    cursor: pointer;
+}
+
+.wtf-follow-button:hover {
+    background-color: #E5F0F9;
+}
+
+.wtf-user-container {
+    margin-top: 0.3em;
+}
+
+.wtf-later-container {
+    margin-top: 0.3em;
+    height: 13em;
+}
+
+.wtf-user-name-box {
+    padding-left: 0.6em;
+}
+
+.wtf-line {
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+    border-color: #E6ECF0
+}
+
+.wtf-later-text {
+    color: #4F6476;
+    opacity: 0.4;
+    font-weight: 600;
+    font-size: 0.9em;
+}
+
+.wtf-later-box {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 

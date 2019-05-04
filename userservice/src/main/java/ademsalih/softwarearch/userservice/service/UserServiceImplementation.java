@@ -9,6 +9,8 @@ import ademsalih.softwarearch.userservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -103,4 +105,28 @@ public class UserServiceImplementation implements UserService {
         return user;
     }
 
+    @Override
+    public List<User> getFollowSuggestionsFor(long id) {
+        List<User> users = userRepository.findUsersByUserRole(UserRoles.USER.name());
+
+        User user = userRepository.findById(id).get();
+        List<Follow> followings = user.getFollowing();
+        users.remove(user);
+
+        for (Follow follow : followings) {
+            User followingUser = follow.getFollowing_user();
+            users.remove(followingUser);
+        }
+
+        Collections.shuffle(users);
+
+        if (users.size() > 3) {
+
+            for (int i = 3; i < users.size(); i++) {
+                users.remove(users.get(i));
+            }
+        }
+
+        return users;
+    }
 }
