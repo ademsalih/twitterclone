@@ -123,7 +123,7 @@ public class UserServiceImplementation implements UserService {
         while (users.size() > 3) {
             users.remove(0);
         }
-        
+
         return users;
     }
 }

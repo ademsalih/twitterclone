@@ -478,13 +478,14 @@ public class HomeController {
 
         model.addAttribute("group", 2);
         model.addAttribute("shortUrl", new URLShortener().shorten(profileUser.getLink()));
-        model.addAttribute("title", "People followed by " + authUser.getName() + " (@" + authUser.getUserName() + ") | Twitter");
+        model.addAttribute("title", "People followed by " + profileUser.getName() + " (@" + profileUser.getUserName() + ") | Twitter");
 
         model.addAttribute("currentUser", user_id);
 
 
 
-        model.addAttribute("profile", profileUser);
+        model.addAttribute("user", profileUser);
+        model.addAttribute("profile", authUser);
 
         FollowStatus f = followService.getFollowingStatus(user_id, id);
 
@@ -554,7 +555,7 @@ public class HomeController {
 
         model.addAttribute("group", 3);
         model.addAttribute("shortUrl", new URLShortener().shorten(profileUser.getLink()));
-        model.addAttribute("title", "People following " + authUser.getName() + " (@" + authUser.getUserName() + ") | Twitter");
+        model.addAttribute("title", "People following " + profileUser.getName() + " (@" + profileUser.getUserName() + ") | Twitter");
 
 
         model.addAttribute("retweet", new Retweet());
@@ -562,11 +563,11 @@ public class HomeController {
 
         model.addAttribute("currentUser", user_id);
 
+        model.addAttribute("user", profileUser);
+        model.addAttribute("profile", authUser);
 
-        model.addAttribute("profile", profileUser);
 
         FollowStatus f = followService.getFollowingStatus(user_id, id);
-
         model.addAttribute("isFollowing", f.isFollow());
 
 
@@ -636,9 +637,12 @@ public class HomeController {
 
 
 
-
         profileUser.setAccountCreated(new TimeFormatter().formatJoinDate(profileUser.getAccountCreated()));
-        model.addAttribute("profile", profileUser);
+
+
+        model.addAttribute("user", profileUser);
+
+        model.addAttribute("profile", authUser);
 
 
         model.addAttribute("currentUser", user_id);
@@ -724,8 +728,6 @@ public class HomeController {
 
         return "profiletweets";
     }
-
-    // TODO: ADD PRINCIPAL FOR USER ID
 
     @PostMapping("/tweet")
     public String tweet(@ModelAttribute("tweet") Tweet tweet, @RequestParam(value = "file", required=false) MultipartFile file, HttpServletRequest request) {
@@ -1054,9 +1056,9 @@ public class HomeController {
         return "frontpage";
     }
 
-    @GetMapping("/error")
+    /*@GetMapping("/error")
     public String error() {
         return "error";
-    }
+    }*/
 
 }

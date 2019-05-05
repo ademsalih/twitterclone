@@ -5,6 +5,7 @@ import ademsalih.softwarearch.userservice.model.User;
 import ademsalih.softwarearch.userservice.model.UserRoles;
 import ademsalih.softwarearch.userservice.repository.FollowRepository;
 import ademsalih.softwarearch.userservice.repository.UserRepository;
+import ademsalih.softwarearch.userservice.tools.CalendarFromEpoch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -51,7 +52,7 @@ public class UserserviceApplication implements CommandLineRunner {
                 "93689146",
                 "adem",
                 "$2a$10$.BFA1vQy.nwyE.dDhAdVZ.VWNVZV1jiEFo0V.dp1JBQXJDldvzE.e",
-                Calendar.getInstance(),
+                new CalendarFromEpoch(1252148582).get(),
                 "adem.png",
                 UserRoles.USER.name(),
                 "My name is Adem and I'm 21 years old. I made this site.",
@@ -67,13 +68,13 @@ public class UserserviceApplication implements CommandLineRunner {
                 "98234233",
                 "jensstoltenberg",
                 "$2a$10$KdEEwACKxjWWD0wnt1ZuDeh0OTHOzcjLNC2x9RusSFaLwfu/E5..q",
-                Calendar.getInstance(),
+                new CalendarFromEpoch(1265367782).get(),
                 "jensstoltenberg.jpg",
                 UserRoles.USER.name(),
                 "",
                 "jensstoltenberg-banner.jpeg",
                 "http://www.nato.int",
-                "Berlin, Germany"
+                "Oslo, Norway"
         );
 
 
@@ -83,7 +84,7 @@ public class UserserviceApplication implements CommandLineRunner {
                 "93248223",
                 "erna_solberg",
                 "$2a$10$B0lSL6krJNf7YjhyQNb82u/JivDMIt90FmGgc6z/kTQP.XHSNS06u",
-                Calendar.getInstance(),
+                new CalendarFromEpoch(1354705382).get(),
                 "ernasolberg.jpg",
                 UserRoles.USER.name(),
                 "Statsminister i Norge. Jobber for et samfunn med muligheter for alle. For saker til forvaltningen, henvend deg til rette myndighet for saksbehandling.",
@@ -98,7 +99,7 @@ public class UserserviceApplication implements CommandLineRunner {
                 "392342345",
                 "realDonaldTrump",
                 "$2a$10$T0w6GsEl813GwfUAx4Q8Uuo1VIsZhVEzea4FgwS0.Pa6KPPIDkN1y",
-                Calendar.getInstance(),
+                new CalendarFromEpoch(1236259425).get(),
                 "donaldtrump.jpg",
                 UserRoles.USER.name(),
                 "45th President of the United States of America\uD83C\uDDFA\uD83C\uDDF8",
@@ -113,7 +114,7 @@ public class UserserviceApplication implements CommandLineRunner {
                 "02391244",
                 "BarackObama",
                 "$2a$10$ygM3YSnGk.MmXAoxKhPsaevzk6K08IPYZDOVN2tkcNIna1HnKkP9W",
-                Calendar.getInstance(),
+                new CalendarFromEpoch(1217934182).get(),
                 "obama.jpg",
                 UserRoles.USER.name(),
                 "Dad, husband, President, citizen.",

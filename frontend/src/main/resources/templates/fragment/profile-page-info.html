@@ -1,26 +1,26 @@
 <div class="col-3" xmlns:th="http://www.w3.org/1999/xhtml">
-    <img class="profile-pic-big" th:src="@{'/static/images/profile/'} + ${profile.profileImageName}">
+    <img class="profile-pic-big" th:src="@{'/static/images/profile/'} + ${user.profileImageName}">
 
     <div class="profile-box-down">
-        <span th:text="${profile.name}" class="profile-big-name"></span><br>
-        <span th:text=" '@' + ${profile.userName}" class="profile-handle-big"></span>
+        <span th:text="${user.name}" class="profile-big-name"></span><br>
+        <span th:text=" '@' + ${user.userName}" class="profile-handle-big"></span>
         <br>
         <div class="bio-container">
-            <span th:text="${profile.bio}" class="profile-bio"></span>
+            <span th:text="${user.bio}" class="profile-bio"></span>
         </div>
 
         <table>
             <tbody>
-            <tr th:if="${profile.location != ''}" class="table-row">
+            <tr th:if="${user.location != ''}" class="table-row">
                 <td>
                     <img class="icon" th:src="@{'/assets/place-icon-2.png'}">
-                    <span th:text="${profile.location}" class="more-info-text"></span>
+                    <span th:text="${user.location}" class="more-info-text"></span>
                 </td>
             </tr>
-            <tr th:if="${profile.link != ''}" class="table-row">
+            <tr th:if="${user.link != ''}" class="table-row">
                 <td>
                     <img th:src="@{'/assets/link-icon-2.png'}" alt="" class="icon">
-                    <a th:href="${profile.link}" target="_blank">
+                    <a th:href="${user.link}" target="_blank">
                         <span th:text="${shortUrl}" class="more-info-text-link"></span>
                     </a>
                 </td>
@@ -28,7 +28,7 @@
             <tr class="table-row">
                 <td>
                     <img th:src="@{'/assets/cal-icon-2.png'}" alt="" class="icon">
-                    <span th:text=" 'Joined ' + ${profile.accountCreated}" class="more-info-text"></span>
+                    <span th:text=" 'Joined ' + ${user.accountCreated}" class="more-info-text"></span>
                 </td>
             </tr>
             </tbody>
