@@ -297,7 +297,7 @@ public class HomeController {
 
         if (!profileImage.isEmpty()) {
             try {
-                String IMAGE_LOCATION = "/src/main/upload/static/images/profile/";
+                String IMAGE_LOCATION = "/src/main/webapp/WEB-INF/images/profile/";
 
                 String projectDir = System.getProperty("user.dir");
                 String absolutePath = projectDir + IMAGE_LOCATION;
@@ -315,7 +315,7 @@ public class HomeController {
 
         if (!bannerImage.isEmpty()) {
             try {
-                String IMAGE_LOCATION = "/src/main/upload/static/images/banner/";
+                String IMAGE_LOCATION = "/src/main/webapp/WEB-INF/images/banner/";
 
                 String projectDir = System.getProperty("user.dir");
                 String absolutePath = projectDir + IMAGE_LOCATION;
@@ -741,10 +741,9 @@ public class HomeController {
         tweet.setNewTweet(null);
         tweet.setDateTime(Calendar.getInstance());
 
-
         if (!file.isEmpty()) {
             try {
-                String IMAGE_LOCATION = "/src/main/upload/static/images/tweet/";
+                String IMAGE_LOCATION = "/src/main/webapp/WEB-INF/images/tweet/";
 
                 String projectDir = System.getProperty("user.dir");
                 String absolutePath = projectDir + IMAGE_LOCATION;

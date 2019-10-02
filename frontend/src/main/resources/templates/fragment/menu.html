@@ -33,7 +33,7 @@
                 <!-- Navbar Profile Image -->
                 <div class="navbar-tweet-options-menu">
                     <button onclick="popUp(event)" id="navbar-pic-button" class="navbar-pic-button">
-                        <img class="navbar-pic" th:src="@{'/assets/profile-new.png'}">
+                        <img class="navbar-pic" th:src="@{'/images/profile/' + ${profile.profileImageName} }">
                     </button>
                     <div class="navbar-caret-popup">
                         <div class="navbar-arrows">

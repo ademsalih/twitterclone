@@ -27,10 +27,10 @@
                             <!---- FOLLOW BOX ---->
                             <div th:each="u : ${followUsers}" class="single-follow-box" >
                                 <div style="width: 18em;height: 17.48em; background-color: #657786">
-                                    <img th:src="@{'/static/images/profile/' + ${u.profileImageName} }" class="follow-box-pic">
+                                    <img th:src="@{'/images/profile/' + ${u.profileImageName} }" class="follow-box-pic">
 
                                     <div class="follow-box-banner">
-                                        <img class="follow-box-banner-img" th:src="@{'/static/images/banner/' + ${u.bannerImageName} }" alt="">
+                                        <img class="follow-box-banner-img" th:src="@{'/images/banner/' + ${u.bannerImageName} }" alt="">
                                     </div>
 
                                     <div class="follow-box-content">

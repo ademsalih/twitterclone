@@ -13,9 +13,9 @@
                 <!---------- PROFILE BOX ---------->
                 <div class="col-3">
                     <div class="profile-box">
-                        <img th:src="@{'/static/images/profile/' + ${profile.profileImageName} }" class="profile-box-pic">
+                        <img th:src="@{'/images/profile/' + ${profile.profileImageName} }" class="profile-box-pic">
                         <div class="profile-box-top-box">
-                            <img class="follow-box-banner-img" th:src="@{'/static/images/banner/' + ${profile.bannerImageName} }" alt="">
+                            <img class="follow-box-banner-img" th:src="@{'/images/banner/' + ${profile.bannerImageName} }" alt="">
                         </div>
 
                         <div class="profile-box-bottom-box">
@@ -87,7 +87,7 @@
                     <!--------- POST NEW TWEET --------->
                     <div class="post-tweet-box">
                         <div class="newtweet-box-image-box">
-                            <img class="newtweet-profile-pic" th:src="@{'/static/images/profile/' + ${profile.profileImageName} }">
+                            <img class="newtweet-profile-pic" th:src="@{'/images/profile/' + ${profile.profileImageName} }">
                         </div>
                         <div class="outer">
                             <form th:action="@{/tweet}" method="post" modelAttribute="tweet" enctype="multipart/form-data">

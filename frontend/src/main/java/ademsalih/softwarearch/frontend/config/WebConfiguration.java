@@ -8,13 +8,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 @Configuration
 public class WebConfiguration extends WebMvcConfigurationSupport {
 
-    private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
-            "classpath:/static/",
-            "file://" + System.getProperty("user.dir") + "/src/main/upload/"
-    };
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**").addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS);
+        registry.addResourceHandler("/images/**").addResourceLocations("/WEB-INF/images/");
+        registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/css/");
+        registry.addResourceHandler("/assets/**").addResourceLocations("/WEB-INF/assets/");
     }
 }
